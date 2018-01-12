@@ -1,0 +1,39 @@
+@import './shared.scss';
+
+.mg-container {
+    width: 90%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding-top: 145px;
+
+    @media (max-width: $mq-small) {
+        margin: 0;
+        padding-left: 12px;
+        padding-right: 12px;
+        width: auto;
+    }
+
+    &.design {
+        background: $green;
+        color: $primaryLight;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    &.art {
+        background: $primaryLight;
+        color: $primaryDark;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    &.code {
+        background: $darkgreen;
+        color: $primaryLight;
+        font-family: 'Share Tech Mono', monospace;
+    }
+
+    &.about {
+        background: $lightgreen;
+        color: $darkgreen;
+        font-family: 'Raleway', sans-serif;
+    }
+}

@@ -1,0 +1,283 @@
+@import './shared.scss';
+
+.mg-navigation {
+    height: 125px;
+    width: 90%;
+    max-width: 1600px;
+    position: fixed;
+    top: 0;
+
+    @media (max-width: $mq-extralarge) {
+        height: 145px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+
+    @media (max-width: $mq-medium) {
+        align-items: center;
+    }
+
+    @media (max-width: $mq-small) {
+        height: 100px;
+        width: calc(100% - 24px);
+    }
+
+    > div {
+        width: 95%;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 2.5%;
+
+        @media (max-width: $mq-extralarge) {
+            justify-content: center;
+            order: 1;
+            height: auto;
+        }
+
+        &:before {
+            content: "";
+            flex-basis: 8 / 12 * 100 * 1%;
+            order: 2;
+
+            @media (max-width: $mq-extralarge) {
+                display: none;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            flex-basis: 1 / 12 * 100 * 1%;
+            margin: 0 .5%;
+            text-align: center;
+            order: 1;
+            position: relative;
+
+            &:last-child {
+                order: 3;
+            }
+
+            @media (max-width: $mq-extralarge) {
+                flex-basis: auto;
+                margin: 0 2.5%;
+                position: relative;
+                top: 8px;
+            }
+        }
+
+        @media (max-width: $mq-medium) {
+            height: 0;
+            overflow: hidden;
+            transition: all 500ms;
+            top: 70%;
+            flex-direction: column;
+            position: absolute;
+            background: $primaryLight;
+            color: $green;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            order: 1;
+            justify-content: center;
+            width: 324px;
+
+            a {
+                padding: 8px;
+                width: 100%;
+            }
+        }
+    }
+
+    @media (max-width: $mq-medium) {
+        &.is-expanded {
+            > div {
+                height: 222px;
+                -webkit-box-shadow: 0px 7px 15px -1px rgba(0,42,28,0.39);
+                -moz-box-shadow: 0px 7px 15px -1px rgba(0,42,28,0.39);
+                box-shadow: 0px 7px 15px -1px rgba(0,42,28,0.39);
+            }
+
+            button {
+                transform: rotate(-90deg) scaleY(1.5);
+            }
+        }
+    }
+
+    h1 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        letter-spacing: 2px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (max-width: $mq-extralarge) {
+            display: block;
+            position: relative;
+            order: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        button {
+            display: none;
+            position: relative;
+            top: -2px;
+            border: 0;
+            background: none;
+            outline: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+            color: $lightblue;
+            transform: rotate(90deg) scaleY(1.5);
+            transition: transform 250ms;
+
+            &:after {
+                content: ">";
+            }
+
+            @media (max-width: $mq-medium) {
+                display: inline-block;
+            }
+        }
+    }
+
+    .design & {
+        background: $green;
+
+        a {
+            font-size: 24px;
+
+            &.current {
+                &:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    height: 3px;
+                    background: $lightblue;
+                    bottom: -2px;
+                    left: 0;
+                    right: 0;
+                    width: 96px;
+                    margin: 0 auto;
+
+                    @media (max-width: $mq-small) {
+                        bottom: 4px;
+                    }
+                }
+            }
+            &:hover {
+                color: $darkblue;
+
+                &:after {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: -6px;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: $primaryLight;
+                    z-index: -1;
+                    height: auto;
+                    width: auto;
+                    -webkit-box-shadow: 0px 3px 15px -1px rgba(0,42,28,0.39);
+                    -moz-box-shadow: 0px 3px 15px -1px rgba(0,42,28,0.39);
+                    box-shadow: 0px 3px 15px -1px rgba(0,42,28,0.39);
+                }
+                @media (max-width: $mq-small) {
+                    &:after {
+                        display: none;
+                    }
+                    background: $darkblue;
+                    color: $primaryLight;
+                }
+            }
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 36px;
+        }
+    }
+    .art & {
+        background: $primaryLight;
+    }
+    .code & {
+        background: $darkgreen;
+
+        a {
+            font-size: 30px;
+            // text-transform: lowercase;
+            color: $gray;
+
+            &.current {
+                color: #ff8a73;
+
+                &:before {
+                    content: "{";
+                }
+                &:after {
+                    content: "}";
+                }
+            }
+
+            &:hover {
+                color: #a15fcb;
+
+                &:before {
+                    content: "$";
+                    margin-left: -16px;
+                }
+
+                &:after {
+                    content: "";
+                }
+            }
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: 40px;
+            // text-transform: lowercase;
+
+            button {
+                color: $lightgreen;
+                top: 2px;
+                left: 4px;
+            }
+        }
+    }
+    .about & {
+        background: $lightgreen;
+
+        a {
+            font-size: 24px;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 36px;
+
+            button {
+                color: $pink;
+                top: 4px;
+                left: 8px;
+            }
+        }
+    }
+}

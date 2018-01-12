@@ -1,0 +1,27 @@
+.mg-container {
+  width: 90%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding-top: 145px; }
+  @media (max-width: 576px) {
+    .mg-container {
+      margin: 0;
+      padding-left: 12px;
+      padding-right: 12px;
+      width: auto; } }
+  .mg-container.design {
+    background: #00e0a3;
+    color: #fff;
+    font-family: 'Josefin Sans', sans-serif; }
+  .mg-container.art {
+    background: #fff;
+    color: #000;
+    font-family: 'Raleway', sans-serif; }
+  .mg-container.code {
+    background: #002a1c;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace; }
+  .mg-container.about {
+    background: #99f3da;
+    color: #002a1c;
+    font-family: 'Raleway', sans-serif; }
