@@ -33,13 +33,13 @@ class Navigation extends Component {
         let currentAbout = { className: this.props.cat === 'about' ? 'current' : '' };
         return (
             <nav className={this.generateClasses()}>
-                <div>
-                    <Link to="/design" {...currentDesign}>DESIGN</Link>
-                    <Link to="/art" {...currentArt}>ART</Link>
-                    <Link to="/code" {...currentCode}>CODE</Link>
-                    <Link to="/about" {...currentAbout}>ABOUT</Link>
-                </div>
-                <h1>MILES GROVER <button onClick={this.handleClick}></button></h1>
+                <h1>miles Grover <button onClick={this.handleClick}></button></h1>
+                <ul>
+                    <li className="design-link"><Link to="/design" {...currentDesign} title="design">design</Link></li>
+                    <li className="code-link"><Link to="/code" {...currentCode} title="code">code</Link></li>
+                    <li className="art-link"><Link to="/art" {...currentArt} title="art">art</Link></li>
+                </ul>
+                <div className="about-link"><Link to="/about" {...currentAbout}>about<span>:</span> me</Link></div>
             </nav>
         );
     }

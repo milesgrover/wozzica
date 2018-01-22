@@ -1,0 +1,24 @@
+.mg-project-thumb {
+  flex-basis: 236px;
+  margin-right: 32px;
+  margin-bottom: 32px; }
+  .mg-project-thumb img {
+    width: 100%;
+    height: auto; }
+  .mg-project-thumb a {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+    color: #336856;
+    padding: 0 8px; }
+    .mg-project-thumb a:first-child {
+      display: inline-block;
+      border: 8px solid #4f9e81;
+      background: #fff;
+      padding: 8px;
+      -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.4);
+      margin-bottom: 24px; }

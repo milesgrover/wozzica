@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation';
-import CatContent from './CatContent';
 import '../styles/PageTemplate.css';
 
 class PageTemplate extends Component {
@@ -8,31 +7,30 @@ class PageTemplate extends Component {
         super(props);
 
         this.state = {
-            page: this.props.route.match.params.cat ? this.props.route.match.params.cat : 'design'
-        }
+            show: this.props.show
+        };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps = (nextProps) => {
         this.setState({
-            page: nextProps.route.match.params.cat
+            show: nextProps.show
         });
     }
 
-    generateContainerClasses() {
-        let classConcat = `mg-container${this.state.page ? ' ' + this.state.page : ''}`;
+    generateContainerClasses = () => {
+        let classConcat = `mg-container ${this.props.cat}${this.state.show === true ? ' show' : ' hide'}`;
         return classConcat;
     }
 
     render() {
-        const testDivStyle = {
-            height: '1000px'
-        }
         return (
             <div className={this.generateContainerClasses()}>
-                <Navigation cat={this.state.page} />
-                <CatContent cat={this.state.page}/>
-                <div style={testDivStyle}>
-                    hello
+                <div>
+                    <Navigation cat={this.props.cat} />
+                    <p>{this.props.blurb}</p>
+                    <div className="mg-project-collection">
+                        {this.props.children}
+                    </div>
                 </div>
             </div>
         );

@@ -1,21 +1,40 @@
 @import './shared.scss';
 
 .mg-container {
-    width: 90%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding-top: 145px;
+    width: 100%;
+    padding: 28px;
+    box-sizing: border-box;
+    position: absolute;
+    transition: left 250ms ease-in-out;
+    min-height: 100%;
 
-    @media (max-width: $mq-small) {
-        margin: 0;
-        padding-left: 12px;
-        padding-right: 12px;
-        width: auto;
+    &.show {
+        left: 0;
+        z-index: 10;
+    }
+    &.hide {
+        left: 100%;
+        transition: left 500ms steps(2, end);
+        z-index: -1;
+        max-height: 100%;
+        overflow: hidden;
     }
 
+    > div {
+        max-width: 1600px;
+
+        @media (max-width: $mq-small) {
+            margin: 0;
+            padding-left: 12px;
+            padding-right: 12px;
+            width: auto;
+        }
+    }
+
+
     &.design {
-        background: $green;
-        color: $primaryLight;
+        background: $aquamarine;
+        color: $primaryDark;
         font-family: 'Josefin Sans', sans-serif;
     }
 
@@ -32,8 +51,34 @@
     }
 
     &.about {
-        background: $lightgreen;
+        background: $pale;
         color: $darkgreen;
         font-family: 'Raleway', sans-serif;
+        transition: top 250ms ease-in-out;
+
+        &.show {
+            left: 0;
+            top: 0;
+        }
+
+        &.hide {
+            left: 0;
+            top: -100%;
+            transition: top 500ms steps(2, end);
+        }
+    }
+
+    p {
+        padding: 0;
+        margin: 0 0 27px 0;
+        font-size: 18px;
+        max-width: 55em;
+        color: $darkTeal;
+    }
+
+    .mg-project-collection {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -32px;
     }
 }
