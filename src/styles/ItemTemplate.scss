@@ -1,0 +1,283 @@
+@import './shared.scss';
+
+.mg-item-container {
+    overflow: auto;
+    height: 100vh;
+
+    > div {
+        position: relative;
+    }
+
+    &.in {
+        overflow: hidden;
+
+        > div {
+            animation: 150ms ease-in-out slideUp;
+        }
+    }
+
+    &.out {
+        overflow: hidden;
+
+        > div {
+            animation: 150ms ease-in-out forwards slideDown;
+        }
+    }
+
+    @keyframes slideUp {
+        0% {
+            transform: translateY(95%);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideDown {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(110%);
+        }
+    }
+
+    &.design {
+        background: $aquamarine;
+        color: $primaryDark;
+        font-family: 'Josefin Sans', sans-serif;
+
+        a {
+            color: $darkTeal;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        > div {
+            background-color: $primaryLight;
+            @include dropShadow();
+        }
+
+        .mg-back-to-page {
+            color: $darkTeal;
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 18px;
+            display: inline-block;
+            margin-left: 19px;
+            padding: 3px 2px 0;
+
+            span {
+                color: $primaryDark;
+            }
+
+            &:before {
+                position: absolute;
+                top: 0;
+                font-size: 19px;
+                left: -24px;
+            }
+
+            &:hover {
+                background-color: $aquamarine;
+                text-decoration: none;
+
+                &:before {
+                    background: transparent;
+                }
+            }
+        }
+
+        h1 {
+            font-size: 60px;
+            line-height: 1;
+            text-transform: uppercase;
+            color: $primaryDark;
+            margin: 0 0 8px 0;
+            padding: 0;
+            margin-top: 14px;
+        }
+    }
+
+    &.art {
+        background: $primaryLight;
+        color: $primaryDark;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    &.code {
+        background: $darkgreen;
+        color: $primaryLight;
+        font-family: 'Space Mono', monospace;
+
+        > div {
+            background-color: transparent;
+            // @include dropShadow();
+        }
+
+        .mg-back-to-page {
+            color: $aquamarine;
+            text-transform: lowercase;
+            font-size: 22px;
+            display: inline-block;
+
+            span {
+                color: $contrastSalmon;
+            }
+
+            &:before {
+                position: relative;
+                top: 3px;
+                left: 2px;
+                font-size: 19px;
+                padding-right: 8px;
+            }
+
+            &:hover {
+                color: $primaryLight;
+                background-color: $contrastSalmon;
+
+                span {
+                    color: $primaryLight;
+                }
+            }
+        }
+    }
+
+    > div {
+        margin: 24px;
+        padding: 24px;
+        min-height: calc(100% - 48px);
+        box-sizing: border-box;
+    }
+
+    .mg-back-to-page {
+        text-decoration: none;
+        position: relative;
+
+        &:before {
+            @include iconFont();
+            content: '\E000';
+        }
+    }
+
+    p {
+        max-width: 60em;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.mg-item-content {
+    padding-bottom: 56px;
+
+    + .mg-back-to-page {
+        position: absolute;
+        bottom: 24px;
+    }
+
+    .design & {
+        h2 {
+            font-size: 36px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            color: $darkTeal;
+            margin: 0;
+            padding: 0;
+            letter-spacing: -0.03em;
+        }
+
+        h3 {
+            font-size: 24px;
+            line-height: 1.25;
+            text-transform: uppercase;
+            color: $primaryDark;
+            margin: 0;
+            padding: 0;
+            letter-spacing: -0.03em;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.25;
+            font-family: Raleway;
+        }
+
+        p,
+        .diagram {
+            + h2 {
+                margin-top: 32px;
+            }
+            + h3 {
+                margin-top: 28px;
+            }
+            + p {
+                margin-top: 18px;
+            }
+            + .mg-prototype-viewer:not(.is-expanded) {
+                margin-top: 24px;
+            }
+        }
+
+        .diagram {
+            + h3 {
+                margin-top: 18px;
+            }
+            + p {
+                margin-top: 12px;
+            }
+        }
+
+        h2,
+        h3 {
+            + p {
+                margin-top: 8px;
+            }
+        }
+
+        .diagram {
+            margin-top: 32px;
+
+            img,
+            .video {
+                display: block;
+                margin-bottom: 12px;
+                max-width: 100%;
+            }
+
+            img {
+                @include dropShadow($blur: 8px);
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            &.flow {
+                max-width: 1250px;
+
+                > div {
+                    margin-right: 24px;
+                    display: inline-block;
+                    vertical-align: top;
+                    max-width: calc(50% - 48px);
+
+                    p {
+                        margin-bottom: 24px;
+                    }
+                }
+
+                > p {
+                    margin-bottom: 36px;
+                }
+            }
+
+            + p + .diagram {
+                margin-top: 18px;
+            }
+        }
+    }
+}

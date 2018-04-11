@@ -4,9 +4,7 @@ import '../styles/ProjectThumb.css';
 
 
 class ProjectThumb extends Component {
-
-render() {
-    console.log()
+    render() {
         return (
             <div className="mg-project-thumb">
                 <Link to={this.props.linkTo}>

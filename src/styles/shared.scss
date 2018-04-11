@@ -22,3 +22,115 @@ $mq-medium: 768px;
 $mq-large: 992px;
 $mq-extralarge: 1200px;
 $mq-max: 1600px;
+
+// icon font styles
+@mixin iconFont() {
+    font-family: "mg-icons";
+    line-height: 1;
+}
+
+// icon names
+$icon-backArrow:       '\E000';
+$icon-rotateArrow:     '\E001';
+$icon-close:           '\E002';
+$icon-gear:            '\E003';
+$icon-gear2:           '\E004';
+$icon-triangle:        '\E005';
+
+// default dropShadow
+@mixin dropShadow($x: 0, $y: 3px, $blur: 3px, $spread: 0, $color: rgba(0,0,0,0.4)) {
+    -webkit-box-shadow: $x $y $blur $spread $color;
+    -moz-box-shadow: $x $y $blur $spread $color;
+    box-shadow: $x $y $blur $spread $color;
+}
+
+// rotation animation
+@mixin aRotate($dur, $ease, $delay, $count, $dir, $fill, $state) {
+    animation: rotate $dur $ease $delay $count $dir $fill $state;
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+// fade out animation
+@mixin aFadeOut($dur, $ease, $delay, $count, $dir, $fill, $state) {
+    animation: fadeOut $dur $ease $delay $count $dir $fill $state;
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+}
+
+// fade in animation
+@mixin aFadeIn($dur, $ease, $delay, $count, $dir, $fill, $state) {
+    animation: fadeIn $dur $ease $delay $count $dir $fill $state;
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+// wiggle animation to get user's attention
+@mixin aNoticeMeSenpai($dur, $ease, $delay, $count, $dir, $fill, $state) {
+    animation: tsundere $dur $ease $delay $count $dir $fill $state;
+    @keyframes tsundere {
+        0% {
+            transform: rotate(0);
+        }
+        83% {
+            transform: rotate(0)
+        }
+        85% {
+            transform: rotate(-5deg);
+        }
+        87% {
+            transform: rotate(7deg);
+        }
+        89% {
+            transform: rotate(-3deg);
+        }
+        91% {
+            transform: rotate(4deg);
+        }
+        93% {
+            transform: rotate(-2deg);
+        }
+        95% {
+            transform: rotate(2deg);
+        }
+        97% {
+            transform: rotate(-1deg);
+        }
+        100% {
+            transform: rotate(0);
+        }
+    }
+}
+
+// animation mixin
+@mixin animation($name: null, $dur: 1000ms, $ease: linear, $delay: 0ms, $count: infinite, $dir: normal, $fill: none, $state: running) {
+    @if ($name == rotate) {
+        @include aRotate($dur, $ease, $delay, $count, $dir, $fill, $state);
+    } @else if ($name == fadeOut) {
+        @include aFadeOut($dur, $ease, $delay, $count, $dir, $fill, $state);
+    } @else if ($name == fadeIn) {
+        @include aFadeIn($dur, $ease, $delay, $count, $dir, $fill, $state);
+    } @else if ($name == noticeMe) {
+        @include aNoticeMeSenpai($dur, $ease, $delay, $count, $dir, $fill, $state);
+    } @else {
+        animation: none;
+    }
+}

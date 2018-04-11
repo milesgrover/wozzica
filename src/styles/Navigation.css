@@ -13,7 +13,7 @@
   .code .mg-navigation h1 {
     font-size: 24px;
     color: #99f3da;
-    word-spacing: -0.5em; }
+    word-spacing: -0.6em; }
   .art .mg-navigation h1 {
     height: 45px;
     overflow: hidden;
@@ -170,9 +170,9 @@
     line-height: 1;
     font-weight: 600;
     text-align: center;
-    -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
     padding: 20px 0; }
     .about .mg-navigation > ul:before {
       content: "CHECK OUT MY";
@@ -205,8 +205,6 @@
   position: absolute;
   top: 0;
   right: 0; }
-  .mg-navigation .about-link span {
-    display: none; }
   .design .mg-navigation .about-link a {
     display: block;
     font-size: 24px;
@@ -244,8 +242,9 @@
     .code .mg-navigation .about-link a:hover {
       color: #fff;
       background: #e04d43; }
-  .code .mg-navigation .about-link span {
-    display: inline; }
+  .code .mg-navigation .about-link span:after {
+    display: inline;
+    content: ":"; }
   .art .mg-navigation .about-link {
     right: 3px;
     top: 27px; }

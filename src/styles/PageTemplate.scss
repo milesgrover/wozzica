@@ -36,6 +36,13 @@
         background: $aquamarine;
         color: $primaryDark;
         font-family: 'Josefin Sans', sans-serif;
+
+        p {
+            color: $darkTeal;
+            font-size: 22px;
+            line-height: 1.25;
+            margin-bottom: 39px;
+        }
     }
 
     &.art {
@@ -47,7 +54,11 @@
     &.code {
         background: $darkgreen;
         color: $primaryLight;
-        font-family: 'Share Tech Mono', monospace;
+        font-family: 'Space Mono', monospace;
+
+        p {
+            margin-bottom: 51px;
+        }
     }
 
     &.about {
@@ -73,7 +84,6 @@
         margin: 0 0 27px 0;
         font-size: 18px;
         max-width: 55em;
-        color: $darkTeal;
     }
 
     .mg-project-collection {

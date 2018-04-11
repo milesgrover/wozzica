@@ -26,6 +26,11 @@
     background: #99f3da;
     color: #000;
     font-family: 'Josefin Sans', sans-serif; }
+    .mg-container.design p {
+      color: #336856;
+      font-size: 22px;
+      line-height: 1.25;
+      margin-bottom: 39px; }
   .mg-container.art {
     background: #fff;
     color: #000;
@@ -33,7 +38,9 @@
   .mg-container.code {
     background: #002116;
     color: #fff;
-    font-family: 'Share Tech Mono', monospace; }
+    font-family: 'Space Mono', monospace; }
+    .mg-container.code p {
+      margin-bottom: 51px; }
   .mg-container.about {
     background: #c9e6de;
     color: #002116;
@@ -50,8 +57,7 @@
     padding: 0;
     margin: 0 0 27px 0;
     font-size: 18px;
-    max-width: 55em;
-    color: #336856; }
+    max-width: 55em; }
   .mg-container .mg-project-collection {
     display: flex;
     flex-wrap: wrap;

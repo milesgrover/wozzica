@@ -14,7 +14,7 @@ const Portfolio = () => {
     return (
         <Switch>
             <Redirect exact from="/" to="/design" />
-            <Route path="/:cat" component={App}/>
+            <Route exact path="/:cat" component={App}/>
             <Route path="/:cat/:item" component={App}/>
         </Switch>
     );

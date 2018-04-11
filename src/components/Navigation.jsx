@@ -39,7 +39,7 @@ class Navigation extends Component {
                     <li className="code-link"><Link to="/code" {...currentCode} title="code">code</Link></li>
                     <li className="art-link"><Link to="/art" {...currentArt} title="art">art</Link></li>
                 </ul>
-                <div className="about-link"><Link to="/about" {...currentAbout}>about<span>:</span> me</Link></div>
+                <div className="about-link"><Link to="/about" {...currentAbout}><span>about</span> me</Link></div>
             </nav>
         );
     }

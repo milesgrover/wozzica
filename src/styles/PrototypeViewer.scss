@@ -1,0 +1,119 @@
+@import './shared.scss';
+
+.mg-prototype-viewer {
+
+    &.is-featured {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+
+        @include animation(noticeMe, $dur: 6000ms, $count: 4);
+    }
+
+    .design & {
+        padding: 8px 12px 4px 10px;
+
+        > a {
+            padding: 0;
+            border: 0;
+            text-transform: uppercase;
+            color: $primaryLight;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: -0.05em;
+            position: relative;
+            z-index: 1;            cursor: pointer;
+
+            &:before {
+                content: "";
+                background: $mediumAquamarine;
+                position: absolute;
+                z-index: -1;
+                left: -10px;
+                top: -8px;
+                right: -12px;
+                bottom: -4px;
+                transform: skewX(-20deg);
+            }
+
+            &:hover {
+                &:before {
+                    background: $darkTeal;
+                }
+            }
+        }
+    }
+
+    &.is-expanded {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+
+        > div {
+            position: relative;
+        }
+
+        .mg-prototype-controls {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            display: flex;
+
+            > button {
+                border: 0;
+                outline: 0;
+                background: rgba(0,0,0,0.5);
+                color: $primaryLight;
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+                transition: transform 100ms ease-in-out;
+                cursor: pointer;
+                margin-left: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                &:focus {
+                    border: 1px solid $primaryLight;
+                    @include dropShadow(0, 0, 0, 2px, rgba(0,0,0,0.5))
+                }
+
+                &.orientation {
+                    font-size: 16px;
+                    &:hover {
+                        transform: scale(1.1) rotateZ(-6deg);
+                    }
+
+                    &:before {
+                        @include iconFont();
+                        content: $icon-rotateArrow;
+                    }
+                }
+
+                &.close {
+                    font-size: 13px;
+                    &:before {
+                        @include iconFont();
+                        content: $icon-close;
+                    }
+                }
+            }
+        }
+    }
+}

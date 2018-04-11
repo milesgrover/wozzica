@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "mg-icons";
+  src:url("../fonts/mg-icons.eot");
+  src:url("../fonts/mg-icons.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/mg-icons.woff") format("woff"),
+    url("../fonts/mg-icons.ttf") format("truetype"),
+    url("../fonts/mg-icons.svg#mg-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;

@@ -1,0 +1,263 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Catamaran:400,500");
+.mg-prototype-autography {
+  -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  position: relative;
+  font-family: "Catamaran", sans-serif;
+  width: 375px;
+  height: 667px; }
+  .is-landscape .mg-prototype-autography {
+    width: 667px;
+    height: 375px; }
+  .mg-prototype-autography svg {
+    max-width: 100%;
+    max-height: 100%; }
+  .mg-prototype-autography .ag-canvas,
+  .mg-prototype-autography .ag-book {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform: translateY(100%);
+    transition: all 250ms step-end;
+    z-index: 2; }
+    .mg-prototype-autography .ag-canvas.current,
+    .mg-prototype-autography .ag-book.current {
+      transition: transform 250ms ease-in-out, z-index 250ms step-end;
+      transform: translateY(0);
+      z-index: 1; }
+    .mg-prototype-autography .ag-canvas .logo,
+    .mg-prototype-autography .ag-book .logo {
+      width: 147px;
+      padding: 12px 20px 0; }
+    .mg-prototype-autography .ag-canvas .drag-bar,
+    .mg-prototype-autography .ag-book .drag-bar {
+      height: 29px;
+      width: calc(100% - 38px);
+      position: absolute;
+      top: -34px;
+      background: transparent;
+      padding-left: 38px;
+      padding-top: 5px;
+      overflow: hidden;
+      cursor: pointer; }
+      .mg-prototype-autography .ag-canvas .drag-bar:before,
+      .mg-prototype-autography .ag-book .drag-bar:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: inherit;
+        border-top-left-radius: 20px;
+        -webkit-box-shadow: -2px 0 5px 0 rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: -2px 0 5px 0 rgba(0, 0, 0, 0.4);
+        box-shadow: -2px 0 5px 0 rgba(0, 0, 0, 0.4); }
+      .mg-prototype-autography .ag-canvas .drag-bar:after,
+      .mg-prototype-autography .ag-book .drag-bar:after {
+        font-family: "mg-icons";
+        line-height: 1;
+        content: "";
+        font-size: 14px;
+        position: relative;
+        top: 1px;
+        left: 9px; }
+    .mg-prototype-autography .ag-canvas .settings,
+    .mg-prototype-autography .ag-book .settings {
+      background: none;
+      border: none;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 0;
+      margin: 0;
+      opacity: 0.5;
+      cursor: pointer;
+      outline: 0; }
+      .mg-prototype-autography .ag-canvas .settings:before,
+      .mg-prototype-autography .ag-book .settings:before {
+        font-family: "mg-icons";
+        line-height: 1;
+        content: "";
+        font-size: 20px;
+        line-height: 1;
+        position: relative; }
+      .mg-prototype-autography .ag-canvas .settings:hover, .mg-prototype-autography .ag-canvas .settings:focus,
+      .mg-prototype-autography .ag-book .settings:hover,
+      .mg-prototype-autography .ag-book .settings:focus {
+        animation: rotate 3000ms linear 0ms infinite normal none running;
+        opacity: 1; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+  .mg-prototype-autography .ag-canvas {
+    background: #fff; }
+    .mg-prototype-autography .ag-canvas .drag-bar:before {
+      background: #fff; }
+    .mg-prototype-autography .ag-canvas #inker {
+      background: repeating-linear-gradient(180deg, #fff, #fff 19px, #ccc 10px, #ccc 20px); }
+    .mg-prototype-autography .ag-canvas .ag-canvas-handler {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .mg-prototype-autography .ag-canvas .ag-canvas-handler:before {
+        content: url(../images/prototypes/autography/sign-here.svg);
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: 185px;
+        opacity: 0;
+        transition: opacity 500ms ease-in-out;
+        pointer-events: none; }
+      .mg-prototype-autography .ag-canvas .ag-canvas-handler.show-helper:before {
+        opacity: 1; }
+    .mg-prototype-autography .ag-canvas .canvas-actions {
+      padding: 4px 8px;
+      display: flex;
+      justify-content: flex-end; }
+      .mg-prototype-autography .ag-canvas .canvas-actions button {
+        border: 0;
+        font-size: 16px;
+        color: #fff;
+        padding: 4px 8px;
+        background: #ce003b;
+        border-radius: 4px;
+        margin: 0 4px;
+        transition: transform 100ms ease;
+        outline: 0; }
+        .mg-prototype-autography .ag-canvas .canvas-actions button:hover {
+          transform: scale(1.1);
+          -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+          -moz-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+          box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4); }
+        .mg-prototype-autography .ag-canvas .canvas-actions button:focus {
+          padding: 3px 7px;
+          border: 1px solid #fff;
+          -webkit-box-shadow: 0 0 0 1px #ce003b;
+          -moz-box-shadow: 0 0 0 1px #ce003b;
+          box-shadow: 0 0 0 1px #ce003b; }
+        .mg-prototype-autography .ag-canvas .canvas-actions button:active {
+          transform: scale(1); }
+  .mg-prototype-autography .ag-book {
+    background: #ce003b;
+    color: #fff;
+    fill: #fff;
+    display: flex;
+    flex-direction: column; }
+    .mg-prototype-autography .ag-book .logo path {
+      fill: #fff; }
+    .mg-prototype-autography .ag-book .settings {
+      color: #fff; }
+    .mg-prototype-autography .ag-book .drag-bar:before {
+      background: #ce003b; }
+    .mg-prototype-autography .ag-book h1 {
+      color: inherit;
+      font-size: 48px;
+      text-transform: none;
+      font-weight: 500;
+      margin: 0;
+      padding: 0 20px;
+      text-shadow: -3px 4px 0 rgba(0, 0, 0, 0.4); }
+    .mg-prototype-autography .ag-book > ul {
+      list-style: none;
+      margin: 16px 0 0 0;
+      padding: 0 0 40px 0;
+      overflow-x: hidden;
+      overflow-y: auto; }
+      .mg-prototype-autography .ag-book > ul li {
+        padding: 0 20px 18px 20px; }
+        .mg-prototype-autography .ag-book > ul li > img {
+          width: 100px;
+          height: 100px;
+          display: inline-block;
+          vertical-align: top;
+          margin-right: 12px; }
+        .mg-prototype-autography .ag-book > ul li .sig-img {
+          display: inline-block;
+          vertical-align: top;
+          box-sizing: border-box;
+          height: 100px;
+          width: calc(100% - 112px);
+          padding: 12px;
+          background: repeating-linear-gradient(180deg, #fff, #fff 19px, #ccc 10px, #ccc 20px);
+          -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+          -moz-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+          box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4); }
+          .mg-prototype-autography .ag-book > ul li .sig-img img {
+            max-width: 100%;
+            max-height: 100%; }
+        .mg-prototype-autography .ag-book > ul li .sig-metadata {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          padding-top: 8px; }
+        .mg-prototype-autography .ag-book > ul li .sig-name {
+          font-size: 21px;
+          line-height: 1; }
+        .mg-prototype-autography .ag-book > ul li .sig-date {
+          font-size: 16px;
+          line-height: 1;
+          color: #ccc;
+          font-family: Arial, Helvetica, sans-serif; }
+  .mg-prototype-autography .ag-settings-page {
+    height: 100%;
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    position: absolute;
+    transition: all 250ms ease-in-out;
+    z-index: 3;
+    background: #ce003b;
+    color: #fff; }
+    .mg-prototype-autography .ag-settings-page.is-transitioning {
+      transform: translateX(100%); }
+    .mg-prototype-autography .ag-settings-page .logo {
+      width: 147px; }
+      .mg-prototype-autography .ag-settings-page .logo svg {
+        fill: #fff;
+        max-width: 100%; }
+    .mg-prototype-autography .ag-settings-page h1 {
+      color: inherit;
+      font-size: 48px;
+      text-transform: none;
+      font-weight: 500;
+      margin: 0;
+      padding: 0;
+      text-shadow: -3px 4px 0 rgba(0, 0, 0, 0.4); }
+    .mg-prototype-autography .ag-settings-page h1 + p {
+      margin-top: 12px; }
+    .mg-prototype-autography .ag-settings-page .close {
+      background: none;
+      border: none;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 0;
+      margin: 0;
+      opacity: 0.5;
+      cursor: pointer;
+      outline: 0;
+      color: #fff;
+      transform-origin: right center;
+      transition: transform 100ms linear; }
+      .mg-prototype-autography .ag-settings-page .close:before {
+        font-family: "mg-icons";
+        line-height: 1;
+        content: "";
+        font-size: 16px;
+        line-height: 1;
+        position: relative; }
+      .mg-prototype-autography .ag-settings-page .close:hover, .mg-prototype-autography .ag-settings-page .close:focus {
+        transform: scale(1.1);
+        opacity: 1; }
