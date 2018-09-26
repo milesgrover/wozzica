@@ -6,14 +6,13 @@ import {
     Route,
     Redirect
 } from 'react-router-dom';
-import './styles/index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const Portfolio = () => {
     return (
         <Switch>
-            <Redirect exact from="/" to="/design" />
+            <Route exact path="/" component={App}/>
             <Route exact path="/:cat" component={App}/>
             <Route path="/:cat/:item" component={App}/>
         </Switch>

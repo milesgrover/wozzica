@@ -1,0 +1,37 @@
+@import './shared';
+
+.wozz-title-bar {
+    background: $darkTeal;
+    display: flex;
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    color: $foregroundLight;
+    text-transform: uppercase;
+    transition: transform 300ms ease-in-out;
+    @include dropShadow();
+    position: absolute;
+    top: 82px;
+    right: 0;
+    left: 0;
+    transform: translateY(0);
+
+    &.title-bar-appear,
+    &.title-bar-enter {
+        transform: translateY(-120%);
+    }
+
+    &.title-bar-enter {
+        // transition-delay: 150ms;
+    }
+
+    &.title-bar-appear-active,
+    &.title-bar-enter-active {
+        transform: translateY(0);
+    }
+
+    h1 {
+        font-size: 24px;
+        line-height: 1;
+    }
+}

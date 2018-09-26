@@ -1,0 +1,14 @@
+.wozz-site-bar {
+  background: #00d6bc;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 5px 3px 0 rgba(0, 0, 0, 0.17); }
+  .wozz-site-bar > div {
+    margin: 0 auto;
+    max-width: 1600px;
+    display: flex;
+    height: 82px;
+    align-items: center; }

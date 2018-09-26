@@ -1,0 +1,56 @@
+// Colors
+// Teal
+$lightTeal: #00d6bc;
+$midTeal: #00ba96;
+$darkTeal: #008e79;
+
+// Yellow
+$yellow: #ffda00;
+
+// Gray
+$lightGray: #999;
+$midGray: #888;
+
+// Foreground colors
+$foregroundLight: #fff;
+$foregroundDark: #000;
+
+// Viewport minimum sizes
+$vp-sm: 576px;
+$vp-md: 768px;
+$vp-lg: 992px;
+$vp-xl: 1200px;
+$vp-max: 1600px;
+
+
+// Icons
+@mixin iconFont() {
+    font-family: "wozz-icons";
+    line-height: 1;
+}
+
+// icon names
+$icon-checkmark:       '\E000';
+$icon-edit:            '\E001';
+$icon-cancel:          '\E002';
+// '\E003' skipped
+$icon-chevronDown:     '\E004';
+$icon-chevronRight:    '\E005';
+$icon-edit:            '\E006';
+$icon-search:          '\E007';
+$icon-plus:            '\E008';
+
+// Drop shadow
+@mixin dropShadow($x: 0, $y: 5px, $blur: 3px, $spread: 0, $color: rgba(0,0,0,0.17)) {
+    box-shadow: $x $y $blur $spread $color;
+}
+
+// Site bar
+@mixin siteBarPadding() {
+    transition: margin 100ms ease-in-out;
+    margin: 0 12px;
+
+    @media (min-width: $vp-md) {
+        margin: 0 24px;
+    }
+}

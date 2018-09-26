@@ -1,0 +1,19 @@
+@import './shared';
+
+.wozz-site-bar {
+    background: $lightTeal;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    @include dropShadow();
+
+    > div {
+        margin: 0 auto;
+        max-width: $vp-max;
+        display: flex;
+        height: 82px;
+        align-items: center;
+    }
+}

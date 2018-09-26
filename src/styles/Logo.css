@@ -1,0 +1,11 @@
+.wozz-logo {
+  width: 164px;
+  flex-shrink: 0;
+  transition: margin 100ms ease-in-out;
+  margin: 0 12px; }
+  @media (min-width: 768px) {
+    .wozz-logo {
+      margin: 0 24px; } }
+  .wozz-logo img {
+    position: relative;
+    top: -4px; }

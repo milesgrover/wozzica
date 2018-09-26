@@ -2,46 +2,54 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navigation.css';
 
-
 class Navigation extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            expanded: false
+            showMenu: false
         }
     }
-    handleClick = () => {
-        this.navExpander();
+
+    setToActive = (cat) => {
+        if (this.props.category && this.props.category === cat) {
+            return 'active';
+        }
+        return null;
     }
 
-    navExpander = () => {
+    toggleMenu = (e) => {
+        e.stopPropagation();
         this.setState({
-            expanded: !this.state.expanded
+            showMenu: !this.state.showMenu
         });
     }
 
-    generateClasses = () => {
-        let classConcat = `mg-navigation${this.state.expanded ? ' is-expanded' : ''}`;
-        return classConcat;
+    menuOff = () => {
+        this.setState({
+            showMenu: false
+        })
+    }
+
+    componentDidMount = () => {
+        window.addEventListener('click', this.menuOff);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener('click', this.menuOff);
     }
 
     render() {
-        let currentDesign = { className: this.props.cat === 'design' ? 'current' : '' };
-        let currentArt = { className: this.props.cat === 'art' ? 'current' : '' };
-        let currentCode = { className: this.props.cat === 'code' ? 'current' : '' };
-        let currentAbout = { className: this.props.cat === 'about' ? 'current' : '' };
         return (
-            <nav className={this.generateClasses()}>
-                <h1>miles Grover <button onClick={this.handleClick}></button></h1>
-                <ul>
-                    <li className="design-link"><Link to="/design" {...currentDesign} title="design">design</Link></li>
-                    <li className="code-link"><Link to="/code" {...currentCode} title="code">code</Link></li>
-                    <li className="art-link"><Link to="/art" {...currentArt} title="art">art</Link></li>
+            <nav className="wozz-navigation">
+                <button className="wozz-menu-btn" onClick={this.toggleMenu}>Menu</button>
+                <ul className={this.state.showMenu ? null : 'hide'}>
+                    <li className={this.setToActive('home')}><Link to="/">Home</Link></li>
+                    <li className={this.setToActive('add')}><Link to="/add">Add a new thing</Link></li>
+                    <li className={this.setToActive('browse')}><Link to="/browse">Browse</Link></li>
                 </ul>
-                <div className="about-link"><Link to="/about" {...currentAbout}><span>about</span> me</Link></div>
             </nav>
-        );
+        )
     }
 }
 
