@@ -3,7 +3,7 @@
 .wozz-navigation {
     flex: 1;
     position: relative;
-    @include siteBarPadding();
+    @include sitePadding();
 
     %navCtrl {
         font-size: 18px;
@@ -26,16 +26,13 @@
         cursor: pointer;
         padding: 4px 8px;
         @extend %navCtrl;
+        animation: animFadeIn 150ms ease-in-out;
 
         &:after {
             content: $icon-chevronDown;
             @include iconFont();
             font-size: 10px;
             padding-left: 8px;
-        }
-
-        @media (min-width: $vp-lg) {
-            display: none;
         }
     }
 
@@ -44,25 +41,34 @@
         margin: 0;
         padding: 0;
         display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 32px;
-        background: $foregroundLight;
-        height: 132px;
-        width: 200px;
-        transition: all 300ms ease-in-out;
-        overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 3px 5px 2px rgba(0,0,0,0.17);
 
-        &.hide {
-            height: 0;
-            box-shadow: 0 3px 5px 2px rgba(0,0,0,0);
-            transition-duration: 100ms;
+        li {
+            a {
+                @extend %navCtrl;
+                display: flex;
+                align-items: center;
+            }
+
+            // &.active {
+            //     a:after {
+            //         content: "";
+            //         width: 24px;
+            //         height: 4px;
+            //         border-radius: 2px;
+            //         position: absolute;
+            //         bottom: -10px;
+            //         right: 0;
+            //         left: 0;
+            //         margin: auto;
+            //         background: $foregroundLight;
+            //     }
+            // }
         }
 
-        @media (min-width: $vp-lg) {
+        &.nav-list {
             flex-direction: row;
+            justify-content: space-between;
+            max-width: 390px;
             position: relative;
             top: 0;
             background: none;
@@ -70,64 +76,62 @@
             width: auto;
             height: auto;
             box-shadow: none;
+            animation: animFadeIn 150ms ease-in-out;
 
-            &.hide {
-                height: auto;
+            li {
+                // margin: 0 22px;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                a {
+                    white-space: nowrap;
+                    padding: 4px 8px;
+                    color: $foregroundLight;
+                }
             }
         }
-    }
 
-    li {
-        margin: 0;
+        &.nav-menu {
+            visibility: hidden;
+            flex-direction: column;
+            position: absolute;
+            top: 32px;
+            background: $foregroundLight;
+            width: 200px;
+            transition: all 100ms ease-in-out;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 0;
+            box-shadow: 0 3px 5px 2px rgba(0,0,0,0);
 
-        @media (min-width: $vp-lg) {
-            margin: 0 22px;
-        }
-
-        &:first-child {
-            margin-left: 0;
-        }
-
-        &:last-child {
-            margin-right: 0;
-        }
-
-        a {
-            @extend %navCtrl;
-            display: flex;
-            padding: 0 12px;
-            height: 44px;
-            align-items: center;
-            border-radius: 0;
-            color: $lightTeal;
-
-            &:hover,
-            &:focus {
-                color: $foregroundLight;
+            &.show {
+                visibility: visible;
+                height: 132px;
+                box-shadow: 0 3px 5px 2px rgba(0,0,0,0.17);
+                transition-duration: 300ms;
             }
 
-            @media (min-width: $vp-lg) {
-                height: auto;
-                padding: 4px 8px;
-                border-radius: 8px;
-                color: $foregroundLight;
+            li {
+                margin: 0;
+
+                a {
+                    padding: 0 12px;
+                    height: 44px;
+                    color: $lightTeal;
+                    border-radius: 0;
+
+                    &:hover,
+                    &:focus {
+                        color: $foregroundLight;
+                    }
+                }
             }
-
         }
-
-        // &.active {
-        //     a:after {
-        //         content: "";
-        //         width: 24px;
-        //         height: 4px;
-        //         border-radius: 2px;
-        //         position: absolute;
-        //         bottom: -10px;
-        //         right: 0;
-        //         left: 0;
-        //         margin: auto;
-        //         background: $foregroundLight;
-        //     }
-        // }
     }
 }

@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Redirect
+    Route
 } from 'react-router-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const Portfolio = () => {
+const Wozzica = () => {
     return (
         <Switch>
             <Route exact path="/" component={App}/>
@@ -21,7 +20,7 @@ const Portfolio = () => {
 
 ReactDOM.render((
     <Router>
-        <Portfolio />
+        <Wozzica />
     </Router>
 ), document.getElementById('root'));
 registerServiceWorker();

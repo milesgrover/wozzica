@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import '../styles/TitleBar.css';
 
 class TitleBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
-            <div className="wozz-title-bar">
+            <div className={`wozz-title-bar${this.props.withdraw ? ' withdraw' : ''}`}>
                 <h1>{this.props.title}</h1>
             </div>
         )

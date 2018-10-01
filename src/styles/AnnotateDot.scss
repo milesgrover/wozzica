@@ -1,0 +1,11 @@
+@import './shared';
+
+.annotation-dot {
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+    background: black;
+    border-radius: 100%;
+    z-index: 3;
+}

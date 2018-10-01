@@ -1,3 +1,9 @@
+@keyframes animFadeIn {
+  0% {
+    opacity: 0.01; }
+  100% {
+    opacity: 1; } }
+
 .wozz-title-bar {
   background: #008e79;
   display: flex;
@@ -8,15 +14,20 @@
   text-transform: uppercase;
   transition: transform 300ms ease-in-out;
   box-shadow: 0 5px 3px 0 rgba(0, 0, 0, 0.17);
-  position: absolute;
-  top: 82px;
-  right: 0;
-  left: 0;
+  position: relative;
   transform: translateY(0); }
   .wozz-title-bar.title-bar-appear, .wozz-title-bar.title-bar-enter {
     transform: translateY(-120%); }
   .wozz-title-bar.title-bar-appear-active, .wozz-title-bar.title-bar-enter-active {
     transform: translateY(0); }
+  .wozz-title-bar.withdraw {
+    animation: animWithdrawUp 300ms 5000ms forwards ease-in-out; }
   .wozz-title-bar h1 {
     font-size: 24px;
     line-height: 1; }
+
+@keyframes animWithdrawUp {
+  0% {
+    margin-top: 0; }
+  100% {
+    margin-top: -54px; } }

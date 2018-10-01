@@ -1,0 +1,48 @@
+@import './shared';
+
+.annotation-label {
+    font-size: 18px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: $foregroundLight;
+    background: $foregroundDark;
+    box-shadow: inset 0 0 0 2px $foregroundDark, inset 0 0 0 4px $foregroundLight;
+    position: absolute;
+    padding: 8px 12px;
+    cursor: default;
+    z-index: 3;
+    display: flex;
+
+    .label-editor {
+        flex-grow: 0;
+        border: 0;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        background: inherit;
+        box-sizing: border-box;
+        @include controlFocus();
+        padding: 4px 8px;
+        margin: -4px -8px;
+        max-width: 256px;
+    }
+
+    .label-dragger-btn,
+    .label-edit-btn,
+    .label-edit-cancel-btn {
+        position: absolute;
+        right: -50px;
+    }
+
+    .label-dragger-btn {
+        top: -5px;
+    }
+
+    .label-edit-btn {
+        bottom: -5px;
+    }
+
+    .label-edit-cancel-btn {
+        bottom: -30px;
+    }
+}

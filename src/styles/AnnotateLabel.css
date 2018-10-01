@@ -1,0 +1,43 @@
+@keyframes animFadeIn {
+  0% {
+    opacity: 0.01; }
+  100% {
+    opacity: 1; } }
+
+.annotation-label {
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+  background: #000;
+  box-shadow: inset 0 0 0 2px #000, inset 0 0 0 4px #fff;
+  position: absolute;
+  padding: 8px 12px;
+  cursor: default;
+  z-index: 3;
+  display: flex; }
+  .annotation-label .label-editor {
+    flex-grow: 0;
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: inherit;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    margin: -4px -8px;
+    max-width: 256px; }
+    .annotation-label .label-editor:focus {
+      outline: 0;
+      box-shadow: inset 0 0 3px 1px #00d6bc; }
+  .annotation-label .label-dragger-btn,
+  .annotation-label .label-edit-btn,
+  .annotation-label .label-edit-cancel-btn {
+    position: absolute;
+    right: -50px; }
+  .annotation-label .label-dragger-btn {
+    top: -5px; }
+  .annotation-label .label-edit-btn {
+    bottom: -5px; }
+  .annotation-label .label-edit-cancel-btn {
+    bottom: -30px; }

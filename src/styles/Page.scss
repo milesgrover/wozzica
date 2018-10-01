@@ -1,0 +1,13 @@
+@import './shared';
+
+.wozz-page-container {
+    margin-top: -65px;
+    padding-top: 87px;
+    flex: 1;
+    @include sitePadding();
+
+    h1 {
+        font-size: 32px;
+        font-weight: 400;
+    }
+}

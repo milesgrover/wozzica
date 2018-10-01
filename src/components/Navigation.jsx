@@ -39,11 +39,23 @@ class Navigation extends Component {
         window.removeEventListener('click', this.menuOff);
     }
 
+    setNavClass = () => {
+        let navClass = 'nav-list';
+        if (this.props.vpSize < 3 && this.state.showMenu) {
+            navClass = 'nav-menu show';
+        } else if (this.props.vpSize < 3 && !this.state.showMenu) {
+            navClass = 'nav-menu';
+        }
+        return navClass;
+    }
+
     render() {
         return (
             <nav className="wozz-navigation">
-                <button className="wozz-menu-btn" onClick={this.toggleMenu}>Menu</button>
-                <ul className={this.state.showMenu ? null : 'hide'}>
+                {this.props.vpSize < 3 &&
+                    <button className="wozz-menu-btn" onClick={this.toggleMenu}>Menu</button>
+                }
+                <ul className={this.setNavClass()}>
                     <li className={this.setToActive('home')}><Link to="/">Home</Link></li>
                     <li className={this.setToActive('add')}><Link to="/add">Add a new thing</Link></li>
                     <li className={this.setToActive('browse')}><Link to="/browse">Browse</Link></li>

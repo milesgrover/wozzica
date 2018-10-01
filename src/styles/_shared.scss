@@ -6,6 +6,7 @@ $darkTeal: #008e79;
 
 // Yellow
 $yellow: #ffda00;
+$lightYellow: #ffe566;
 
 // Gray
 $lightGray: #999;
@@ -15,11 +16,14 @@ $midGray: #888;
 $foregroundLight: #fff;
 $foregroundDark: #000;
 
+// Font
+$fontFamily: "Raleway", sans-serif;
+
 // Viewport minimum sizes
-$vp-sm: 576px;
-$vp-md: 768px;
-$vp-lg: 992px;
-$vp-xl: 1200px;
+$vp-1: 576px;
+$vp-2: 768px;
+$vp-3: 992px;
+$vp-4: 1200px;
 $vp-max: 1600px;
 
 
@@ -45,12 +49,43 @@ $icon-plus:            '\E008';
     box-shadow: $x $y $blur $spread $color;
 }
 
-// Site bar
-@mixin siteBarPadding() {
-    transition: margin 100ms ease-in-out;
-    margin: 0 12px;
+// Padding used across the site
+@mixin sitePadding() {
+    transition: padding 100ms ease-in-out;
+    padding-right: 12px;
+    padding-left: 12px;
 
-    @media (min-width: $vp-md) {
-        margin: 0 24px;
+    @media (min-width: $vp-3) {
+        padding-right: 24px;
+        padding-left: 24px;
+    }
+}
+
+// Control states
+@mixin controlFocus() {
+    &:focus {
+        outline: 0;
+        box-shadow: inset 0 0 3px 1px $lightTeal;
+    }
+}
+
+@mixin buttonActive() {
+    &:active {
+        background: $yellow;
+        box-shadow: none;
+
+        &:before {
+            color: $darkTeal;
+        }
+    }
+}
+
+// Animations
+@keyframes animFadeIn {
+    0% {
+        opacity: 0.01;
+    }
+    100% {
+        opacity: 1;
     }
 }

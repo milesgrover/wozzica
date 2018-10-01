@@ -4,16 +4,17 @@
   100% {
     opacity: 1; } }
 
-.wozz-logo {
-  width: 164px;
-  flex-shrink: 0;
+.wozz-page-container {
+  margin-top: -65px;
+  padding-top: 87px;
+  flex: 1;
   transition: padding 100ms ease-in-out;
   padding-right: 12px;
   padding-left: 12px; }
   @media (min-width: 992px) {
-    .wozz-logo {
+    .wozz-page-container {
       padding-right: 24px;
       padding-left: 24px; } }
-  .wozz-logo img {
-    position: relative;
-    top: -4px; }
+  .wozz-page-container h1 {
+    font-size: 32px;
+    font-weight: 400; }

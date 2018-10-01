@@ -5,13 +5,13 @@ class SiteSearch extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { showInput: false }
+        this.state = { expandInput: false }
     }
 
     handleSearchClick = () => {
-        if (!this.state.showInput) {
+        if (!this.state.expandInput && this.props.vpSize < 1) {
             this.setState({
-                showInput: true
+                expandInput: true
             });
         } else {
             this.searchSite();
@@ -20,7 +20,7 @@ class SiteSearch extends Component {
 
     handleCancelClick = () => {
         this.setState({
-            showInput: false
+            expandInput: false
         });
     }
 
@@ -30,16 +30,20 @@ class SiteSearch extends Component {
 
     render() {
         return (
-            <div className={`wozz-site-search${this.state.showInput ? '' : ' hide'}`}>
-                <input type="text"
-                       placeholder="search for a thing"
-                       />
+            <div className={`wozz-site-search${this.state.expandInput && this.props.vpSize < 1 ? ' expand' : ''}`}>
+                {(this.props.vpSize > 0 || this.state.expandInput) &&
+                    <input type="text"
+                           placeholder="search for a thing"
+                    />
+                }
                 <button className="search-go" onClick={this.handleSearchClick}>
                     <span>search</span>
                 </button>
-                <button className="search-cancel" onClick={this.handleCancelClick}>
-                    <span>cancel</span>
-                </button>
+                {this.props.vpSize < 1 && this.state.expandInput &&
+                    <button className="search-cancel" onClick={this.handleCancelClick}>
+                        <span>cancel</span>
+                    </button>
+                }
             </div>
         )
     }

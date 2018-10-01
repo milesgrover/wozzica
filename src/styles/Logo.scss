@@ -3,7 +3,7 @@
 .wozz-logo {
     width: 164px;
     flex-shrink: 0;
-    @include siteBarPadding();
+    @include sitePadding();
 
     // adjust logo to align with other elements
     img {

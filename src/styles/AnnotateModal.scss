@@ -1,0 +1,147 @@
+@import './shared';
+
+$fadeTiming: fadeIn 100ms ease-in-out;
+
+.annotation-modal {
+    position: absolute;
+    width: 320px;
+    height: 100px;
+    background-color: $lightYellow;
+    animation: $fadeTiming;
+
+    .heading {
+        font-size: 22px;
+        color: $darkTeal;
+        font-weight: 400;
+        padding: 12px;
+        padding-bottom: 0;
+    }
+
+    .close-btn {
+        border: 0;
+        background: none;
+        position: absolute;
+        padding: 4px 6px;
+        top: 0;
+        right: 0;
+        outline: 0;
+
+        &:after {
+            content: $icon-cancel;
+            @include iconFont();
+            color: $darkTeal;
+            font-size: 9px;
+        }
+
+        &:focus,
+        &:active {
+            &:after {
+                color: $foregroundDark;
+            }
+        }
+
+        &:active {
+            transform: translate(0, 1px);
+        }
+
+        span {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+    }
+
+    form {
+        padding: 12px;
+        display: flex;
+
+        input,
+        button {
+            border-radius: 8px;
+            border: 3px solid $darkTeal;
+
+            @include controlFocus();
+        }
+
+        input {
+            flex: 1;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            margin-right: -3px;
+            padding: 0 8px;
+        }
+
+        button {
+            width: 36px;
+            height: 36px;
+            background: $darkTeal;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+
+            &:before {
+                content: $icon-checkmark;
+                @include iconFont();
+                color: $foregroundLight;
+                font-size: 18px;
+            }
+
+            @include buttonActive();
+
+            span {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+.modal-tail {
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: -20px;
+    border-top: 20px solid $lightYellow;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    transform: translate(-14px, -100%);
+    z-index: 4;
+    animation: $fadeTiming;
+
+    &.left {
+        border-left-width: 0;
+        transform: translate(4px, -100%) scaleX(1.5);
+    }
+
+    &.right {
+        border-right-width: 0;
+        transform: translate(-18px, -100%) scaleX(1.5);
+    }
+
+    &.top {
+        transform: translate(-14px, 0) rotate(180deg);
+
+        &.left {
+            border-left-width: 15px;
+            border-right-width: 0;
+            transform: translate(4px, 0) scaleX(1.5) rotate(180deg);
+        }
+
+        &.right {
+            border-right-width: 15px;
+            border-left-width: 0;
+            transform: translate(-18px, 0) scaleX(1.5) rotate(180deg);
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.01;
+    }
+    100% {
+        opacity: 1;
+    }
+}

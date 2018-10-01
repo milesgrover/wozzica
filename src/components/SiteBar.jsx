@@ -5,17 +5,13 @@ import SiteSearch from './SiteSearch';
 import '../styles/SiteBar.css';
 
 class SiteBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <section className="wozz-site-bar">
                 <div>
                 <Logo />
-                <Navigation category={this.props.category} />
-                <SiteSearch />
+                <Navigation category={this.props.category} vpSize={this.props.vpSize} />
+                <SiteSearch vpSize={this.props.vpSize} />
                 </div>
             </section>
         )

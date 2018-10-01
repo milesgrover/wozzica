@@ -10,10 +10,7 @@
     text-transform: uppercase;
     transition: transform 300ms ease-in-out;
     @include dropShadow();
-    position: absolute;
-    top: 82px;
-    right: 0;
-    left: 0;
+    position: relative;
     transform: translateY(0);
 
     &.title-bar-appear,
@@ -21,17 +18,26 @@
         transform: translateY(-120%);
     }
 
-    &.title-bar-enter {
-        // transition-delay: 150ms;
-    }
-
     &.title-bar-appear-active,
     &.title-bar-enter-active {
         transform: translateY(0);
     }
 
+    &.withdraw {
+        animation: animWithdrawUp 300ms 5000ms forwards ease-in-out;
+    }
+
     h1 {
         font-size: 24px;
         line-height: 1;
+    }
+
+    @keyframes animWithdrawUp {
+        0% {
+            margin-top: 0;
+        }
+        100% {
+            margin-top: -54px;
+        }
     }
 }
