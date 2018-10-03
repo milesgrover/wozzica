@@ -9,7 +9,7 @@ class Annotator extends Component {
     handleBtnClick = (e) => {
         e.preventDefault();
         if (this.InputBox.value) {
-            this.props.onAddLabel(this.InputBox.value)
+            this.props.onAddLabel(this.InputBox.value, this.props.index)
         }
     }
 
@@ -22,6 +22,7 @@ class Annotator extends Component {
             top: this.props.position.tailCoords.y,
             left: this.props.position.tailCoords.x
         }
+
         return (
             <Fragment>
                 <div className="annotation-modal" style={positionStyle}>

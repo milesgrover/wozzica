@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import AnnotateModal from './AnnotateModal';
 import AnnotateDot from './AnnotateDot';
 import AnnotateLabel from './AnnotateLabel';
+import AnnotateLine from './AnnotateLine';
 import '../styles/Annotator.css';
 
 const imgSrc = 'http://www.munchamuncha.com/munchamuncha.jpg'; // obvz for testing only
@@ -12,12 +13,12 @@ class Annotator extends Component {
 
         this.state = {
             imgSize: {w: 0, h: 0},
-            numDots: 0,
-            currentDotCoords: {x:0, y: 0},
-            numLabels: 0,
+            dotCoords: [],
             currentLabel: '',
-            currentLabelCoords: {x:0, y:0},
-            placingLabel: false,
+            labels: [],
+            labelCoords: [],
+            labelDimensions: [],
+            placingLabel: -1,
             showingModal: false
         }
     }
@@ -33,86 +34,140 @@ class Annotator extends Component {
         let newX = e.nativeEvent.offsetX;
         let newY = e.nativeEvent.offsetY;
 
-        if (!this.state.showingModal && !this.state.placingLabel) {
+        if (!this.state.showingModal && this.state.placingLabel < 0) {
             this.setState({
                 showingModal: true,
-                currentDotCoords: {x: newX, y: newY},
-                numDots: this.state.numDots + 1
+                dotCoords: [...this.state.dotCoords, {x: newX, y: newY}]
             })
         }
     }
 
-    handleMouseMove = (e) => {
+    handleDotClick = (e) => {
+        e.stopPropagation();
+    }
 
+    handleMouseMove = (e) => {
+        if (this.state.placingLabel >= 0) {
+            let dragX = e.clientX - this.thingImage.parentNode.offsetLeft;
+            let dragY = e.clientY - this.thingImage.parentNode.offsetTop;
+
+            let updateCurrentLabelCoords = this.state.labelCoords.slice(0);
+            updateCurrentLabelCoords[this.state.placingLabel] = {x:dragX, y:dragY};
+
+            this.setState({
+                labelCoords: updateCurrentLabelCoords
+            })
+        }
     }
 
     modalOnClose = () => {
+        let updateDotCoords = this.state.dotCoords.slice(0);
+        updateDotCoords.splice(this.state.dotCoords.length - 1, 1);
         this.setState({
             showingModal: false,
-            numDots: this.state.numDots - 1
+            dotCoords: updateDotCoords
         })
     }
 
-    addLabel = (text) => {
+    addLabel = (text, index) => {
         this.setState({
             currentLabel: text,
+            labels: [...this.state.labels, text],
             showingModal: false,
-            placingLabel: true,
-            currentLabelCoords: this.state.currentDotCoords,
-            numLabels: this.state.numLabels + 1
+            labelCoords: [...this.state.labelCoords, this.state.dotCoords[index]]
         });
     }
 
-    onUpdateLabel = (text) => {
+    onUpdateLabel = (text, index, dimensions) => {
+        if (text) {
+            let updateCurrentLabel = this.state.labels.slice(0);
+            updateCurrentLabel[index] = text;
+            this.setState({
+                currentLabel: text,
+                labels: updateCurrentLabel
+            });
+        }
+
+        let updateCurrentLabelDimensions = this.state.labelDimensions.slice(0);
+        updateCurrentLabelDimensions[index] = dimensions;
+
         this.setState({
-            currentLabel: text
+            labelDimensions: updateCurrentLabelDimensions
+        });
+    }
+
+    onDragLabel = (index) => {
+        this.setState({
+            placingLabel: index
         });
     }
 
     positionModal = () => {
-        // setting these as hardcoded numbers to avoid dynamically pulling the size
-        // this should rarely change and getting size from the DOM is needless
         let modalWidth = 320;
         let modalHeight = 100;
         let edgeGutter = 4;
         let tailHeight = 20;
 
+        let currentDotCoords = this.state.dotCoords[this.state.dotCoords.length - 1]
         let alterTail = [];
 
-        let modalX = this.state.currentDotCoords.x - modalWidth / 2;
-        let modalY = this.state.currentDotCoords.y - tailHeight - modalHeight;
-        if (this.state.currentDotCoords.x < modalWidth / 2) {
+        let modalX = currentDotCoords.x - modalWidth / 2;
+        let modalY = currentDotCoords.y - tailHeight - modalHeight;
+        if (currentDotCoords.x < modalWidth / 2) {
             modalX = edgeGutter;
             alterTail.push('left');
-        } else if (this.state.imgSize && this.state.currentDotCoords.x > this.state.imgSize.w - modalWidth / 2) {
+        } else if (this.state.imgSize && currentDotCoords.x > this.state.imgSize.w - modalWidth / 2) {
             modalX = this.state.imgSize.w - edgeGutter - modalWidth;
             alterTail.push('right');
         }
-        if (this.state.currentDotCoords.y < modalHeight + tailHeight + edgeGutter) {
-            modalY = this.state.currentDotCoords.y + tailHeight;
+        if (currentDotCoords.y < modalHeight + tailHeight + edgeGutter) {
+            modalY = currentDotCoords.y + tailHeight;
             alterTail.push('top');
         }
-        return {x: modalX, y: modalY, tail: alterTail, tailCoords: this.state.currentDotCoords};
+        return {x: modalX, y: modalY, tail: alterTail, tailCoords: currentDotCoords};
     }
 
     render() {
         // add dots
         const dots = [];
-        for (let i = 0; i < this.state.numDots; i++) {
-            dots.push(<AnnotateDot key={i} coords={this.state.currentDotCoords} />)
+        for (let i = 0; i < this.state.dotCoords.length; i++) {
+            dots.push(<AnnotateDot key={i}
+                                   coords={this.state.dotCoords[i]}
+                                   onClickDot={this.handleDotClick}
+                                   />)
         }
 
         // add labels
         const labels = [];
-        for (let i = 0; i < this.state.numLabels; i++) {
-            labels.push(<AnnotateLabel key={i} coords={this.state.currentLabelCoords} label={this.state.currentLabel} onUpdate={this.onUpdateLabel} />)
+        for (let i = 0; i < this.state.labelCoords.length; i++) {
+            labels.push(<AnnotateLabel key={i}
+                                       index={i}
+                                       coords={this.state.labelCoords[i]}
+                                       label={this.state.labels[i]}
+                                       onUpdate={this.onUpdateLabel}
+                                       onDragger={this.onDragLabel}
+                                       />)
+        }
+
+        // add lines
+        const lines = [];
+        for (let i = 0; i < this.state.labelDimensions.length; i++) {
+            lines.push(<AnnotateLine key={i}
+                                       index={i}
+                                       dotCoords={this.state.dotCoords[i]}
+                                       labelCoords={this.state.labelCoords[i]}
+                                       labelDimensions={this.state.labelDimensions[i]}
+                                       />)
         }
 
         return (
             <div className="wozz-annotator" onMouseMove={this.handleMouseMove} onClick={this.handleImgClick}>
                 <img src={imgSrc} alt="" onLoad={this.onImgLoad} ref={(el) => this.thingImage = el} />
                 {this.state.showingModal &&
-                    <AnnotateModal onClose={this.modalOnClose} onAddLabel={this.addLabel} position={this.positionModal()} />
+                    <AnnotateModal onClose={this.modalOnClose}
+                                   onAddLabel={this.addLabel}
+                                   position={this.positionModal()}
+                                   index={this.state.labels.length} />
                 }
                 <DotHolder>
                     {dots}
@@ -120,18 +175,27 @@ class Annotator extends Component {
                 <LabelHolder>
                     {labels}
                 </LabelHolder>
+                <LineHolder>
+                    {lines}
+                </LineHolder>
             </div>
         )
     }
 }
 
-const DotHolder = props => (
+const DotHolder = (props) => (
   <Fragment>
     {props.children}
   </Fragment>
 );
 
-const LabelHolder = props => (
+const LabelHolder = (props) => (
+  <Fragment>
+    {props.children}
+  </Fragment>
+);
+
+const LineHolder = (props) => (
   <Fragment>
     {props.children}
   </Fragment>

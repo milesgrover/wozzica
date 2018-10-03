@@ -7,6 +7,7 @@ class AnnotatePage extends Component {
         return (
             <Fragment>
                 <Annotator />
+                <Annotator />
             </Fragment>
         )
     }

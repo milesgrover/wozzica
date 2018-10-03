@@ -10,7 +10,8 @@
   width: 320px;
   height: 100px;
   background-color: #ffe566;
-  animation: fadeIn 100ms ease-in-out; }
+  animation: fadeIn 100ms ease-in-out;
+  z-index: 10; }
   .annotation-modal .heading {
     font-size: 22px;
     color: #008e79;

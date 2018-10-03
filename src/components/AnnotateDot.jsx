@@ -7,7 +7,13 @@ class AnnotateDot extends Component {
             top: this.props.coords.y - 2,
             left: this.props.coords.x - 2
         }
-        return <div className="annotation-dot" style={positionStyle}></div>
+        return (
+            <div className="annotation-dot"
+                    style={positionStyle}
+                    onClick={this.props.onClickDot}
+                    >
+            </div>
+        )
     }
 }
 

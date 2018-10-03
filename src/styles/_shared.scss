@@ -37,7 +37,7 @@ $vp-max: 1600px;
 $icon-checkmark:       '\E000';
 $icon-edit:            '\E001';
 $icon-cancel:          '\E002';
-// '\E003' skipped
+$icon-gripper:         '\E003';
 $icon-chevronDown:     '\E004';
 $icon-chevronRight:    '\E005';
 $icon-edit:            '\E006';
@@ -77,6 +77,16 @@ $icon-plus:            '\E008';
         &:before {
             color: $darkTeal;
         }
+    }
+}
+
+// hides the text while leaving it accessible to screen readers
+@mixin hideText() {
+    span {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
     }
 }
 

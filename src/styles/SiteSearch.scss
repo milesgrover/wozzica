@@ -88,13 +88,6 @@
         }
 
         @include buttonActive();
-
-        // hides the text while leaving it accessible to screen readers
-        span {
-            position: absolute;
-            height: 1px;
-            width: 1px;
-            overflow: hidden;
-        }
+        @include hideText();
     }
 }

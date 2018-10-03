@@ -8,6 +8,7 @@ $fadeTiming: fadeIn 100ms ease-in-out;
     height: 100px;
     background-color: $lightYellow;
     animation: $fadeTiming;
+    z-index: 10;
 
     .heading {
         font-size: 22px;
