@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import '../styles/AnnotateDot.css';
 
 class AnnotateDot extends Component {
+    handleDotClick = (e) => {
+        e.stopPropagation();
+        this.props.onClickDot(this.props.index)
+    }
+
     render() {
         const positionStyle = {
             top: this.props.coords.y - 2,
@@ -10,7 +15,7 @@ class AnnotateDot extends Component {
         return (
             <div className="annotation-dot"
                     style={positionStyle}
-                    onClick={this.props.onClickDot}
+                    onClick={this.handleDotClick}
                     >
             </div>
         )

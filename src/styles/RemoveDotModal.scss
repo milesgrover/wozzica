@@ -1,0 +1,107 @@
+@import './shared';
+
+$fadeTiming: fadeIn 100ms ease-in-out;
+
+.remove-dot-modal {
+    position: absolute;
+    width: 160px;
+    height: 75px;
+    background-color: $foregroundLight;
+    animation: $fadeTiming;
+    z-index: 10;
+    text-align: center;
+
+    .heading {
+        font-size: 16px;
+        color: $foregroundDark;
+        font-weight: 600;
+        padding: 12px;
+        padding-bottom: 0;
+    }
+
+    .btn-group {
+        display: flex;
+        padding: 0 8px;
+    }
+
+    button {
+        @include hideText()
+        border-radius: 8px;
+        flex: 1;
+        border: 0;
+        background: $dangerRed;
+        margin: 4px;
+        height: 30px;
+
+        &.cancel-btn {
+            background: $darkTeal;
+
+            &:before {
+                color: $foregroundLight;
+                font-size: 14px;
+                line-height: 14px;
+                content: $icon-cancel;
+                @include iconFont();
+            }
+        }
+
+        &.proceed-btn {
+            &:before {
+                color: $foregroundLight;
+                font-size: 16px;
+                line-height: 14px;
+                content: $icon-checkmark;
+                @include iconFont();
+            }
+        }
+    }
+
+
+    + .modal-tail {
+        position: absolute;
+        height: 0;
+        width: 0;
+        bottom: -20px;
+        border-top: 20px solid $foregroundLight;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        transform: translate(-14px, -100%);
+        z-index: 4;
+        animation: $fadeTiming;
+
+        &.left {
+            border-left-width: 0;
+            transform: translate(4px, -100%) scaleX(1.5);
+        }
+
+        &.right {
+            border-right-width: 0;
+            transform: translate(-18px, -100%) scaleX(1.5);
+        }
+
+        &.top {
+            transform: translate(-14px, 0) rotate(180deg);
+
+            &.left {
+                border-left-width: 15px;
+                border-right-width: 0;
+                transform: translate(4px, 0) scaleX(1.5) rotate(180deg);
+            }
+
+            &.right {
+                border-right-width: 15px;
+                border-left-width: 0;
+                transform: translate(-18px, 0) scaleX(1.5) rotate(180deg);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.01;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import '../styles/AnnotateModal.css';
 
-class Annotator extends Component {
+class AnnotateModal extends Component {
     componentDidMount = () => {
         this.InputBox.focus();
     }
@@ -42,4 +42,4 @@ class Annotator extends Component {
     }
 }
 
-export default Annotator;
+export default AnnotateModal;

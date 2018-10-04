@@ -1,0 +1,85 @@
+@charset "UTF-8";
+@keyframes animFadeIn {
+  0% {
+    opacity: 0.01; }
+  100% {
+    opacity: 1; } }
+
+.remove-dot-modal {
+  position: absolute;
+  width: 160px;
+  height: 75px;
+  background-color: #fff;
+  animation: fadeIn 100ms ease-in-out;
+  z-index: 10;
+  text-align: center; }
+  .remove-dot-modal .heading {
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+    padding: 12px;
+    padding-bottom: 0; }
+  .remove-dot-modal .btn-group {
+    display: flex;
+    padding: 0 8px; }
+  .remove-dot-modal button {
+    border-radius: 8px;
+    flex: 1;
+    border: 0;
+    background: #b22427;
+    margin: 4px;
+    height: 30px; }
+    .remove-dot-modal button span {
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      overflow: hidden; }
+    .remove-dot-modal button.cancel-btn {
+      background: #008e79; }
+      .remove-dot-modal button.cancel-btn:before {
+        color: #fff;
+        font-size: 14px;
+        line-height: 14px;
+        content: "";
+        font-family: "wozz-icons";
+        line-height: 1; }
+    .remove-dot-modal button.proceed-btn:before {
+      color: #fff;
+      font-size: 16px;
+      line-height: 14px;
+      content: "";
+      font-family: "wozz-icons";
+      line-height: 1; }
+  .remove-dot-modal + .modal-tail {
+    position: absolute;
+    height: 0;
+    width: 0;
+    bottom: -20px;
+    border-top: 20px solid #fff;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    transform: translate(-14px, -100%);
+    z-index: 4;
+    animation: fadeIn 100ms ease-in-out; }
+    .remove-dot-modal + .modal-tail.left {
+      border-left-width: 0;
+      transform: translate(4px, -100%) scaleX(1.5); }
+    .remove-dot-modal + .modal-tail.right {
+      border-right-width: 0;
+      transform: translate(-18px, -100%) scaleX(1.5); }
+    .remove-dot-modal + .modal-tail.top {
+      transform: translate(-14px, 0) rotate(180deg); }
+      .remove-dot-modal + .modal-tail.top.left {
+        border-left-width: 15px;
+        border-right-width: 0;
+        transform: translate(4px, 0) scaleX(1.5) rotate(180deg); }
+      .remove-dot-modal + .modal-tail.top.right {
+        border-right-width: 15px;
+        border-left-width: 0;
+        transform: translate(-18px, 0) scaleX(1.5) rotate(180deg); }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.01; }
+  100% {
+    opacity: 1; } }

@@ -3,6 +3,7 @@ import AnnotateModal from './AnnotateModal';
 import AnnotateDot from './AnnotateDot';
 import AnnotateLabel from './AnnotateLabel';
 import AnnotateLine from './AnnotateLine';
+import RemoveDotModal from './RemoveDotModal';
 import '../styles/Annotator.css';
 
 const imgSrc = 'http://www.munchamuncha.com/munchamuncha.jpg'; // obvz for testing only
@@ -14,12 +15,12 @@ class Annotator extends Component {
         this.state = {
             imgSize: {w: 0, h: 0},
             dotCoords: [],
-            currentLabel: '',
             labels: [],
             labelCoords: [],
             labelDimensions: [],
             placingLabel: -1,
-            showingModal: false
+            showingModal: false,
+            removeDot: -1
         }
     }
 
@@ -34,7 +35,7 @@ class Annotator extends Component {
         let newX = e.nativeEvent.offsetX;
         let newY = e.nativeEvent.offsetY;
 
-        if (!this.state.showingModal && this.state.placingLabel < 0) {
+        if (!this.state.showingModal && this.state.placingLabel < 0 && this.state.removeDot < 0) {
             this.setState({
                 showingModal: true,
                 dotCoords: [...this.state.dotCoords, {x: newX, y: newY}]
@@ -42,8 +43,10 @@ class Annotator extends Component {
         }
     }
 
-    handleDotClick = (e) => {
-        e.stopPropagation();
+    handleDotClick = (index) => {
+        this.setState({
+            removeDot: index
+        })
     }
 
     handleMouseMove = (e) => {
@@ -56,7 +59,7 @@ class Annotator extends Component {
 
             this.setState({
                 labelCoords: updateCurrentLabelCoords
-            })
+            });
         }
     }
 
@@ -66,12 +69,36 @@ class Annotator extends Component {
         this.setState({
             showingModal: false,
             dotCoords: updateDotCoords
-        })
+        });
+    }
+
+    removeDot = () => {
+        if (this.state.removeDot > -1) {
+            let updateDotCoords = this.state.dotCoords.slice(0);
+            updateDotCoords.splice(this.state.removeDot, 1);
+
+            let updateLabels = this.state.labels.slice(0);
+            updateLabels.splice(this.state.removeDot, 1);
+
+            let updateLabelCoords = this.state.labelCoords.slice(0);
+            updateLabelCoords.splice(this.state.removeDot, 1);
+
+            let updateLabelDimensions = this.state.labelDimensions.slice(0);
+            updateLabelDimensions.splice(this.state.removeDot, 1);
+
+            this.setState({
+                showingModal: false,
+                dotCoords: updateDotCoords,
+                labels: updateLabels,
+                labelCoords: updateLabelCoords,
+                labelDimensions: updateLabelDimensions,
+                removeDot: -1
+            });
+        }
     }
 
     addLabel = (text, index) => {
         this.setState({
-            currentLabel: text,
             labels: [...this.state.labels, text],
             showingModal: false,
             labelCoords: [...this.state.labelCoords, this.state.dotCoords[index]]
@@ -83,7 +110,6 @@ class Annotator extends Component {
             let updateCurrentLabel = this.state.labels.slice(0);
             updateCurrentLabel[index] = text;
             this.setState({
-                currentLabel: text,
                 labels: updateCurrentLabel
             });
         }
@@ -102,9 +128,9 @@ class Annotator extends Component {
         });
     }
 
-    positionModal = () => {
-        let modalWidth = 320;
-        let modalHeight = 100;
+    positionModal = (width, height) => {
+        let modalWidth = width || 320;
+        let modalHeight = height || 100;
         let edgeGutter = 4;
         let tailHeight = 20;
 
@@ -132,6 +158,7 @@ class Annotator extends Component {
         const dots = [];
         for (let i = 0; i < this.state.dotCoords.length; i++) {
             dots.push(<AnnotateDot key={i}
+                                   index={i}
                                    coords={this.state.dotCoords[i]}
                                    onClickDot={this.handleDotClick}
                                    />)
@@ -154,6 +181,7 @@ class Annotator extends Component {
         for (let i = 0; i < this.state.labelDimensions.length; i++) {
             lines.push(<AnnotateLine key={i}
                                        index={i}
+                                       imgSize={this.state.imgSize}
                                        dotCoords={this.state.dotCoords[i]}
                                        labelCoords={this.state.labelCoords[i]}
                                        labelDimensions={this.state.labelDimensions[i]}
@@ -166,8 +194,16 @@ class Annotator extends Component {
                 {this.state.showingModal &&
                     <AnnotateModal onClose={this.modalOnClose}
                                    onAddLabel={this.addLabel}
-                                   position={this.positionModal()}
-                                   index={this.state.labels.length} />
+                                   isRemove={this.state.removeDot}
+                                   onRemove={this.removeDot}
+                                   position={this.positionModal(320, 100)}
+                                   index={this.state.labels.length}
+                                   />
+                }
+                {this.state.removeDot > -1 &&
+                    <RemoveDotModal index={this.state.removeDot}
+                                    position={this.positionModal(160, 75)}
+                                    onProceed={this.removeDot}/>
                 }
                 <DotHolder>
                     {dots}
