@@ -8,36 +8,23 @@
     justify-content: center;
     color: $foregroundLight;
     text-transform: uppercase;
-    transition: transform 300ms ease-in-out;
     @include dropShadow();
     position: relative;
     transform: translateY(0);
+    animation: animSlideDown 300ms ease-in-out;
 
-    &.title-bar-appear,
-    &.title-bar-enter {
-        transform: translateY(-120%);
-    }
-
-    &.title-bar-appear-active,
-    &.title-bar-enter-active {
-        transform: translateY(0);
-    }
-
-    &.withdraw {
-        animation: animWithdrawUp 300ms 5000ms forwards ease-in-out;
-    }
-
-    h1 {
+    .heading-page-title {
         font-size: 24px;
         line-height: 1;
     }
 
-    @keyframes animWithdrawUp {
+    @keyframes animSlideDown {
         0% {
-            margin-top: 0;
+            transform: translateY(-120%);
         }
         100% {
-            margin-top: -54px;
+            transform: translateY(0);
         }
     }
+
 }

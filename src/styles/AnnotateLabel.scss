@@ -63,6 +63,7 @@
 
         &:focus {
             outline: 0;
+            opacity: 1;
 
             &:before {
                 color: $foregroundDark;
@@ -134,11 +135,13 @@
 
     &:hover,
     &.is-editing,
-    &.is-dragging {
+    &.is-dragging,
+    &.flash {
         .label-dragger-btn,
         .label-edit-btn,
         .label-edit-cancel-btn {
             opacity: 1;
         }
     }
+
 }

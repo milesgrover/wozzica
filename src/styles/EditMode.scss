@@ -1,0 +1,77 @@
+@import './shared';
+
+.wozz-editor {
+    @include annotatorWrapper();
+}
+
+.wozz-edit-mode {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 102px 20px 20px;
+    z-index: 12;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wozz-edit-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        @include sitePadding();
+        height: 82px;
+        background: $darkTeal;
+        @include dropShadow();
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .heading {
+            color: $foregroundLight;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        button {
+            display: inline-flex;
+            font-size: 18px;
+            font-weight: 500;
+            height: 38px;
+            padding: 0 12px;
+            border: 0;
+            font-family: inherit;
+            border-radius: 4px;
+            color: $foregroundLight;
+
+            &.btn-submit {
+                background: $lightTeal;
+            }
+
+            &.btn-cancel {
+                margin-left: 20px;
+                background: rgba(0,0,0,0.6);
+            }
+
+            &:focus {
+                @include dropShadow();
+                outline: 0;
+            }
+
+            &:active {
+                transform: translate(1px, 1px);
+                outline: 0;
+            }
+        }
+    }
+
+    .wozz-annotator img {
+        max-width: 100%;
+    }
+}

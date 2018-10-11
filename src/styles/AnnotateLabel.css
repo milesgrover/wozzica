@@ -68,7 +68,8 @@
     .annotation-label .label-dragger-btn:focus,
     .annotation-label .label-edit-btn:focus,
     .annotation-label .label-edit-cancel-btn:focus {
-      outline: 0; }
+      outline: 0;
+      opacity: 1; }
       .annotation-label .label-dragger-btn:focus:before,
       .annotation-label .label-edit-btn:focus:before,
       .annotation-label .label-edit-cancel-btn:focus:before {
@@ -124,5 +125,7 @@
   .annotation-label.is-editing .label-edit-btn,
   .annotation-label.is-editing .label-edit-cancel-btn, .annotation-label.is-dragging .label-dragger-btn,
   .annotation-label.is-dragging .label-edit-btn,
-  .annotation-label.is-dragging .label-edit-cancel-btn {
+  .annotation-label.is-dragging .label-edit-cancel-btn, .annotation-label.flash .label-dragger-btn,
+  .annotation-label.flash .label-edit-btn,
+  .annotation-label.flash .label-edit-cancel-btn {
     opacity: 1; }

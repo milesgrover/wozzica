@@ -13,7 +13,9 @@ $lightGray: #999;
 $midGray: #888;
 
 // Red
-$dangerRed: #b22427;
+$foregroundRed: #e75850;
+$backgroundRed: #bf4747;
+$shadowRed: #80312d;
 
 // Foreground colors
 $foregroundLight: #fff;
@@ -93,7 +95,41 @@ $icon-plus:            '\E008';
     }
 }
 
+// Tail for modal popovers
+@mixin modalTail() {
+    + .modal-tail {
+        position: absolute;
+        height: 22px;
+        width: 34px;
+        bottom: -20px;
+        transform: translate(calc(-50% + 1px), -100%);
+        z-index: 11;
+        animation: $fadeTiming;
+
+        &.top {
+            transform: translate(calc(-50% + 1px), 0) scaleY(-1);
+        }
+    }
+}
+
+@mixin annotatorWrapper() {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid $lightTeal;
+    margin-bottom: 12px;
+    background: url("../images/background.png");
+    font-size: 0;
+
+    > img {
+        display: inline-block;
+    }
+}
+
 // Animations
+$fadeTiming: animFadeIn 100ms ease-in-out;
+
 @keyframes animFadeIn {
     0% {
         opacity: 0.01;

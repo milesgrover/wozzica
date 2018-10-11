@@ -1,0 +1,29 @@
+@keyframes animFadeIn {
+  0% {
+    opacity: 0.01; }
+  100% {
+    opacity: 1; } }
+
+.wozz-add .wozz-page-container {
+  display: flex;
+  flex-direction: column; }
+  .wozz-add .wozz-page-container .wozz-page-content {
+    padding: 0;
+    flex: 1;
+    margin-top: -65px; }
+
+.wozz-add .wozz-add-choose-img,
+.wozz-add .wozz-add-name-thing,
+.wozz-add .wozz-add-tag-thing {
+  padding-top: 65px;
+  align-self: stretch;
+  flex: 1; }
+
+.wozz-add .wozz-add-choose-img {
+  background: rgba(255, 218, 0, 0.2); }
+
+.wozz-add .wozz-add-name-thing {
+  background: rgba(255, 218, 0, 0.4); }
+
+.wozz-add .wozz-add-tag-thing {
+  background: rgba(255, 218, 0, 0.6); }

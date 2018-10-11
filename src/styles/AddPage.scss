@@ -1,0 +1,34 @@
+@import './shared';
+
+.wozz-add {
+    .wozz-page-container {
+        display: flex;
+        flex-direction: column;
+
+        .wozz-page-content {
+            padding: 0;
+            flex: 1;
+            margin-top: -65px;
+        }
+    }
+
+    .wozz-add-choose-img,
+    .wozz-add-name-thing,
+    .wozz-add-tag-thing {
+        padding-top: 65px;
+        align-self: stretch;
+        flex: 1;
+    }
+
+    .wozz-add-choose-img {
+        background: rgba($yellow, 0.2);
+    }
+
+    .wozz-add-name-thing {
+        background: rgba($yellow, 0.4);
+    }
+
+    .wozz-add-tag-thing {
+        background: rgba($yellow, 0.6);
+    }
+}

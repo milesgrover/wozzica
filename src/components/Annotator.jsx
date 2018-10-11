@@ -3,10 +3,9 @@ import AnnotateModal from './AnnotateModal';
 import AnnotateDot from './AnnotateDot';
 import AnnotateLabel from './AnnotateLabel';
 import AnnotateLine from './AnnotateLine';
-import RemoveDotModal from './RemoveDotModal';
+import DeleteModal from './DeleteModal';
+import generateId from '../utilities/generateId';
 import '../styles/Annotator.css';
-
-const imgSrc = 'http://www.munchamuncha.com/munchamuncha.jpg'; // obvz for testing only
 
 class Annotator extends Component {
     constructor(props) {
@@ -14,117 +13,132 @@ class Annotator extends Component {
 
         this.state = {
             imgSize: {w: 0, h: 0},
-            dotCoords: [],
-            labels: [],
-            labelCoords: [],
-            labelDimensions: [],
-            placingLabel: -1,
+            thingData: this.props.data || [],
             showingModal: false,
-            removeDot: -1
+            placingLabel: null,
+            deletingThing: null
         }
+
+        this.thingImage = React.createRef();
     }
 
     onImgLoad = () => {
         this.setState({
-            imgSize: { w: this.thingImage.offsetWidth,
-                       h: this.thingImage.offsetHeight }
+            imgSize: { w: this.thingImage.current.offsetWidth,
+                       h: this.thingImage.current.offsetHeight }
         });
     }
 
     handleImgClick = (e) => {
+        if (this.props.readonly) {
+            return;
+        }
         let newX = e.nativeEvent.offsetX;
         let newY = e.nativeEvent.offsetY;
+        let uid = generateId();
 
-        if (!this.state.showingModal && this.state.placingLabel < 0 && this.state.removeDot < 0) {
+        if (!this.state.showingModal && !this.state.placingLabel && !this.state.deletingThing) {
             this.setState({
                 showingModal: true,
-                dotCoords: [...this.state.dotCoords, {x: newX, y: newY}]
+                thingData: [...this.state.thingData, {dx: newX, dy: newY, uid: uid, lx: newX, ly: newY}]
             })
         }
     }
 
-    handleDotClick = (index) => {
+    handleDotClick = (uid) => {
+        if (this.props.readonly) {
+            return;
+        }
         this.setState({
-            removeDot: index
+            deletingThing: uid
         })
     }
 
     handleMouseMove = (e) => {
-        if (this.state.placingLabel >= 0) {
-            let dragX = e.clientX - this.thingImage.parentNode.offsetLeft;
-            let dragY = e.clientY - this.thingImage.parentNode.offsetTop;
+        if (this.props.readonly) {
+            return;
+        }
+        if (this.state.placingLabel) {
+            let dragX = e.clientX - this.thingImage.current.parentNode.offsetLeft;
+            let dragY = e.clientY - this.thingImage.current.parentNode.offsetTop;
 
-            let updateCurrentLabelCoords = this.state.labelCoords.slice(0);
-            updateCurrentLabelCoords[this.state.placingLabel] = {x:dragX, y:dragY};
+            let updateLabelPosition = this.state.thingData.slice(0);
+            let dataIndex = updateLabelPosition.findIndex(el => el.uid === this.state.placingLabel);
+            updateLabelPosition[dataIndex].lx = dragX;
+            updateLabelPosition[dataIndex].ly = dragY;
 
             this.setState({
-                labelCoords: updateCurrentLabelCoords
+                thingData: updateLabelPosition
             });
         }
     }
 
-    modalOnClose = () => {
-        let updateDotCoords = this.state.dotCoords.slice(0);
-        updateDotCoords.splice(this.state.dotCoords.length - 1, 1);
-        this.setState({
-            showingModal: false,
-            dotCoords: updateDotCoords
-        });
-    }
-
-    removeDot = () => {
-        if (this.state.removeDot > -1) {
-            let updateDotCoords = this.state.dotCoords.slice(0);
-            updateDotCoords.splice(this.state.removeDot, 1);
-
-            let updateLabels = this.state.labels.slice(0);
-            updateLabels.splice(this.state.removeDot, 1);
-
-            let updateLabelCoords = this.state.labelCoords.slice(0);
-            updateLabelCoords.splice(this.state.removeDot, 1);
-
-            let updateLabelDimensions = this.state.labelDimensions.slice(0);
-            updateLabelDimensions.splice(this.state.removeDot, 1);
+    deletingThing = () => {
+        if (this.state.deletingThing) {
+            let removeThing = this.state.thingData.slice(0);
+            let dataIndex = removeThing.findIndex(el => el.uid === this.state.deletingThing);
+            removeThing.splice(dataIndex, 1);
 
             this.setState({
                 showingModal: false,
-                dotCoords: updateDotCoords,
-                labels: updateLabels,
-                labelCoords: updateLabelCoords,
-                labelDimensions: updateLabelDimensions,
-                removeDot: -1
+                thingData: removeThing,
+                deletingThing: null
             });
         }
     }
 
-    addLabel = (text, index) => {
+    addLabel = (text, uid) => {
+        let addLabelData = this.state.thingData.slice(0);
+        let dataIndex = addLabelData.findIndex(el => el.uid === uid);
+        addLabelData[dataIndex].ltext = text;
+        addLabelData[dataIndex].ly = addLabelData[dataIndex].dy;
+        addLabelData[dataIndex].lx = addLabelData[dataIndex].dx;
+
         this.setState({
-            labels: [...this.state.labels, text],
             showingModal: false,
-            labelCoords: [...this.state.labelCoords, this.state.dotCoords[index]]
+            thingData: addLabelData
         });
     }
 
-    onUpdateLabel = (text, index, dimensions) => {
+    onModalClose = () => {
+        let removeThing = this.state.thingData.slice(0);
+        removeThing.splice(this.state.thingData.length - 1, 1);
+        this.setState({
+            showingModal: false,
+            thingData: removeThing
+        });
+    }
+
+    onDeleteCancel = () => {
+        this.setState({
+            deletingThing: null
+        })
+    }
+
+    onUpdateLabel = (text, uid, dimensions) => {
+        let updateLabelData = this.state.thingData.slice(0);
+        let dataIndex = updateLabelData.findIndex(el => el.uid === uid);
+
         if (text) {
-            let updateCurrentLabel = this.state.labels.slice(0);
-            updateCurrentLabel[index] = text;
-            this.setState({
-                labels: updateCurrentLabel
-            });
+            updateLabelData[dataIndex].ltext = text;
         }
 
-        let updateCurrentLabelDimensions = this.state.labelDimensions.slice(0);
-        updateCurrentLabelDimensions[index] = dimensions;
+        if (dimensions) {
+            updateLabelData[dataIndex].lw = dimensions.w;
+            updateLabelData[dataIndex].lh = dimensions.h;
+        }
 
         this.setState({
-            labelDimensions: updateCurrentLabelDimensions
+            thingData: updateLabelData
         });
     }
 
-    onDragLabel = (index) => {
+    onDragLabel = (uid) => {
+        if (this.props.readonly) {
+            return;
+        }
         this.setState({
-            placingLabel: index
+            placingLabel: uid
         });
     }
 
@@ -132,109 +146,89 @@ class Annotator extends Component {
         let modalWidth = width || 320;
         let modalHeight = height || 100;
         let edgeGutter = 4;
-        let tailHeight = 20;
+        let tailHeight = 22;
 
-        let currentDotCoords = this.state.dotCoords[this.state.dotCoords.length - 1]
+        let dataIndex = this.state.thingData.findIndex(el => el.uid === this.state.deletingThing);
+
+        let currentThing = this.state.thingData[dataIndex] || this.state.thingData[this.state.thingData.length - 1];
         let alterTail = [];
 
-        let modalX = currentDotCoords.x - modalWidth / 2;
-        let modalY = currentDotCoords.y - tailHeight - modalHeight;
-        if (currentDotCoords.x < modalWidth / 2) {
+        let modalX = currentThing.dx - modalWidth / 2;
+        let modalY = currentThing.dy - tailHeight - modalHeight;
+        if (currentThing.dx < modalWidth / 2) {
             modalX = edgeGutter;
             alterTail.push('left');
-        } else if (this.state.imgSize && currentDotCoords.x > this.state.imgSize.w - modalWidth / 2) {
+        } else if (this.state.imgSize && currentThing.dx > this.state.imgSize.w - modalWidth / 2) {
             modalX = this.state.imgSize.w - edgeGutter - modalWidth;
             alterTail.push('right');
         }
-        if (currentDotCoords.y < modalHeight + tailHeight + edgeGutter) {
-            modalY = currentDotCoords.y + tailHeight;
+        if (currentThing.dy < modalHeight + tailHeight + edgeGutter) {
+            modalY = currentThing.dy + tailHeight;
             alterTail.push('top');
         }
-        return {x: modalX, y: modalY, tail: alterTail, tailCoords: currentDotCoords};
+        return {
+            x: modalX,
+            y: modalY,
+            w: modalWidth,
+            h: modalHeight,
+            tail: alterTail,
+            tailCoords: currentThing
+        };
     }
 
     render() {
         // add dots
         const dots = [];
-        for (let i = 0; i < this.state.dotCoords.length; i++) {
+        for (let i = 0; i < this.state.thingData.length; i++) {
             dots.push(<AnnotateDot key={i}
-                                   index={i}
-                                   coords={this.state.dotCoords[i]}
+                                   data={this.state.thingData[i]}
                                    onClickDot={this.handleDotClick}
                                    />)
         }
 
         // add labels
         const labels = [];
-        for (let i = 0; i < this.state.labelCoords.length; i++) {
+        const labelsAdded = this.state.thingData.filter(thing => thing.ltext);
+        for (let i = 0; i < labelsAdded.length; i++) {
             labels.push(<AnnotateLabel key={i}
-                                       index={i}
-                                       coords={this.state.labelCoords[i]}
-                                       label={this.state.labels[i]}
+                                       data={this.state.thingData[i]}
                                        onUpdate={this.onUpdateLabel}
                                        onDragger={this.onDragLabel}
+                                       readonly={this.props.readonly}
                                        />)
         }
 
         // add lines
         const lines = [];
-        for (let i = 0; i < this.state.labelDimensions.length; i++) {
+        for (let i = 0; i < labelsAdded.length; i++) {
             lines.push(<AnnotateLine key={i}
-                                       index={i}
                                        imgSize={this.state.imgSize}
-                                       dotCoords={this.state.dotCoords[i]}
-                                       labelCoords={this.state.labelCoords[i]}
-                                       labelDimensions={this.state.labelDimensions[i]}
+                                       data={this.state.thingData[i]}
                                        />)
         }
 
         return (
             <div className="wozz-annotator" onMouseMove={this.handleMouseMove} onClick={this.handleImgClick}>
-                <img src={imgSrc} alt="" onLoad={this.onImgLoad} ref={(el) => this.thingImage = el} />
+                <img src={this.props.image} alt="" onLoad={this.onImgLoad} ref={this.thingImage} />
                 {this.state.showingModal &&
-                    <AnnotateModal onClose={this.modalOnClose}
+                    <AnnotateModal onClose={this.onModalClose}
                                    onAddLabel={this.addLabel}
-                                   isRemove={this.state.removeDot}
-                                   onRemove={this.removeDot}
                                    position={this.positionModal(320, 100)}
-                                   index={this.state.labels.length}
+                                   uid={this.state.thingData[this.state.thingData.length - 1].uid}
                                    />
                 }
-                {this.state.removeDot > -1 &&
-                    <RemoveDotModal index={this.state.removeDot}
-                                    position={this.positionModal(160, 75)}
-                                    onProceed={this.removeDot}/>
+                {this.state.deletingThing &&
+                    <DeleteModal index={this.state.deletingThing}
+                                    position={this.positionModal(103, 97)}
+                                    onCancel={this.onDeleteCancel}
+                                    onConfirm={this.deletingThing}/>
                 }
-                <DotHolder>
-                    {dots}
-                </DotHolder>
-                <LabelHolder>
-                    {labels}
-                </LabelHolder>
-                <LineHolder>
-                    {lines}
-                </LineHolder>
+                {dots}
+                {labels}
+                {lines}
             </div>
         )
     }
 }
-
-const DotHolder = (props) => (
-  <Fragment>
-    {props.children}
-  </Fragment>
-);
-
-const LabelHolder = (props) => (
-  <Fragment>
-    {props.children}
-  </Fragment>
-);
-
-const LineHolder = (props) => (
-  <Fragment>
-    {props.children}
-  </Fragment>
-);
 
 export default Annotator;

@@ -1,0 +1,15 @@
+@import './shared';
+
+.wozz-thing {
+    .wozz-page-container {
+        .wozz-page-content {
+            @include sitePadding();
+            padding-top: 22px;
+            padding-bottom: 22px;
+
+            .wozz-thing-illustration {
+                @include annotatorWrapper();
+            }
+        }
+    }
+}

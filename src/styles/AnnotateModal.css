@@ -10,8 +10,9 @@
   width: 320px;
   height: 100px;
   background-color: #ffe566;
-  animation: fadeIn 100ms ease-in-out;
-  z-index: 10; }
+  animation: animFadeIn 100ms ease-in-out;
+  z-index: 10;
+  border-bottom: 3px solid #008e79; }
   .annotation-modal .heading {
     font-size: 22px;
     color: #008e79;
@@ -82,34 +83,11 @@
         overflow: hidden; }
   .annotation-modal + .modal-tail {
     position: absolute;
-    height: 0;
-    width: 0;
+    height: 22px;
+    width: 34px;
     bottom: -20px;
-    border-top: 20px solid #ffe566;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    transform: translate(-14px, -100%);
-    z-index: 4;
-    animation: fadeIn 100ms ease-in-out; }
-    .annotation-modal + .modal-tail.left {
-      border-left-width: 0;
-      transform: translate(4px, -100%) scaleX(1.5); }
-    .annotation-modal + .modal-tail.right {
-      border-right-width: 0;
-      transform: translate(-18px, -100%) scaleX(1.5); }
+    transform: translate(calc(-50% + 1px), -100%);
+    z-index: 11;
+    animation: animFadeIn 100ms ease-in-out; }
     .annotation-modal + .modal-tail.top {
-      transform: translate(-14px, 0) rotate(180deg); }
-      .annotation-modal + .modal-tail.top.left {
-        border-left-width: 15px;
-        border-right-width: 0;
-        transform: translate(4px, 0) scaleX(1.5) rotate(180deg); }
-      .annotation-modal + .modal-tail.top.right {
-        border-right-width: 15px;
-        border-left-width: 0;
-        transform: translate(-18px, 0) scaleX(1.5) rotate(180deg); }
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0.01; }
-  100% {
-    opacity: 1; } }
+      transform: translate(calc(-50% + 1px), 0) scaleY(-1); }

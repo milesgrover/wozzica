@@ -6,8 +6,10 @@ class AnnotateLabel extends Component {
         super(props);
 
         this.state = {
+            flashControls: this.props.readonly ? false : true,
             dragging: false,
-            editing: false
+            editing: false,
+            savedState: null
         }
 
         // refs
@@ -17,34 +19,36 @@ class AnnotateLabel extends Component {
     }
 
     componentDidMount = () => {
-        this.props.onUpdate(null, this.props.index,
-            { w: this.componentElement.current.offsetWidth, h: this.componentElement.current.offsetHeight })
+        this.props.onUpdate(null, this.props.data.uid,
+            { w: this.componentElement.current.offsetWidth, h: this.componentElement.current.offsetHeight });
+        setTimeout(() => {
+            this.setState({
+                flashControls: false
+            })
+        }, 3000)
     }
 
     handleEditClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        if (!this.state.editing) {
-            this.setState({
-                editing: true
-            });
-        } else {
-            if (this.editInput.current.value) {
-                this.props.onUpdate(this.editInput.current.value, this.props.index,
-                    { w: this.componentElement.current.offsetWidth, h: this.componentElement.current.offsetHeight })
+        this.setState({
+            editing: !this.state.editing,
+            savedState: {
+                text: this.props.data.ltext,
+                w: this.props.data.lw,
+                h: this.props.data.lh
             }
-            this.setState({
-                editing: false
-            });
-        }
+        });
     }
 
     handleCancelClick = (e) => {
         e.stopPropagation();
+        this.props.onUpdate(this.state.savedState.text, this.props.data.uid,
+            { w: this.state.savedState.w, h: this.state.savedState.h });
 
         this.setState({
-            editing: false
+            editing: false,
+            savedState: null
         });
     }
 
@@ -54,6 +58,8 @@ class AnnotateLabel extends Component {
             if (this.inputWidthCheck.current.offsetWidth + 16 < 256) {
                 this.editInput.current.style.width = this.inputWidthCheck.current.offsetWidth + 16 + 'px';
             }
+            this.props.onUpdate(this.editInput.current.value, this.props.data.uid,
+                { w: this.componentElement.current.offsetWidth, h: this.componentElement.current.offsetHeight });
         }
     }
 
@@ -62,7 +68,7 @@ class AnnotateLabel extends Component {
         this.setState({
             dragging: true
         })
-        this.props.onDragger(this.props.index);
+        this.props.onDragger(this.props.data.uid);
     }
 
     handleDragOff = (e) => {
@@ -71,7 +77,21 @@ class AnnotateLabel extends Component {
             dragging: false
         })
         e.target.blur();
-        this.props.onDragger(-1);
+        this.props.onDragger(null);
+    }
+
+    buildClass = () => {
+        let className = ['annotation-label'];
+        if (this.state.dragging) {
+            className.push('is-dragging');
+        }
+        if (this.state.editing) {
+            className.push('is-editing');
+        }
+        if (this.state.flashControls) {
+            className.push('flash');
+        }
+        return className.join(' ');
     }
 
     noPropagate = (e) => {
@@ -79,56 +99,61 @@ class AnnotateLabel extends Component {
     }
 
     render() {
-        const adjustX = this.componentElement.current ? this.componentElement.current.offsetWidth : 0;
-        const adjustY = 0;
+        const adjustX = this.props.data.lw ? this.props.data.lw : 0;
+
         const positionStyle = {
-            top: this.props.coords.y - adjustY,
-            left: this.props.coords.x - adjustX
+            top: this.props.data.ly,
+            left: this.props.data.lx - adjustX
         }
 
         return (
-            <div className={`annotation-label${this.state.dragging ? ' is-dragging' : ''}${this.state.editing ? ' is-editing' : ''}`}
+            <div className={this.buildClass()}
                  style={positionStyle}
-                 title={this.props.label}
+                 title={this.props.data.ltext}
                  onClick={this.noPropagate}
                  ref={this.componentElement}>
                 {!this.state.editing &&
-                    <span className="label-text">{this.props.label}</span>
+                    <span className="label-text">{this.props.data.ltext}</span>
                 }
-                <span className="hidden-text-width" ref={this.inputWidthCheck}>{this.props.label}</span>
+                <span className="hidden-text-width" ref={this.inputWidthCheck}>{this.props.data.ltext}</span>
 
-                <button className="label-dragger-btn"
-                        onMouseDown={this.handleDragOn}
-                        onMouseUp={this.handleDragOff}
-                        onClick={this.noPropagate}>
-                            <span>drag</span>
-                </button>
-                <form>
-                    <button className="label-edit-btn"
-                            onClick={this.handleEditClick}>
-                                <span>edit</span>
-                    </button>
-                    {this.state.editing &&
-                        <Fragment>
-                            <button className="label-edit-cancel-btn"
-                                    onClick={this.handleCancelClick}>
-                                        <span>cancel</span>
+                {!this.props.readonly &&
+                    <Fragment>
+                        <button className="label-dragger-btn"
+                                onMouseDown={this.handleDragOn}
+                                onMouseUp={this.handleDragOff}
+                                onClick={this.noPropagate}>
+                                    <span>drag</span>
+                        </button>
+
+                        <form>
+                            <button className="label-edit-btn"
+                                    onClick={this.handleEditClick}>
+                                        <span>edit</span>
                             </button>
-                            <input type="text"
-                                className="label-editor"
-                                style={{width: this.inputWidthCheck.current.offsetWidth + 16}}
-                                pattern="[\w\s',]+"
-                                defaultValue={this.props.label}
-                                ref={this.editInput}
-                                onClick={this.noPropagate}
-                                onBlur={this.handleEditBlur}
-                                onInput={this.handleInput}
-                                maxLength={256}
-                                autoFocus
-                                />
-                        </Fragment>
-                    }
-                </form>
+                            {this.state.editing &&
+                                <Fragment>
+                                    <button className="label-edit-cancel-btn"
+                                            onClick={this.handleCancelClick}>
+                                                <span>cancel</span>
+                                    </button>
+                                    <input type="text"
+                                        className="label-editor"
+                                        style={{width: this.inputWidthCheck.current.offsetWidth + 16}}
+                                        pattern="[\w\s',]+"
+                                        defaultValue={this.props.data.ltext}
+                                        ref={this.editInput}
+                                        onClick={this.noPropagate}
+                                        onBlur={this.handleEditBlur}
+                                        onInput={this.handleInput}
+                                        maxLength={256}
+                                        autoFocus
+                                        />
+                                </Fragment>
+                            }
+                        </form>
+                    </Fragment>
+                }
             </div>
         )
     }

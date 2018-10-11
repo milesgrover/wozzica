@@ -1,13 +1,30 @@
 @import './shared';
 
 .wozz-page-container {
-    margin-top: -65px;
-    padding-top: 87px;
     flex: 1;
-    @include sitePadding();
 
-    h1 {
-        font-size: 32px;
-        font-weight: 400;
+    .wozz-page-content {
+        display: flex;
+
+        .heading-title-1 {
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 1.25;
+        }
+    }
+
+    .wozz-page-main,
+    .wozz-page-aside {
+        padding: 22px 0;
+    }
+
+    .wozz-page-main {
+        flex: 1;
+        padding-right: 11px;
+    }
+
+    .wozz-page-aside {
+        flex: 0 0 456px;
+        padding-left: 11px;
     }
 }

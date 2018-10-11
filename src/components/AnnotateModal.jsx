@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import Triangle from './Triangle';
 import '../styles/AnnotateModal.css';
 
 class AnnotateModal extends Component {
@@ -9,7 +10,7 @@ class AnnotateModal extends Component {
     handleBtnClick = (e) => {
         e.preventDefault();
         if (this.InputBox.value) {
-            this.props.onAddLabel(this.InputBox.value, this.props.index)
+            this.props.onAddLabel(this.InputBox.value, this.props.uid)
         }
     }
 
@@ -19,8 +20,8 @@ class AnnotateModal extends Component {
             left: this.props.position.x
         }
         const tailPositionStyle = {
-            top: this.props.position.tailCoords.y,
-            left: this.props.position.tailCoords.x
+            top: this.props.position.tailCoords.dy,
+            left: this.props.position.tailCoords.dx
         }
 
         return (
@@ -33,10 +34,14 @@ class AnnotateModal extends Component {
                         <button className="submit-btn" onClick={this.handleBtnClick}><span>OK</span></button>
                     </form>
                 </div>
-                <div className={`modal-tail${this.props.position.tail.length > 0 ?
-                                ' ' + this.props.position.tail.join(' ') : ''}`}
-                                style={tailPositionStyle}>
-                </div>
+                {/* TODO: consider how to avoid duplicating colors here with CSS */}
+                <Triangle className="modal-tail"
+                          fill="#ffe566"
+                          shadow="#008e79"
+                          left={this.props.position.tail.includes('left')}
+                          right={this.props.position.tail.includes('right')}
+                          top={this.props.position.tail.includes('top')}
+                          style={tailPositionStyle} />
             </Fragment>
         )
     }
