@@ -73,9 +73,10 @@
         font-size: 18px; }
       .annotation-modal form button:active {
         background: #ffda00;
-        box-shadow: none; }
+        box-shadow: none;
+        color: #008e79; }
         .annotation-modal form button:active:before {
-          color: #008e79; }
+          color: inherit; }
       .annotation-modal form button span {
         position: absolute;
         width: 1px;

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import TriangleSvg from '../images/triangle.svg'
-// import '../styles/Triangle.css';
 
 class Triangle extends Component {
     render() {

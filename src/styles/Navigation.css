@@ -66,6 +66,10 @@
         padding: 4px 8px;
         color: #fff; }
     .wozz-navigation ul.nav-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
       visibility: hidden;
       flex-direction: column;
       position: absolute;
@@ -79,15 +83,29 @@
       box-shadow: 0 3px 5px 2px transparent; }
       .wozz-navigation ul.nav-menu.show {
         visibility: visible;
-        height: 132px;
         box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.17);
         transition-duration: 300ms; }
       .wozz-navigation ul.nav-menu li {
         margin: 0; }
-        .wozz-navigation ul.nav-menu li a {
+        .wozz-navigation ul.nav-menu li a,
+        .wozz-navigation ul.nav-menu li button {
+          font-size: 18px;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 500;
+          position: relative;
+          background: transparent;
+          width: 100%;
+          border: 0;
+          text-align: left;
           padding: 0 12px;
           height: 44px;
           color: #00d6bc;
           border-radius: 0; }
-          .wozz-navigation ul.nav-menu li a:hover, .wozz-navigation ul.nav-menu li a:focus {
+          .wozz-navigation ul.nav-menu li a:hover, .wozz-navigation ul.nav-menu li a:focus,
+          .wozz-navigation ul.nav-menu li button:hover,
+          .wozz-navigation ul.nav-menu li button:focus {
+            outline: 0;
+            background: #008e79;
             color: #fff; }

@@ -1,6 +1,7 @@
 @import './reset';
 @import './shared';
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,500,600,900');
+@import './raleway';
+// @import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,500,600,900');
 
 @font-face {
   font-family: "wozz-icons";
@@ -27,6 +28,14 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+
+    &.wozz-link {
+        color: $darkTeal;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .wozz-app {

@@ -25,22 +25,16 @@
 
     input,
     button {
-        height: 36px;
-        padding: 0;
         box-sizing: border-box;
-        border: 3px solid $darkTeal;
-        border-radius: 8px;
-
+        @include controlCommon();
         @include controlFocus();
     }
 
     input {
+        @include controlInput();
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        padding: 0 8px;
-        position: relative;
         right: -3px;
-        background: $foregroundLight;
 
         @media (min-width: $vp-1) {
             width: 196px;
@@ -53,11 +47,7 @@
 
     button {
         width: 36px;
-        background: $darkTeal;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include controlButton();
 
         &:before {
             @include iconFont();

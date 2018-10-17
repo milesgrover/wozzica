@@ -7,7 +7,11 @@
 .wozz-page-container {
   flex: 1; }
   .wozz-page-container .wozz-page-content {
-    display: flex; }
+    display: flex;
+    max-width: 1600px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto; }
     .wozz-page-container .wozz-page-content .heading-title-1 {
       font-size: 30px;
       font-weight: 400;

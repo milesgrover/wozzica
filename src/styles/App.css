@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,500,600,900");
 h1,
 h2,
 h3,
@@ -14,6 +13,41 @@ h6 {
     opacity: 0.01; }
   100% {
     opacity: 1; } }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 400;
+  src: url(../fonts/Raleway-Italic.ttf) format("truetype"); }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Raleway-Regular.ttf) format("truetype"); }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../fonts/Raleway-Medium.ttf) format("truetype"); }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  src: url(../fonts/Raleway-SemiBold.ttf) format("truetype"); }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 900;
+  src: url(../fonts/Raleway-Black.ttf) format("truetype"); }
 
 @font-face {
   font-family: "wozz-icons";
@@ -34,6 +68,10 @@ body {
 a {
   text-decoration: none;
   color: inherit; }
+  a.wozz-link {
+    color: #008e79; }
+    a.wozz-link:hover {
+      text-decoration: underline; }
 
 .wozz-app {
   height: 100vh;

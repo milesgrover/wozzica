@@ -50,12 +50,13 @@ class Navigation extends Component {
     }
 
     render() {
+        const menuItemsCount = 3;
         return (
             <nav className="wozz-navigation">
                 {this.props.vpSize < 3 &&
                     <button className="wozz-menu-btn" onClick={this.toggleMenu}>Menu</button>
                 }
-                <ul className={this.setNavClass()}>
+                <ul className={this.setNavClass()} style={this.props.vpSize < 3 && this.state.showMenu  ? {height: menuItemsCount * 44} : null}>
                     <li className={this.setToActive('home')}><Link to="/">Home</Link></li>
                     <li className={this.setToActive('add')}><Link to="/add">Add a new thing</Link></li>
                     <li className={this.setToActive('browse')}><Link to="/browse">Browse</Link></li>

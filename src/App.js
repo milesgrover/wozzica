@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { CSSTransitionGroup } from 'react-transition-group';
 import ViewRePorter from './components/ViewRePorter';
 import SiteBar from './components/SiteBar';
 import Page from './components/Page';

@@ -7,6 +7,9 @@ $darkTeal: #008e79;
 // Yellow
 $yellow: #ffda00;
 $lightYellow: #ffe566;
+$yellow-20: #fff8cc;
+$yellow-40: #fff099;
+$yellow-60: #ffe966;
 
 // Gray
 $lightGray: #999;
@@ -67,6 +70,33 @@ $icon-plus:            '\E008';
 }
 
 // Control states
+@mixin controlCommon() {
+    height: 36px;
+    padding: 0;
+    border: 3px solid $darkTeal;
+    border-radius: 8px;
+    display: flex;
+    font-family: Raleway, sans-serif;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+@mixin controlInput() {
+    padding: 0 8px;
+    position: relative;
+    background: $foregroundLight;
+    flex: 1;
+    align-items: center;
+}
+
+@mixin controlButton() {
+    background: $darkTeal;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    color: $foregroundLight;
+}
+
 @mixin controlFocus() {
     &:focus {
         outline: 0;
@@ -78,9 +108,10 @@ $icon-plus:            '\E008';
     &:active {
         background: $yellow;
         box-shadow: none;
+        color: $darkTeal;
 
         &:before {
-            color: $darkTeal;
+            color: inherit;
         }
     }
 }
@@ -108,6 +139,60 @@ $icon-plus:            '\E008';
 
         &.top {
             transform: translate(calc(-50% + 1px), 0) scaleY(-1);
+        }
+    }
+}
+
+// Dropdown styles
+@mixin dropDownStyles($width: 200px, $top: 32px) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    position: absolute;
+    top: $top;
+    background: $foregroundLight;
+    width: $width;
+    transition: all 100ms ease-in-out;
+    overflow: hidden;
+    border-radius: 8px;
+    height: 0;
+    box-shadow: 0 3px 5px 2px rgba(0,0,0,0);
+
+    &.show {
+        visibility: visible;
+        box-shadow: 0 3px 5px 2px rgba(0,0,0,0.17);
+        transition-duration: 300ms;
+    }
+
+    li {
+        margin: 0;
+
+        a,
+        button {
+            font-size: 18px;
+            color: $foregroundLight;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            position: relative;
+            background: transparent;
+            width: 100%;
+            border: 0;
+            text-align: left;
+            padding: 0 12px;
+            height: 44px;
+            color: $lightTeal;
+            border-radius: 0;
+
+            &:hover,
+            &:focus {
+                outline: 0;
+                background: $darkTeal;
+                color: $foregroundLight;
+            }
         }
     }
 }

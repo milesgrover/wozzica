@@ -12,6 +12,7 @@
     position: relative;
     transform: translateY(0);
     animation: animSlideDown 300ms ease-in-out;
+    z-index: 1;
 
     .heading-page-title {
         font-size: 24px;

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-// import '../styles/AddPage.css';
+import '../styles/AddPage.css';
 
 class HomePage extends Component {
     render() {

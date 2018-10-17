@@ -9,6 +9,28 @@
             padding: 0;
             flex: 1;
             margin-top: -65px;
+            position: relative;
+
+            &:before,
+            &:after {
+                content: '';
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                z-index: -1;
+            }
+
+            &:before {
+                background: $yellow-20;
+                left: 0;
+                right: 50%;
+            }
+
+            &:after {
+                background: $yellow-60;
+                left: 50%;
+                right: 0;
+            }
         }
     }
 
@@ -18,17 +40,25 @@
         padding-top: 65px;
         align-self: stretch;
         flex: 1;
+
+        p {
+            max-width: 332px;
+            margin-right: auto;
+            margin-left: auto;
+            font-weight: 500;
+            line-height: 1.33;
+        }
     }
 
     .wozz-add-choose-img {
-        background: rgba($yellow, 0.2);
+        background: $yellow-20;
     }
 
     .wozz-add-name-thing {
-        background: rgba($yellow, 0.4);
+        background: $yellow-40;
     }
 
     .wozz-add-tag-thing {
-        background: rgba($yellow, 0.6);
+        background: $yellow-60;
     }
 }
