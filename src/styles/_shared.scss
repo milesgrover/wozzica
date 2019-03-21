@@ -98,7 +98,7 @@ $icon-plus:            '\E008';
 }
 
 @mixin controlFocus() {
-    &:focus {
+    &.wozz-tab-focus:focus {
         outline: 0;
         box-shadow: inset 0 0 3px 1px $lightTeal;
     }
@@ -209,17 +209,10 @@ $icon-plus:            '\E008';
 
     > img {
         display: inline-block;
+        max-width: 100%;
+        min-width: 400px;
     }
 }
 
 // Animations
 $fadeTiming: animFadeIn 100ms ease-in-out;
-
-@keyframes animFadeIn {
-    0% {
-        opacity: 0.01;
-    }
-    100% {
-        opacity: 1;
-    }
-}

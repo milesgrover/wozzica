@@ -5,8 +5,21 @@ import SiteBar from './components/SiteBar';
 import Page from './components/Page';
 
 import './styles/App.css';
+import './styles/animations.css';
 
 class App extends Component {
+    componentDidMount = () => {
+        document.addEventListener('keyup', (e) => {
+          let key = e.key || e.keycode || 0;
+          if (key === 'Tab' || key === 9) {
+            let inFocus = document.activeElement;
+            inFocus.classList.add('wozz-tab-focus');
+            inFocus.addEventListener('blur', (evt) => {
+              evt.target.classList.remove('wozz-tab-focus');
+            });
+          }
+        });
+    }
     render() {
         const category = this.props.match.params.cat || 'home';
         const categoryTitles = {
@@ -19,17 +32,19 @@ class App extends Component {
                     <SiteBar category={category} />
                 </ViewRePorter>
 
-                {!this.props.match.thingName &&
+                {!this.props.match.params.thingName &&
                     <Page category={category}
                         title={categoryTitles[category] || category}
                         item={this.props.match.params.item}
+                        history={this.props.history}
                         />
                 }
 
-                {this.props.match.thingName &&
+                {this.props.match.params.thingName &&
                     <Page category="thing"
                         thingName={this.props.match.params.thingName}
                         thingId={this.props.match.params.thingId}
+                        history={this.props.history}
                         />
                 }
             </div>

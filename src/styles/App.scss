@@ -38,8 +38,33 @@ a {
     }
 }
 
+strong {
+    font-weight: 600;
+}
+
+*:focus {
+    outline: 0;
+}
+
 .wozz-app {
     height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.wozz-term {
+    font-style: italic;
+    color: $darkTeal;
+}
+
+.wozz-hyperlink {
+    color: $lightTeal;
+    text-decoration: underline;
+}
+
+.wozz-paragraph {
+    font-size: 18px;
+    line-height: 1.2;
+    margin-top: .9em;
+    max-width: 50em;
 }

@@ -30,6 +30,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        animation: slideDown 250ms ease-in-out;
 
         .heading {
             color: $foregroundLight;
@@ -59,7 +60,7 @@
                 background: rgba(0,0,0,0.6);
             }
 
-            &:focus {
+            &.wozz-tab-focus:focus {
                 @include dropShadow();
                 outline: 0;
             }
@@ -73,5 +74,24 @@
 
     .wozz-annotator img {
         max-width: 100%;
+        animation: imgFadeIn 250ms ease-in-out;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes imgFadeIn {
+    0% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 1;
     }
 }

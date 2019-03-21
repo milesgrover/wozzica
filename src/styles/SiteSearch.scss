@@ -2,7 +2,27 @@
 
 .wozz-site-search {
     display: flex;
+    position: relative;
     @include sitePadding();
+
+    &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 24px;
+            bottom: 0;
+            left: 27px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 150ms ease-in-out;
+        }
+
+    &:focus-within {
+        &:before {
+            opacity: 1;
+        }
+    }
 
     &.expand {
         position: fixed;

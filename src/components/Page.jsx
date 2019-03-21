@@ -23,6 +23,8 @@ class Page extends Component {
                       item={this.props.item}
                       thingName={this.props.thingName}
                       thingId={this.props.thingId}
+                      history={this.props.history}
+                      key={this.props.title}
                       />
         );
     }

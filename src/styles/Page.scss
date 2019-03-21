@@ -4,31 +4,43 @@
     flex: 1;
 
     .wozz-page-content {
+        animation: pageFadeIn 300ms ease-in-out;
+
+        @keyframes pageFadeIn {
+            0% {
+                opacity: 0.1;
+            }
+            100% {
+                opacity: 1.0;
+            }
+        }
+
         display: flex;
         max-width: 1600px;
-        width: 100%;
+        width: calc(100% - 22px);
         margin-right: auto;
         margin-left: auto;
+        padding: 0 11px;
 
-        .heading-title-1 {
-            font-size: 30px;
-            font-weight: 400;
-            line-height: 1.25;
+        @media (max-width: $vp-3) {
+            flex-direction: column;
         }
+    }
+
+    .wozz-page-singlet {
+        padding: 22px;
     }
 
     .wozz-page-main,
     .wozz-page-aside {
-        padding: 22px 0;
+        padding: 22px 11px;
     }
 
     .wozz-page-main {
         flex: 1;
-        padding-right: 11px;
     }
 
     .wozz-page-aside {
         flex: 0 0 456px;
-        padding-left: 11px;
     }
 }

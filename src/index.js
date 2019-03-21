@@ -13,8 +13,8 @@ const Wozzica = () => {
         <Switch>
             <Route exact path="/" component={App}/>
             <Route exact path="/:cat" component={App}/>
-            <Route path="/:cat/:item" component={App}/>
             <Route exact path="/thing/:thingId/:thingName" component={App}/>
+            <Route path="/:cat/:item" component={App}/>
         </Switch>
     );
 }

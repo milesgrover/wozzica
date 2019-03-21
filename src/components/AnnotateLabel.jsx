@@ -31,6 +31,10 @@ class AnnotateLabel extends Component {
     handleEditClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
+
+        // tell annotator whether we're in the editing state so it knows to disable dot clicks
+        this.props.onEditing(!this.state.editing);
+
         this.setState({
             editing: !this.state.editing,
             savedState: {

@@ -20,62 +20,76 @@
         -moz-font-feature-settings: "lnum";
         -webkit-font-feature-settings: "lnum";
         font-feature-settings: "lnum";
+
+        &.complete {
+            > span {
+                display: none;
+            }
+
+            &:before {
+                content: $icon-checkmark;
+                @include iconFont();
+                font-size: 24px;
+            }
+        }
     }
 
     .wozz-add-ctrl-input {
-        display: flex;
-        max-width: 332px;
-        margin: 0 auto;
-
-        input[type=file] {
-            position: absolute;
-            height: 0.1px;
-            width: 0.1px;
-            overflow: hidden;
-        }
-
-        > label {
-            flex: 1;
+        > form {
             display: flex;
-
-            &.placeholder {
-                color: #757575;
+            max-width: 332px;
+            margin: 0 auto;
+    
+            input[type=file] {
+                position: absolute;
+                height: 0.1px;
+                width: 0.1px;
+                overflow: hidden;
             }
-        }
-
-        .pseudo-input {
-            @include controlCommon();
-            @include controlInput();
-            @include controlFocus();
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            font-size: 13px;
-            margin-right: -3px;
-            white-space: nowrap;
-
-            + span {
+    
+            > label {
+                flex: 1;
+                display: flex;
+    
+                &.placeholder {
+                    color: #757575;
+                }
+            }
+    
+            .pseudo-input {
                 @include controlCommon();
-                @include controlButton();
+                @include controlInput();
                 @include controlFocus();
-                @include buttonActive();
-                flex-basis: 74px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                font-size: 13px;
+                margin-right: -3px;
+                white-space: nowrap;
+    
+                + span {
+                    @include controlCommon();
+                    @include controlButton();
+                    @include controlFocus();
+                    @include buttonActive();
+                    flex-basis: 74px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+    
+            input[type=text] {
+                @include controlCommon();
+                @include controlInput();
+                @include controlFocus();
+            }
+    
+            .wozz-ctrl-select + input[type=text] {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
-                font-size: 14px;
-                font-weight: 400;
+                margin-left: -3px;
             }
-        }
-
-        input[type=text] {
-            @include controlCommon();
-            @include controlInput();
-            @include controlFocus();
-        }
-
-        .wozz-ctrl-select + input[type=text] {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            margin-left: -3px;
         }
     }
 }

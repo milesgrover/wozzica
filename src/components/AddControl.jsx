@@ -1,5 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Select from './Select';
+import generateId from '../utilities/generateId';
+import classNames from '../utilities/classNames';
 import '../styles/AddControl.css';
 
 
@@ -25,40 +27,53 @@ class AddControl extends Component {
                 filePlaceholder: true
             })
         }
+        this.props.onInput(e);
     }
+
     render() {
         return (
             <div className="wozz-add-control">
-                <div className="wozz-add-ctrl-number">{this.props.number}</div>
+                <div className={classNames('wozz-add-ctrl-number', this.props.complete)}>
+                    <span>{this.props.number}</span>
+                </div>
                 <div className="wozz-add-ctrl-input">
                     {this.props.input === 'file' &&
-                        <Fragment>
-                            <label htmlFor="AddFileInput" class={this.state.filePlaceholder ? 'placeholder' : null}>
-                                <div className="pseudo-input" tabindex={0}>{this.state.filePath}</div>
-                                <span tabindex={0}>{this.props.button}</span>
+                        <form method="post" encType="multipart/form-data">
+                            <label htmlFor="AddImageInput" className={this.state.filePlaceholder ? 'placeholder' : null}>
+                                <div className="pseudo-input" tabIndex={0}>{this.state.filePath}</div>
+                                <span tabIndex={0}>{this.props.button}</span>
                             </label>
                             <input type="file"
-                                   id="AddFileInput"
+                                   id="AddImageInput"
+                                   name="thingImage"
                                    onChange={this.handleFileChange}
-                                   tabindex={-1}
+                                   tabIndex={-1}
                                    accept="image/*"/>
-                        </Fragment>
+                        </form>
                     }
-                    {this.props.options &&
-                        <Select options={this.props.options} />
-                    }
-                    {this.props.input === 'text' &&
-                        <Fragment>
-                            <input type="text"
-                                   placeholder={this.props.placeholder}/>
-                        </Fragment>
-                    }
+                    <form>
+                        {this.props.options &&
+                                <Select options={this.props.options} />
+                        }
+                        {this.props.input === 'text' &&
+                                <input type="text"
+                                    placeholder={this.props.placeholder}
+                                    onChange={this.props.onInput}/>
+                        }
+                    </form>
                 </div>
 
                 {this.props.children}
             </div>
         )
     }
+}
+
+AddControl.InputOptions = {
+    empty: 'empty',
+    loading: 'loading',
+    complete: 'complete',
+    error: 'error',
 }
 
 export default AddControl;

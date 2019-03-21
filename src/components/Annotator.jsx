@@ -15,11 +15,20 @@ class Annotator extends Component {
             imgSize: {w: 0, h: 0},
             thingData: this.props.data || [],
             showingModal: false,
+            editingLabel: false,
             placingLabel: null,
             deletingThing: null
         }
 
         this.thingImage = React.createRef();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.data !== this.props.data) {
+            this.setState({
+                thingData: this.props.data
+            })
+        }
     }
 
     onImgLoad = () => {
@@ -46,7 +55,10 @@ class Annotator extends Component {
     }
 
     handleDotClick = (uid) => {
-        if (this.props.readonly) {
+        // Don't allow dot click if user is editing label (or if we're in read only mode)
+        // If user deletes a label while editing, the array of labels can have a conflict and end up replacing
+        // a different label with the text from the deleted one
+        if (this.props.readonly || this.state.editingLabel) {
             return;
         }
         this.setState({
@@ -115,12 +127,21 @@ class Annotator extends Component {
         })
     }
 
+    onEditingLabel = (uid) => {
+        this.setState({
+            editingLabel: uid
+        })
+    }
+
     onUpdateLabel = (text, uid, dimensions) => {
         let updateLabelData = this.state.thingData.slice(0);
         let dataIndex = updateLabelData.findIndex(el => el.uid === uid);
 
         if (text) {
             updateLabelData[dataIndex].ltext = text;
+            this.setState({
+                editingLabel: null
+            })
         }
 
         if (dimensions) {
@@ -192,6 +213,7 @@ class Annotator extends Component {
         for (let i = 0; i < labelsAdded.length; i++) {
             labels.push(<AnnotateLabel key={i}
                                        data={this.state.thingData[i]}
+                                       onEditing={this.onEditingLabel}
                                        onUpdate={this.onUpdateLabel}
                                        onDragger={this.onDragLabel}
                                        readonly={this.props.readonly}

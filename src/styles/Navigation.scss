@@ -14,7 +14,7 @@
         position: relative;
 
         &:hover,
-        &:focus {
+        &.wozz-tab-focus:focus {
             outline: 0;
             background: $darkTeal;
         }
