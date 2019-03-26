@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Triangle from './Triangle';
-import '../styles/DeleteModal.css';
+import '../styles/DeleteModal.scss';
 
 class DeleteModal extends Component {
     constructor(props) {

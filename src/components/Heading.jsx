@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Heading.css';
+import '../styles/Heading.scss';
 
 const Heading = (props) => {
     if (!props.type) {

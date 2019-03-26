@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom';
 import ViewRePorter from './components/ViewRePorter';
 import SiteBar from './components/SiteBar';
 import Page from './components/Page';
+import ExperimentPage from './experiment/page';
 
-import './styles/App.css';
-import './styles/animations.css';
+import './styles/App.scss';
+import './styles/animations.scss';
 
 class App extends Component {
     componentDidMount = () => {
@@ -31,6 +32,11 @@ class App extends Component {
                 <ViewRePorter>
                     <SiteBar category={category} />
                 </ViewRePorter>
+
+                {/* <ExperimentPage>
+                    <div>hello</div>
+                    <div>hello</div>
+                </ExperimentPage> */}
 
                 {!this.props.match.params.thingName &&
                     <Page category={category}

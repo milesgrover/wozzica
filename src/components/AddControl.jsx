@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Select from './Select';
 import generateId from '../utilities/generateId';
 import classNames from '../utilities/classNames';
-import '../styles/AddControl.css';
+import '../styles/AddControl.scss';
 
 
 class AddControl extends Component {

@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import TitleBar from '../components/TitleBar';
-import '../styles/BrowsePage.css';
+import PageTemplate from "../components/PageTemplate";
+
+import '../styles/BrowsePage.scss';
 
 
 class BrowsePage extends Component {
@@ -26,24 +28,31 @@ class BrowsePage extends Component {
     }
     render() {
         return (
+                
             <Fragment>
                 <TitleBar title={this.props.title} />
-                <div className="wozz-page-content">
-                    {this.state.things &&
-                        this.state.things.map((thing) => {
-                            console.log(thing)
-                            return (
-                                <div className="wozz-browse-item" key={thing.id}>
-                                    <img src={thing.image} alt={thing.name} />
-                                    <div>
-                                        <h2><a href={`/thing/${thing.id}/${thing.name.replace(/\s/g, '-')}`}>{thing.name}</a></h2>
-                                        <p>tags: {thing.tags.join(", ")}</p>
+                <PageTemplate>
+                    <div>
+                        {this.state.things &&
+                            this.state.things.map((thing) => {
+                                console.log(thing)
+                                return (
+                                    <div className="wozz-browse-item" key={thing.id}>
+                                        <img src={thing.image} alt={thing.name} />
+                                        <div>
+                                            <h2>
+                                                <a href={`/thing/${thing.id}/${thing.name.replace(/\s/g, '%20')}`}>
+                                                    {thing.name}
+                                                </a>
+                                            </h2>
+                                            <p>tags: {thing.tags.join(", ")}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })
-                    }
-                </div>
+                                );
+                            })
+                        }
+                    </div>
+                </PageTemplate>
             </Fragment>
         )
     }

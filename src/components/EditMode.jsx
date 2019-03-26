@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Annotator from '../components/Annotator';
-import '../styles/EditMode.css';
+import '../styles/EditMode.scss';
 
 class EditMode extends Component {
     constructor(props) {

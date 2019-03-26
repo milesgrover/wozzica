@@ -3,7 +3,7 @@ import TitleBar from '../components/TitleBar';
 import AddControl from '../components/AddControl';
 import BigButton from '../components/BigButton';
 import generateId from '../utilities/generateId';
-import '../styles/AddPage.css';
+import '../styles/AddPage.scss';
 
 class AddPage extends Component {
     constructor(props) {

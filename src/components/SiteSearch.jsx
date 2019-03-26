@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/SiteSearch.css';
+import '../styles/SiteSearch.scss';
 
 class SiteSearch extends Component {
     constructor(props) {

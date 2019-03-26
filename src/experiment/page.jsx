@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-class PageTemplateBase extends React.Component {
+class Page extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
@@ -11,7 +11,7 @@ class PageTemplateBase extends React.Component {
     }
 }
 
-const PageTemplate = styled(PageTemplateBase)`
+const StyledPage = styled(Page)`
     display: grid;
     grid-template-columns: ${props => {
         const childCount = React.Children.count(props.children);
@@ -26,4 +26,4 @@ const PageTemplate = styled(PageTemplateBase)`
     grid-column-gap: 22px;
 `;
 
-export default PageTemplate;
+export default StyledPage;

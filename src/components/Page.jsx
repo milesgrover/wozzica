@@ -5,7 +5,7 @@ import BrowsePage from '../pages/BrowsePage';
 import HomePage from '../pages/HomePage';
 import ThingPage from '../pages/ThingPage';
 
-import '../styles/Page.css';
+import '../styles/Page.scss';
 
 class Page extends Component {
     determinePage = () => {

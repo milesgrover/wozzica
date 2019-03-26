@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import SiteSearch from './SiteSearch';
-import '../styles/SiteBar.css';
+import '../styles/SiteBar.scss';
 
 class SiteBar extends Component {
     render() {

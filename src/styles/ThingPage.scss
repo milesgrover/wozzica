@@ -11,5 +11,22 @@
                 @include annotatorWrapper();
             }
         }
+
+    }
+}
+
+.wozz-load-icon {
+    width: 100px;
+    height: 100px;
+    transform-origin: center;
+    animation: spin 5000ms linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

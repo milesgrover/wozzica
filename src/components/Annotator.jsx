@@ -5,7 +5,7 @@ import AnnotateLabel from './AnnotateLabel';
 import AnnotateLine from './AnnotateLine';
 import DeleteModal from './DeleteModal';
 import generateId from '../utilities/generateId';
-import '../styles/Annotator.css';
+import '../styles/Annotator.scss';
 
 class Annotator extends Component {
     constructor(props) {

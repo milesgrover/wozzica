@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import '../styles/AnnotateLabel.css';
+import '../styles/AnnotateLabel.scss';
 
 class AnnotateLabel extends Component {
     constructor(props) {

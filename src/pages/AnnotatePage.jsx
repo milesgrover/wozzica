@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import EditMode from '../components/EditMode';
-import '../styles/AnnotatePage.css';
+import '../styles/AnnotatePage.scss';
 
 const imgSrc = 'http://www.munchamuncha.com/munchamuncha.jpg'; // obvz for testing only
 

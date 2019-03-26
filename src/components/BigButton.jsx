@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classNames from '../utilities/classNames';
-import '../styles/BigButton.css';
+import '../styles/BigButton.scss';
 
 class BigButton extends Component {
     render() {
