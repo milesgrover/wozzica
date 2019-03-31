@@ -198,20 +198,24 @@ $icon-plus:            '\E008';
 }
 
 @mixin annotatorWrapper() {
-    overflow: hidden;
+    // overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 3px solid $lightTeal;
     margin-bottom: 12px;
     background: url("../images/background.png");
+    padding: 12px;
     font-size: 0;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+    min-width: 0;
 
-    > img {
-        display: inline-block;
-        max-width: 100%;
-        min-width: 400px;
-    }
+    // > img,
+    // .wozz-annotator > img {
+    //     display: inline-block;
+    //     max-width: 100%;
+    //     min-width: 400px;
+    // }
 }
 
 // Animations

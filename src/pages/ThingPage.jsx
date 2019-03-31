@@ -3,6 +3,9 @@ import Annotator from '../components/Annotator';
 import LoadIcon from "../components/LoadIcon";
 import Heading from "../components/Heading";
 import PageTemplate from "../components/PageTemplate";
+import TagList from "../components/TagList";
+import Shrinker from "../components/Shrinker";
+import { getData } from "../api";
 import '../styles/ThingPage.scss';
 
 class ThingPage extends Component {
@@ -10,42 +13,43 @@ class ThingPage extends Component {
         super(props);
 
         this.state = {
-            thing: {},
+            thingData: {},
             loading: true,
         }
     }
     componentDidMount() {
-        let origin = process.env.NODE_ENV === "development" ? "&origin=*" : "";
-        let self = this;
-        fetch(`http://www.wozzica.com/wiki/api.php?action=parse&format=json&prop=wikitext&page=${this.props.thingId}${origin}`)
-            .then(res => res.json())
-            .then(thing => { self.setState({ thing: { id: thing.parse.title, ...JSON.parse(thing.parse.wikitext["*"]) } }) })
-            .then(res => {
-                self.setState({
-                    loading: false,
-                });
+        getData(this, this.props.thingId)
+        .then(() => {
+            this.setState({
+                loading: false,
             });
+        });
     }
     render() {
         if (this.state.loading) {
             return (
                 <div className="wozz-page-content">
-                    <LoadIcon />
+                    <LoadIcon fill="#00d6bc" />
                 </div>
             )
         }
-        if (this.state.thing.annotations) {
+        if (this.state.thingData.annotations) {
             return (
                 <PageTemplate>
-                    <div className="wozz-thing-illustration">
+                    <div>
+                        <div>This is called a</div>
                         <Heading type="page">{this.props.thingName}</Heading>
-                        <Annotator readonly
-                                   uid={this.props.thingId}
-                                   image={this.state.thing.image}
-                                   data={this.state.thing.annotations}
-                        />
+                        <div className="wozz-thing-illustration">
+                            <Shrinker>
+                                <Annotator readonly
+                                        uid={this.props.thingId}
+                                        image={this.state.thingData.image}
+                                        data={this.state.thingData.annotations}
+                                />
+                            </Shrinker>
+                        </div>
+                        <TagList tags={this.state.thingData.tags} />
                     </div>
-                    <div>Thing stuff</div>
                 </PageTemplate>
             );
         } else {

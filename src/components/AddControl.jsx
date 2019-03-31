@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from './Select';
-import generateId from '../utilities/generateId';
 import classNames from '../utilities/classNames';
+import LoadIcon from '../components/LoadIcon';
 import '../styles/AddControl.scss';
 
 
@@ -30,15 +30,19 @@ class AddControl extends Component {
         this.props.onInput(e);
     }
 
+    noSubmit = (e) => {
+        e.preventDefault();
+    }
+
     render() {
         return (
             <div className="wozz-add-control">
                 <div className={classNames('wozz-add-ctrl-number', this.props.complete)}>
-                    <span>{this.props.number}</span>
+                    {this.props.complete === AddControl.InputOptions.loading ? <LoadIcon /> : <span>{this.props.number}</span>}
                 </div>
                 <div className="wozz-add-ctrl-input">
                     {this.props.input === 'file' &&
-                        <form method="post" encType="multipart/form-data">
+                        <form onSubmit={this.noSubmit}>
                             <label htmlFor="AddImageInput" className={this.state.filePlaceholder ? 'placeholder' : null}>
                                 <div className="pseudo-input" tabIndex={0}>{this.state.filePath}</div>
                                 <span tabIndex={0}>{this.props.button}</span>
@@ -51,7 +55,7 @@ class AddControl extends Component {
                                    accept="image/*"/>
                         </form>
                     }
-                    <form>
+                    <form onSubmit={this.noSubmit}>
                         {this.props.options &&
                                 <Select options={this.props.options} />
                         }

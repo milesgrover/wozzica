@@ -23,11 +23,14 @@ class Annotator extends Component {
         this.thingImage = React.createRef();
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.data !== this.props.data) {
             this.setState({
                 thingData: this.props.data
-            })
+            });
+        }
+        if (prevState.thingData !== this.state.thingData && this.props.onUpdate) {
+            this.props.onUpdate(this.state.thingData);
         }
     }
 
@@ -36,6 +39,9 @@ class Annotator extends Component {
             imgSize: { w: this.thingImage.current.offsetWidth,
                        h: this.thingImage.current.offsetHeight }
         });
+        if (this.props.onImageLoad) {
+            this.props.onImageLoad();
+        }
     }
 
     handleImgClick = (e) => {
@@ -230,8 +236,14 @@ class Annotator extends Component {
         }
 
         return (
-            <div className="wozz-annotator" onMouseMove={this.handleMouseMove} onClick={this.handleImgClick}>
-                <img src={this.props.image} alt="" onLoad={this.onImgLoad} ref={this.thingImage} />
+            <div
+                ref={this.props.forwardedRef}
+                className="wozz-annotator"
+                onMouseMove={this.handleMouseMove}
+                onClick={this.handleImgClick}
+                style={this.props.shrunkStyle}
+            >
+                <img src={this.props.image} alt={this.props.name} onLoad={this.onImgLoad} ref={this.thingImage} />
                 {this.state.showingModal &&
                     <AnnotateModal onClose={this.onModalClose}
                                    onAddLabel={this.addLabel}

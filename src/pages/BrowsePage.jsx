@@ -19,8 +19,8 @@ class BrowsePage extends Component {
         fetch(`http://www.wozzica.com/wiki/api.php?action=query&format=json&list=allpages${origin}`)
             .then(res => res.json())
             .then(pages => {
-                return pages.query.allpages.map(p => {
-                    fetch(`http://www.wozzica.com/wiki/api.php?action=parse&format=json&prop=wikitext&page=${p.title}${origin}`)
+                return pages.query.allpages.map((p) => {
+                    return fetch(`http://www.wozzica.com/wiki/api.php?action=parse&format=json&prop=wikitext&page=${p.title}${origin}`)
                     .then(res => res.json())
                     .then(thing => {self.setState({ things: [...this.state.things, {id: thing.parse.title, ...JSON.parse(thing.parse.wikitext["*"])}] })});
                 });

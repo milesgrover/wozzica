@@ -13,62 +13,114 @@ class AddPage extends Component {
             imageInput: AddControl.InputOptions.empty,
             nameInput: AddControl.InputOptions.empty,
             tagInput: AddControl.InputOptions.empty,
+            createID: generateId(),
             uploadToken: '',
+            tags: [],
+            name: '',
+            imageUrl: '',
         }
     }
 
     handleImageInput = (e) => {
         e.preventDefault();
         if (e.target.files && e.target.files.length) {
-            const self = this;
-            const file = e.target.files[0];
-            const fileContents = new FileReader();
-            fileContents.onload = () => { console.log(fileContents.result) }
-            fileContents.readAsArrayBuffer(file);
-            const ext = file.name.slice(-3);
-            const newName = generateId() + "." + ext;
-
             this.setState({
                 imageInput: AddControl.InputOptions.loading,
             });
 
-            fetch(`http://www.wozzica.com/wiki/api.php?action=query&meta=tokens&format=json`)
-            .then(res => res.json())
-            .then(res => {
-                const token = res.query.tokens.csrftoken;
-                self.setState({
-                    uploadToken: token
+            const file = e.target.files[0];
+            const fileContents = new FileReader();
+            const ext = file.name.slice(-3);
+            const newName = this.state.createID + "." + ext;
+
+            fileContents.addEventListener('load', () => {
+                this.getToken()
+                .then(res => {
+                    this.uploadImage(newName, file)
                 });
-                return fetch(`http://www.wozzica.com/wiki/api.php?action=upload&format=json&filename=${newName}&file=${file}&token=${token}`);
-            })
-            .then(res => {console.log(res)}, res => {console.log(res)})
+            });
+            fileContents.readAsArrayBuffer(file);
         }
-        this.setState({
-            imageInput: AddControl.InputOptions.complete
-        });
-        
+    }
+
+    getToken = () => {
+        return fetch(`http://www.wozzica.com/wiki/api.php?action=query&meta=tokens&format=json`)
+        .then(res => res.json())
+        .then(res => {
+            const token = res.query.tokens.csrftoken;
+            this.setState({
+                uploadToken: token
+            });
+            return res;
+        })
+    }
+
+    uploadImage = (newName, file) => {
+        let request = new XMLHttpRequest();
+        request.open('POST', 'http://www.wozzica.com/wiki/api.php?format=json&ignorewarnings=1', true);
+        let formData = new FormData();
+        formData.append('action', 'upload');
+        formData.append('filename', newName);
+        formData.append('token', this.state.uploadToken);
+        formData.append('file', file);
+        request.setRequestHeader('Content-Disposition', 'form-data');
+        request.send(formData);
+        request.onreadystatechange = () => {
+            if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+                this.setState({
+                    imageInput: AddControl.InputOptions.complete,
+                    imageUrl: JSON.parse(request.response).upload.imageinfo.url,
+                })
+            }
+        }
     }
 
     handleNameInput = (e) => {
         this.setState({
+            name: e.target.value,
             nameInput: e.target.value.length ? AddControl.InputOptions.complete : AddControl.InputOptions.empty
         });
     }
 
     handleTagInput = (e) => {
+        const tags = e.target.value.split(', ');
         this.setState({
+            tags: tags,
             tagInput: e.target.value.length ? AddControl.InputOptions.complete : AddControl.InputOptions.empty
         });
     }
 
-    handleNextBtnClick = () => {
-        this.props.history.push('/annotate');
+    handleNextBtnClick = (e) => {
+        e.preventDefault();
+        const jsonTags = JSON.stringify({tags: this.state.tags, image: this.state.imageUrl, name: this.state.name});
+        const upperID = this.state.createID.slice(0,1).toUpperCase() + this.state.createID.slice(1);
+        const upperName = this.state.name.slice(0,1).toUpperCase() + this.state.name.slice(1)
+        this.getToken()
+        .then(res => {
+            let request = new XMLHttpRequest();
+            request.open('POST', 'http://www.wozzica.com/wiki/api.php', true);
+            let formData = new FormData();
+            formData.append('action', 'edit');
+            formData.append('token', this.state.uploadToken);
+            formData.append('title', this.state.createID);
+            formData.append('format', 'json');
+            formData.append('contentmodel', 'json');
+            formData.append('text', jsonTags);
+            request.setRequestHeader('Content-Disposition', 'form-data');
+            request.send(formData);
+            request.onreadystatechange = () => {
+                if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+                    console.log(request.response)
+                    this.props.history.push(`/annotate/${upperID}/${upperName}`);
+                }
+            }
+        })
     }
 
     render() {
         const vowelRegex = /\b[aeiou]\w*/ig;
         let indefArticle = 'a';
-        if (this.state.nameInput && vowelRegex.test(this.state.nameInput)) {
+        if (this.state.name && vowelRegex.test(this.state.name)) {
             indefArticle = 'an'
         }
         return (
@@ -85,7 +137,7 @@ class AddPage extends Component {
                                     complete={this.state.imageInput}
                                     >
                             <p>This is the image you’ll be annotating. Illustrations are best, but photographs can work if they clearly show their subject. The format should be .jpg, .gif, or .png.</p>
-                            <p>Please only upload images that you created, or which you have the rights to. See our <a href="" className="wozz-link">legal disclaimers</a>.</p>
+                            <p>Please only upload images that you created, or which you have the rights to. See our <a href="#" className="wozz-link">legal disclaimers</a>.</p>
                         </AddControl>
                     </div>
                     <div className="wozz-add-name-thing">

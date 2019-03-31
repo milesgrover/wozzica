@@ -1,17 +1,8 @@
 @import './shared';
 
 .wozz-thing {
-    .wozz-page-container {
-        .wozz-page-content {
-            @include sitePadding();
-            padding-top: 22px;
-            padding-bottom: 22px;
-
-            .wozz-thing-illustration {
-                @include annotatorWrapper();
-            }
-        }
-
+    .wozz-thing-illustration {
+        @include annotatorWrapper();
     }
 }
 
@@ -19,7 +10,7 @@
     width: 100px;
     height: 100px;
     transform-origin: center;
-    animation: spin 5000ms linear infinite;
+    animation: spin 1500ms linear infinite;
 }
 
 @keyframes spin {

@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import ViewRePorter from './components/ViewRePorter';
 import SiteBar from './components/SiteBar';
 import Page from './components/Page';
-import ExperimentPage from './experiment/page';
 
 import './styles/App.scss';
 import './styles/animations.scss';
@@ -33,11 +32,6 @@ class App extends Component {
                     <SiteBar category={category} />
                 </ViewRePorter>
 
-                {/* <ExperimentPage>
-                    <div>hello</div>
-                    <div>hello</div>
-                </ExperimentPage> */}
-
                 {!this.props.match.params.thingName &&
                     <Page category={category}
                         title={categoryTitles[category] || category}
@@ -47,7 +41,7 @@ class App extends Component {
                 }
 
                 {this.props.match.params.thingName &&
-                    <Page category="thing"
+                    <Page category={category}
                         thingName={this.props.match.params.thingName}
                         thingId={this.props.match.params.thingId}
                         history={this.props.history}
