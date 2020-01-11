@@ -20,7 +20,6 @@ class ThingPage extends Component {
     componentDidMount() {
         getData(this, this.props.thingId)
         .then(() => {
-            console.log(this.state.thingData.readonlyImage)
             this.setState({
                 loading: false,
             });

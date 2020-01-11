@@ -16,7 +16,7 @@ export const Base64String = {
           i,c,
           current,
           status = 0;
-      
+
       input = this.compress(input);
       
       for (i=0 ; i<input.length ; i++) {
@@ -82,6 +82,8 @@ export const Base64String = {
             output.push(String.fromCharCode((current + (c >> 15))+32, (c & 32767)+32));
             status = 0;
             break;
+          default:
+            break;
         }
       }
       output.push(String.fromCharCode(current + 32));
@@ -94,7 +96,7 @@ export const Base64String = {
           current,c,
           status=0,
           i = 0;
-      
+
       while (i < input.length) {
         c = input.charCodeAt(i) - 32;
         
@@ -162,15 +164,16 @@ export const Base64String = {
             output.push(String.fromCharCode(current | c));
             status=0;
             break;
+          default:
+            break;
         }
         
         
         i++;
       }
-      
-      return this.decompress(output.join(''));
-      //return output;
-      
+      let decompressed = this.decompress(output.join(''));
+      decompressed = decompressed.replace('dataimage', 'data:image').replace('base64', ';base64,');
+      return decompressed;
     },
   
   
@@ -183,9 +186,9 @@ export const Base64String = {
       var i = 1;
       var odd = input.charCodeAt(0) >> 8;
       
-      while (i < input.length*2 && (i < input.length*2-1 || odd==0)) {
+      while (i < input.length*2 && (i < input.length*2-1 || odd===0)) {
         
-        if (i%2==0) {
+        if (i%2===0) {
           chr1 = input.charCodeAt(i/2) >> 8;
           chr2 = input.charCodeAt(i/2) & 255;
           if (i/2+1 < input.length) 
@@ -207,9 +210,9 @@ export const Base64String = {
         enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
         enc4 = chr3 & 63;
         
-        if (isNaN(chr2) || (i==input.length*2+1 && odd)) {
+        if (isNaN(chr2) || (i===input.length*2+1 && odd)) {
           enc3 = enc4 = 64;
-        } else if (isNaN(chr3) || (i==input.length*2 && odd)) {
+        } else if (isNaN(chr3) || (i===input.length*2 && odd)) {
           enc4 = 64;
         }
         
@@ -243,15 +246,15 @@ export const Base64String = {
         chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
         chr3 = ((enc3 & 3) << 6) | enc4;
         
-        if (ol%2==0) {
+        if (ol%2===0) {
           output_ = chr1 << 8;
           flush = true;
           
-          if (enc3 != 64) {
+          if (enc3 !== 64) {
             output.push(String.fromCharCode(output_ | chr2));
             flush = false;
           }
-          if (enc4 != 64) {
+          if (enc4 !== 64) {
             output_ = chr3 << 8;
             flush = true;
           }
@@ -259,11 +262,11 @@ export const Base64String = {
           output.push(String.fromCharCode(output_ | chr1));
           flush = false;
           
-          if (enc3 != 64) {
+          if (enc3 !== 64) {
             output_ = chr2 << 8;
             flush = true;
           }
-          if (enc4 != 64) {
+          if (enc4 !== 64) {
             output.push(String.fromCharCode(output_ | chr3));
             flush = false;
           }
