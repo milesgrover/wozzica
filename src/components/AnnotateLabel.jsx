@@ -126,13 +126,15 @@ class AnnotateLabel extends Component {
                         <button className="label-dragger-btn"
                                 onMouseDown={this.handleDragOn}
                                 onMouseUp={this.handleDragOff}
-                                onClick={this.noPropagate}>
+                                onClick={this.noPropagate}
+                                data-html2canvas-ignore>
                                     <span>drag</span>
                         </button>
 
                         <form>
                             <button className="label-edit-btn"
-                                    onClick={this.handleEditClick}>
+                                    onClick={this.handleEditClick}
+                                    data-html2canvas-ignore>
                                         <span>edit</span>
                             </button>
                             {this.state.editing &&

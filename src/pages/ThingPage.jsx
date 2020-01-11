@@ -20,11 +20,17 @@ class ThingPage extends Component {
     componentDidMount() {
         getData(this, this.props.thingId)
         .then(() => {
+            console.log(this.state.thingData.readonlyImage)
             this.setState({
                 loading: false,
             });
         });
     }
+
+    handleEditClick = () => {
+        this.props.history.push(`/annotate/${this.props.thingId}/${this.props.thingName}`)
+    }
+
     render() {
         if (this.state.loading) {
             return (
@@ -37,14 +43,22 @@ class ThingPage extends Component {
             return (
                 <PageTemplate>
                     <div>
-                        <div>This is called a</div>
-                        <Heading type="page">{this.props.thingName}</Heading>
+                        <header>
+                            <section>
+                                <div>This is called a</div>
+                                <Heading type="thingPage">{this.props.thingName}</Heading>
+                            </section>
+                            <section>
+                                <button onClick={this.handleEditClick}>edit</button>
+                            </section>
+                        </header>
                         <div className="wozz-thing-illustration">
                             <Shrinker>
                                 <Annotator readonly
                                         uid={this.props.thingId}
                                         image={this.state.thingData.image}
                                         data={this.state.thingData.annotations}
+                                        readonlyImage={this.state.thingData.readonlyImage}
                                 />
                             </Shrinker>
                         </div>

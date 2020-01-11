@@ -29,22 +29,24 @@ class ShrinkerBase extends React.Component {
     }
 
     calculateSize = () => {
-        const child = this.childComponent.current;
-        const outerSpace = this.shrinker.current.clientWidth;
-        const innerSpace = child.offsetWidth;
-
-        if (outerSpace <= innerSpace) {
-            this.setState({
-                shrunkStyle: {
-                    transform: `scale(${outerSpace / innerSpace})`,
-                    transformOrigin: 'left top',
-                },
-            }, () => {this.updateHeight(child.getBoundingClientRect().height)})
-        } else {
-            this.setState({
-                shrunkStyle: {},
-                height: null,
-            })
+        if (this.shrinker.current && this.childComponent.current) {
+            const child = this.childComponent.current;
+            const outerSpace = this.shrinker.current.clientWidth;
+            const innerSpace = child.offsetWidth;
+    
+            if (outerSpace <= innerSpace) {
+                this.setState({
+                    shrunkStyle: {
+                        transform: `scale(${outerSpace / innerSpace})`,
+                        transformOrigin: 'left top',
+                    },
+                }, () => {this.updateHeight(child.getBoundingClientRect().height)})
+            } else {
+                this.setState({
+                    shrunkStyle: {},
+                    height: null,
+                })
+            }
         }
     }
 

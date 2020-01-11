@@ -1,13 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import EditMode from '../components/EditMode';
-import PageTemplate from "../components/PageTemplate";
-import TitleBar from "../components/TitleBar";
-import LoadIcon from "../components/LoadIcon";
-import '../styles/AnnotatePage.scss';
+import PageTemplate from '../components/PageTemplate';
+import TitleBar from '../components/TitleBar';
+import LoadIcon from '../components/LoadIcon';
 import Heading from '../components/Heading';
-
-import { getToken, getData, updateAnnotations } from "../api";
+import * as caps from '../utilities/capitalize';
+import { getToken, getData, updateThing } from '../api';
 import BigButton from '../components/BigButton';
+import { Base64String } from '../utilities/base64-string';
+
+import '../styles/AnnotatePage.scss';
+import TagList from '../components/TagList';
+import AddButton from '../components/AddButton';
 
 class AnnotatePage extends Component {
     constructor(props) {
@@ -31,10 +35,19 @@ class AnnotatePage extends Component {
     }
 
     handleEditorUpdate = (data) => {
-        const updateThing = Object.assign({}, this.state.thingData, { annotations: data });
+        console.log(data.readonlyImage)
+        if (data.readonlyImage) {
+            data.readonlyImage = Base64String.compressToUTF16(data.readonlyImage);
+        }
+        console.log(data.readonlyImage)
+        const updateThing = Object.assign({}, this.state.thingData, data);
         this.setState({
             thingData: updateThing
         });
+    }
+
+    handleEditorCancel = () => {
+        getData(this, this.props.thingId);
     }
 
     handleFinishClick = () => {
@@ -42,7 +55,7 @@ class AnnotatePage extends Component {
             updating: true,
         });
         getToken(this)
-        .then(() => updateAnnotations({
+        .then(() => updateThing({
             title: this.state.thingData.id,
             thing: this.state.thingData,
             token: this.state.uploadToken
@@ -54,18 +67,27 @@ class AnnotatePage extends Component {
         }))
     }
 
+    handleAddNames = () => {
+        return;
+    }
+
+    handleAddTags = () => {
+        return;
+    }
+
     render() {
         if (this.state.loading) {
             return (
                 <LoadIcon fill="#00d6bc" />
             );
         } else {
+            // console.log(this.state.thingData)
             return (
                 <Fragment>
                     <TitleBar title="Annotate!" />
                     <PageTemplate>
                         <div className="wozz-content-area">
-                            <EditMode thingData={this.state.thingData} updateData={this.handleEditorUpdate} />
+                            <EditMode thingData={this.state.thingData} updateData={this.handleEditorUpdate} onCancel={this.handleEditorCancel} />
                             <BigButton onClick={this.handleFinishClick} disabled={this.state.updating}>
                                 Finish
                                 {this.state.updating &&
@@ -77,8 +99,12 @@ class AnnotatePage extends Component {
                             </BigButton>
                         </div>
                         <aside className="wozz-aside-area">
-                            <div>This is called a</div>
-                            <Heading type="page">{this.props.thingName}</Heading>
+                            <Heading type="section">This is called a</Heading>
+                            <Heading type="thing">{caps.sentencify(this.props.thingName)}</Heading>
+                            <AddButton onClick={this.handleAddNames}>add other names</AddButton>
+                            <Heading type="section">Tagged</Heading>
+                            <TagList tags={this.state.thingData.tags} />
+                            <AddButton onClick={this.handleAddTags}>add more tags</AddButton>
                         </aside>
                     </PageTemplate>
                 </Fragment>

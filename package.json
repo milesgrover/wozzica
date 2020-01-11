@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "html2canvas": "^1.0.0-alpha.12",
     "lodash-es": "^4.17.11",
     "node-sass": "^4.11.0",
     "react": "^16.8.4",

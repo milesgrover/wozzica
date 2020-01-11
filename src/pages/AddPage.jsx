@@ -3,6 +3,7 @@ import TitleBar from '../components/TitleBar';
 import AddControl from '../components/AddControl';
 import BigButton from '../components/BigButton';
 import generateId from '../utilities/generateId';
+import { getToken, uploadImage } from '../api';
 import '../styles/AddPage.scss';
 
 class AddPage extends Component {
@@ -29,49 +30,18 @@ class AddPage extends Component {
             });
 
             const file = e.target.files[0];
+            console.log(file)
             const fileContents = new FileReader();
             const ext = file.name.slice(-3);
             const newName = this.state.createID + "." + ext;
 
             fileContents.addEventListener('load', () => {
-                this.getToken()
+                getToken(this)
                 .then(res => {
-                    this.uploadImage(newName, file)
+                    uploadImage(this.state.uploadToken, newName, file, this)
                 });
             });
             fileContents.readAsArrayBuffer(file);
-        }
-    }
-
-    getToken = () => {
-        return fetch(`http://www.wozzica.com/wiki/api.php?action=query&meta=tokens&format=json`)
-        .then(res => res.json())
-        .then(res => {
-            const token = res.query.tokens.csrftoken;
-            this.setState({
-                uploadToken: token
-            });
-            return res;
-        })
-    }
-
-    uploadImage = (newName, file) => {
-        let request = new XMLHttpRequest();
-        request.open('POST', 'http://www.wozzica.com/wiki/api.php?format=json&ignorewarnings=1', true);
-        let formData = new FormData();
-        formData.append('action', 'upload');
-        formData.append('filename', newName);
-        formData.append('token', this.state.uploadToken);
-        formData.append('file', file);
-        request.setRequestHeader('Content-Disposition', 'form-data');
-        request.send(formData);
-        request.onreadystatechange = () => {
-            if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-                this.setState({
-                    imageInput: AddControl.InputOptions.complete,
-                    imageUrl: JSON.parse(request.response).upload.imageinfo.url,
-                })
-            }
         }
     }
 

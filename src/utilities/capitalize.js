@@ -6,13 +6,12 @@ const unimportant =
 
 // Extend the String object to have more methods for different capitalization schemes
 // sentence case
-const sentencify = function(...exceptions) {
-    let string = this.toLowerCase();
+export const sentencify = function(str, ...exceptions) {
+    let string = str.toLowerCase();
     // For proper nouns, you can provide an excepted word and it'll display as you provided
     if (exceptions) {
         exceptions.forEach((x) => {
             let rgx = new RegExp(x.toLowerCase(), 'g');
-            console.log(rgx)
             string = string.replace(rgx, x);
         });
     }
@@ -20,8 +19,8 @@ const sentencify = function(...exceptions) {
 };
 
 // title case
-const titlify = function(un) {
-    let tc = this.toLowerCase().replace(/\b(\w)/g, (t) => t.toUpperCase());
+export const titlify = function(str, un) {
+    let tc = str.toLowerCase().replace(/\b(\w)/g, (t) => t.toUpperCase());
     // For unimportant words, pass true to the function and it will leave them lowercase
     // (unless they're first or last)
     if (un) {
@@ -35,31 +34,16 @@ const titlify = function(un) {
             }
         }
         tc = tc.replace(mw, mwArr.join(' '));
-        console.log(tc, mwArr.join(' '))
     }
     return tc;
 };
 
 // invert case
-const invertify = function() {
-    return this.replace(/\w{1}/g, (t) => t === t.toUpperCase() ? t.toLowerCase() : t.toUpperCase());
+export const invertify = function(str) {
+    return str.replace(/\w{1}/g, (t) => t === t.toUpperCase() ? t.toLowerCase() : t.toUpperCase());
 };
 
 // randomize case
-const randomify = function() {
-    return this.replace(/\w{1}/g, (t) => Math.round(Math.random()) ? t.toLowerCase() : t.toUpperCase());
+export const randomify = function(str) {
+    return str.replace(/\w{1}/g, (t) => Math.round(Math.random()) ? t.toLowerCase() : t.toUpperCase());
 };
-
-
-Object.defineProperty(String.prototype, 'toSentenceCase', {
-    value: sentencify
-});
-Object.defineProperty(String.prototype, 'toTitleCase', {
-    value: titlify
-});
-Object.defineProperty(String.prototype, 'toInvertedCase', {
-    value: invertify
-});
-Object.defineProperty(String.prototype, 'toRandomCase', {
-    value: randomify
-});

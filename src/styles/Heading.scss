@@ -2,6 +2,8 @@
 
 [class^=wozz-h-] {
     line-height: 1.25;
+    margin: 0;
+    padding: 0;
 }
 
 .wozz-h-page {
@@ -17,6 +19,12 @@
 .wozz-h-thing-page {
     font-size: 48px;
     font-weight: 600;
+}
+
+.wozz-h-section {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
 }
 
 .wozz-h-widget {

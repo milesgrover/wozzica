@@ -5,6 +5,8 @@ import AnnotateLabel from './AnnotateLabel';
 import AnnotateLine from './AnnotateLine';
 import DeleteModal from './DeleteModal';
 import generateId from '../utilities/generateId';
+import TextOverlay from './TextOverlay';
+import html2canvas from 'html2canvas';
 import '../styles/Annotator.scss';
 
 class Annotator extends Component {
@@ -17,7 +19,8 @@ class Annotator extends Component {
             showingModal: false,
             editingLabel: false,
             placingLabel: null,
-            deletingThing: null
+            deletingThing: null,
+            asCanvas: false,
         }
 
         this.thingImage = React.createRef();
@@ -204,6 +207,27 @@ class Annotator extends Component {
     }
 
     render() {
+        if (this.props.readonly && this.props.readonlyImage) {
+            return (
+                <div
+                    ref={this.props.forwardedRef}
+                    className="wozz-annotator"
+                    onClick={this.handleImgClick}
+                    style={this.props.shrunkStyle}
+                >
+                    <img
+                        src={this.props.image}
+                        alt={this.props.name}
+                        onLoad={this.onImgLoad}
+                        ref={this.thingImage}
+                    />
+                    <img src={this.props.readonlyImage} alt="annotations" className="wozz-static-annotations" />
+                    {this.props.clickToEdit &&
+                        <TextOverlay data-html2canvas-ignore>click to edit</TextOverlay>
+                    }
+                </div>
+            );
+        }
         // add dots
         const dots = [];
         for (let i = 0; i < this.state.thingData.length; i++) {
@@ -243,13 +267,18 @@ class Annotator extends Component {
                 onClick={this.handleImgClick}
                 style={this.props.shrunkStyle}
             >
-                <img src={this.props.image} alt={this.props.name} onLoad={this.onImgLoad} ref={this.thingImage} />
+                <img
+                    src={this.props.image}
+                    alt={this.props.name}
+                    onLoad={this.onImgLoad}
+                    ref={this.thingImage}
+                />
                 {this.state.showingModal &&
                     <AnnotateModal onClose={this.onModalClose}
-                                   onAddLabel={this.addLabel}
-                                   position={this.positionModal(320, 100)}
-                                   uid={this.state.thingData[this.state.thingData.length - 1].uid}
-                                   />
+                                    onAddLabel={this.addLabel}
+                                    position={this.positionModal(320, 100)}
+                                    uid={this.state.thingData[this.state.thingData.length - 1].uid}
+                                    />
                 }
                 {this.state.deletingThing &&
                     <DeleteModal index={this.state.deletingThing}
@@ -260,8 +289,11 @@ class Annotator extends Component {
                 {dots}
                 {labels}
                 {lines}
+                {this.props.clickToEdit &&
+                    <TextOverlay data-html2canvas-ignore>click to edit</TextOverlay>
+                }
             </div>
-        )
+        );
     }
 }
 

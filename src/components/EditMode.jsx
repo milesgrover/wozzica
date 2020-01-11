@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import Annotator from '../components/Annotator';
-import '../styles/EditMode.scss';
 import Shrinker from './Shrinker';
+import html2canvas from 'html2canvas';
+import { getToken, uploadImage, updateThing } from '../api';
+import '../styles/EditMode.scss';
 
 class EditMode extends Component {
     constructor(props) {
@@ -11,7 +13,10 @@ class EditMode extends Component {
             fullScreen: false,
             uploadToken: '',
             annotations: [],
+            imageUrl: '',
         }
+
+        this.annotatorRef = React.createRef();
     }
 
     handleLaunchClick = () => {
@@ -21,9 +26,49 @@ class EditMode extends Component {
     }
 
     handleSubmitClick = () => {
-        this.props.updateData(this.state.annotations);
-        this.setState({
-            fullScreen: false
+        this.props.updateData({ annotations: this.state.annotations });
+        
+        html2canvas(this.annotatorRef.current, {
+            backgroundColor: null,
+            logging: false,
+            onclone: (doc) => {
+                doc.querySelector('.wozz-annotator img').style.opacity = '0';
+            }
+        })
+        .then(canvas => {
+        canvas.toBlob(blob => {
+            const file = new File([blob], this.props.thingData.name + '-flan');
+            const fileContents = new FileReader();
+            const ext = '.png';
+            const newName = this.state.createID + ext;
+
+            fileContents.addEventListener('load', () => {
+                getToken(this)
+                .then(res => {
+                    uploadImage(this.state.uploadToken, newName, file, this);
+                    updateThing({readonlyImage: this.state.imageUrl})
+                });
+            });
+            fileContents.readAsArrayBuffer(file);
+        })
+
+            // const file = canvas.toBlob('image/png');
+            // const fileContents = new FileReader();
+            // const ext = '.png';
+            // const newName = this.state.createID + "." + ext;
+
+            // fileContents.addEventListener('load', () => {
+            //     getToken(this)
+            //     .then(res => {
+            //         uploadImage(this.state.uploadToken, newName, file, this)
+            //     });
+            // });
+            // fileContents.readAsArrayBuffer(file);
+            // this.setState({
+            //     fullScreen: false,
+            //     readonlyImage: file
+            // });
+            // this.props.updateData({readonlyImage: file})
         });
     }
 
@@ -32,6 +77,7 @@ class EditMode extends Component {
             fullScreen: false,
             annotations: [],
         });
+        this.props.onCancel();
     }
 
     handleAnnotatorUpdate = (data) => {
@@ -44,7 +90,6 @@ class EditMode extends Component {
         return (
             <Fragment>
                 <div
-                    ref={this.editorRef}
                     className="wozz-editor"
                     onClick={this.handleLaunchClick}
                 >
@@ -55,6 +100,8 @@ class EditMode extends Component {
                             image={this.props.thingData.image}
                             data={this.props.thingData.annotations}
                             onUpdate={this.handleAnnotatorUpdate}
+                            readonlyImage={this.state.readonlyImage}
+                            clickToEdit
                             readonly
                         />
                     </Shrinker>
@@ -73,6 +120,7 @@ class EditMode extends Component {
                             image={this.props.thingData.image}
                             data={this.props.thingData.annotations}
                             onUpdate={this.handleAnnotatorUpdate}
+                            forwardedRef={this.annotatorRef}
                         />
                     </div>
                 }

@@ -1,6 +1,10 @@
 @import './shared';
 
 .wozz-thing {
+    header {
+        display: flex;
+        justify-content: space-between;
+    }
     .wozz-thing-illustration {
         @include annotatorWrapper();
     }

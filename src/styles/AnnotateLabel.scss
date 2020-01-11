@@ -6,13 +6,29 @@
     white-space: nowrap;
     color: $foregroundLight;
     background: $foregroundDark;
-    box-shadow: inset 0 0 0 2px $foregroundDark, inset 0 0 0 4px $foregroundLight;
     position: absolute;
     padding: 8px 12px;
     cursor: default;
     z-index: 3;
     display: flex;
     max-width: 256px;
+
+    &:before {
+        content: '';
+        border-radius: inherit;
+        height: inherit;
+        width: inherit;
+        position: absolute;
+    }
+
+    &:before {
+        top: 2px;
+        right: 2px;
+        bottom: 2px;
+        left: 2px;
+        border: 2px solid $foregroundLight;
+        z-index: 4;
+    }
 
     .label-text {
         max-width: inherit;
@@ -47,10 +63,8 @@
     .label-edit-cancel-btn {
         position: absolute;
         right: -10px;
-        background: $midTeal;
         height: 20px;
         width: 20px;
-        border-radius: 100%;
         border: 0;
         padding: 0;
         display: flex;
@@ -58,23 +72,34 @@
         justify-content: center;
         opacity: 0.01;
         transition: opacity 250ms ease-in-out;
-
+        z-index: 5;
+        background: transparent;
+        
         @include hideText();
-
+        
         &:focus {
             outline: 0;
             opacity: 1;
-
+            
             &:before {
                 color: $foregroundDark;
             }
         }
-
+        
         &:before {
             color: $foregroundLight;
             font-size: 10px;
             width: 20px;
             @include iconFont();
+            position: relative;
+            z-index: 5;
+            background: $midTeal;
+            border-radius: 100%;
+            height: inherit;
+            width: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         &:after {
