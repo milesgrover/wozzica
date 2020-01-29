@@ -22,6 +22,8 @@ body {
 
 body {
     font-family: $fontFamily;
+    background-color: $teal-tint-10;
+    font-weight: 500;
 }
 
 a {
@@ -29,7 +31,7 @@ a {
     color: inherit;
 
     &.wozz-link {
-        color: $darkTeal;
+        color: $teal-shade-20;
 
         &:hover {
             text-decoration: underline;
@@ -53,11 +55,11 @@ strong {
 
 .wozz-term {
     font-style: italic;
-    color: $darkTeal;
+    color: $teal-shade-20;
 }
 
 .wozz-hyperlink {
-    color: $lightTeal;
+    color: $teal;
     text-decoration: underline;
 }
 

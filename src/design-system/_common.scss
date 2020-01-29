@@ -34,7 +34,7 @@ $border-radius-small: 2px;
 $border-radius-pill: 999px;
 
 // Drop shadow
-@mixin dropShadow($x: 0, $y: 5px, $blur: 3px, $spread: 0, $color: rgba(0,0,0,0.17)) {
+@mixin dropShadow($x: 0, $y: 3px, $blur: 3px, $spread: 0, $color: rgba(0,0,0,0.17)) {
     box-shadow: $x $y $blur $spread $color;
 }
 
@@ -84,7 +84,7 @@ $border-radius-pill: 999px;
 }
 
 @mixin controlButton() {
-    background: $midTeal;
+    background: $teal-shade-10;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -94,13 +94,13 @@ $border-radius-pill: 999px;
 @mixin controlFocus() {
     &.wozz-tab-focus:focus {
         outline: 0;
-        box-shadow: inset 0 0 3px 1px $lightTeal;
+        box-shadow: inset 0 0 3px 1px $teal;
     }
 }
 
 @mixin buttonActive() {
     &:active {
-        background: $darkTeal;
+        background: $teal-shade-20;
         box-shadow: none;
 
         &:before {
@@ -177,13 +177,13 @@ $border-radius-pill: 999px;
             text-align: left;
             padding: 0 12px;
             height: 44px;
-            color: $lightTeal;
+            color: $teal;
             border-radius: 0;
 
             &:hover,
             &:focus {
                 outline: 0;
-                background: $darkTeal;
+                background: $teal-shade-20;
                 color: $foregroundLight;
             }
         }
@@ -195,7 +195,7 @@ $border-radius-pill: 999px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid $lightTeal;
+    border: 3px solid $teal;
     margin-bottom: 12px;
     background: url("../images/background.png");
     padding: 12px;

@@ -17,7 +17,7 @@ class Logo extends Component {
             secondary = this.props.colors.secondary;
         }
         const defaultPrimary = { fill: "#ffda00" };
-        const defaultSecondary = { fill: "#00ab94" };
+        const defaultSecondary = { fill: "#00a18d" };
         const primaryColor = primary ? { fill: primary } : defaultPrimary;
         const secondaryColor = secondary ? { fill: secondary } : defaultSecondary;
         return (

@@ -42,7 +42,7 @@
             width: 0;
             bottom: 0;
             left: 8px;
-            border-bottom: 2px dashed $midTeal;
+            border-bottom: 2px dashed $teal-shade-10;
             width: calc(100% - 34px);
         }
     }
@@ -67,7 +67,7 @@
                     width: 0;
                     bottom: 0;
                     left: 8px;
-                    border-bottom: 2px dashed $midTeal;
+                    border-bottom: 2px dashed $teal-shade-10;
                     transition: width 500ms $shotgun2Pillow;
                 }
                 

@@ -1,7 +1,7 @@
 @import "../design-system/common";
 
 .wozz-site-bar {
-    background: $lightTeal;
+    background: $teal;
     position: relative;
     top: 0;
     right: 0;
@@ -22,7 +22,7 @@
 
     // &:after {
     //     content: "";
-    //     background: linear-gradient(to bottom, $darkTeal 0%, lighten($darkTeal, 5%) 95%, $darkTeal 100%);
+    //     background: linear-gradient(to bottom, $teal-shade-20 0%, lighten($teal-shade-20, 5%) 95%, $teal-shade-20 100%);
     //     width: 100%;
     //     position: absolute;
     //     bottom: 0px;

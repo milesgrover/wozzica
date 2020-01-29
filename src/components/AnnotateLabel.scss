@@ -93,7 +93,7 @@
             @include iconFont();
             position: relative;
             z-index: 5;
-            background: $midTeal;
+            background: $teal-shade-10;
             border-radius: 100%;
             height: inherit;
             width: inherit;
@@ -105,7 +105,7 @@
         &:after {
             height: inherit;
             width: inherit;
-            background: $darkTeal;
+            background: $teal-shade-20;
             border-radius: 100%;
             position: absolute;
             right: -1px;

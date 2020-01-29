@@ -7,11 +7,11 @@
     background-color: $lightYellow;
     animation: $fadeTiming;
     z-index: 10;
-    border-bottom: 3px solid $darkTeal;
+    border-bottom: 3px solid $teal-shade-20;
 
     .heading {
         font-size: 22px;
-        color: $darkTeal;
+        color: $teal-shade-20;
         font-weight: 400;
         padding: 12px;
         padding-bottom: 0;
@@ -29,7 +29,7 @@
         &:after {
             content: $icon-cancel;
             @include iconFont();
-            color: $darkTeal;
+            color: $teal-shade-20;
             font-size: 9px;
         }
 
@@ -59,7 +59,7 @@
         input,
         button {
             border-radius: $border-radius-large;
-            border: 3px solid $darkTeal;
+            border: 3px solid $teal-shade-20;
 
             @include controlFocus();
         }
@@ -75,7 +75,7 @@
         button {
             width: 36px;
             height: 36px;
-            background: $darkTeal;
+            background: $teal-shade-20;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
 

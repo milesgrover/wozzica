@@ -4,8 +4,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background: $lightTeal;
-    border: 3px solid $lightTeal;
+    background: $teal;
+    border: 3px solid $teal;
     color: $foregroundLight;
     border-radius: $border-radius-large;
     height: 60px;
@@ -21,7 +21,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: $midTeal;
+        background: $teal-shade-10;
         border-radius: $border-radius-large;
         border-top-left-radius: 0;
         border-top-right-radius: 0;

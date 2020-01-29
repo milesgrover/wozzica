@@ -25,7 +25,7 @@
         z-index: 5;
         @include sitePadding();
         height: 82px;
-        background: $darkTeal;
+        background: $teal-shade-20;
         @include dropShadow();
         display: flex;
         align-items: center;
@@ -52,7 +52,7 @@
             color: $foregroundLight;
 
             &.btn-submit {
-                background: $lightTeal;
+                background: $teal;
             }
 
             &.btn-cancel {

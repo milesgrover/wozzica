@@ -26,7 +26,7 @@
         &:after {
             @include iconFont();
             content: $icon-chevronDown;
-            color: $darkTeal;
+            color: $teal-shade-20;
             position: absolute;
             right: 4px;
         }
