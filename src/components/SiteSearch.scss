@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 .wozz-site-search {
     display: flex;
@@ -12,7 +12,7 @@
             right: 24px;
             bottom: 0;
             left: 27px;
-            border-radius: 8px;
+            border-radius: $border-radius-large;
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
             opacity: 0;
             transition: opacity 150ms ease-in-out;

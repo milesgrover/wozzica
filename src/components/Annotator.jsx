@@ -7,7 +7,7 @@ import DeleteModal from './DeleteModal';
 import generateId from '../utilities/generateId';
 import TextOverlay from './TextOverlay';
 import html2canvas from 'html2canvas';
-import '../styles/Annotator.scss';
+import './Annotator.scss';
 
 class Annotator extends Component {
     constructor(props) {

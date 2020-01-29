@@ -4,7 +4,7 @@ import AddControl from '../components/AddControl';
 import BigButton from '../components/BigButton';
 import generateId from '../utilities/generateId';
 import { getToken, uploadImage } from '../api';
-import '../styles/AddPage.scss';
+import './AddPage.scss';
 
 class AddPage extends Component {
     constructor(props) {
@@ -95,7 +95,7 @@ class AddPage extends Component {
         }
         return (
             <Fragment>
-                <TitleBar title={this.props.title} />
+                {/* <TitleBar title={this.props.title} /> */}
 
                 <div className="wozz-page-content">
                     <div className="wozz-add-choose-img">

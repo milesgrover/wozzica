@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 .annotation-modal {
     position: absolute;
@@ -58,7 +58,7 @@
 
         input,
         button {
-            border-radius: 8px;
+            border-radius: $border-radius-large;
             border: 3px solid $darkTeal;
 
             @include controlFocus();

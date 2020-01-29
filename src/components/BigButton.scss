@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 .wozz-big-btn {
     display: inline-flex;
@@ -7,7 +7,7 @@
     background: $lightTeal;
     border: 3px solid $lightTeal;
     color: $foregroundLight;
-    border-radius: 8px;
+    border-radius: $border-radius-large;
     height: 60px;
     position: relative;
     min-width: 218px;
@@ -22,7 +22,7 @@
         right: 0;
         bottom: 0;
         background: $midTeal;
-        border-radius: 8px;
+        border-radius: $border-radius-large;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         z-index: 1;

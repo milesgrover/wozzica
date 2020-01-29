@@ -4,8 +4,8 @@ import ViewRePorter from './components/ViewRePorter';
 import SiteBar from './components/SiteBar';
 import Page from './components/Page';
 
-import './styles/App.scss';
-import './styles/animations.scss';
+import './App.scss';
+import './design-system/animations.scss';
 
 class App extends Component {
     componentDidMount = () => {

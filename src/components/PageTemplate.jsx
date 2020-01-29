@@ -16,15 +16,16 @@ const PageTemplate = styled(PageTemplateBase)`
     grid-template-columns: ${props => {
         const childCount = React.Children.count(props.children);
         if (childCount === 2) {
-            return 'minmax(0, 1fr) 456px';
+            return '1fr 456px';
         } else {
             return `repeat(${childCount}, 1fr)`;
         }
     }};
     min-width: 0;
-    max-width: 1600px;
-    padding: 22px;
+    max-width: 1200px;
+    padding: 22px 24px;
     grid-column-gap: 22px;
+    margin: 0 auto;
     > * {
         min-width: 0;
     }

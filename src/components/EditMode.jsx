@@ -3,7 +3,7 @@ import Annotator from '../components/Annotator';
 import Shrinker from './Shrinker';
 import html2canvas from 'html2canvas';
 import { getToken, uploadImage, updateThing } from '../api';
-import '../styles/EditMode.scss';
+import './EditMode.scss';
 
 class EditMode extends Component {
     constructor(props) {

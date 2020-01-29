@@ -1,0 +1,12 @@
+@import "../design-system/common";
+
+
+.wozz-logo {
+    .wozz-site-bar & {
+        width: 182px;
+        flex-shrink: 0;
+        // @include sitePadding(left);
+        position: relative;
+        top: -4px;
+    }
+}

@@ -1,31 +1,7 @@
-// Colors
-// Teal
-$lightTeal: #00d6bc;
-$midTeal: #00ba96;
-$darkTeal: #008e79;
-
-// Yellow
-$yellow: #ffda00;
-$lightYellow: #ffe566;
-$yellow-20: #fff8cc;
-$yellow-40: #fff099;
-$yellow-60: #ffe966;
-
-// Gray
-$lightGray: #999;
-$midGray: #888;
-
-// Red
-$foregroundRed: #e75850;
-$backgroundRed: #bf4747;
-$shadowRed: #80312d;
-
-// Foreground colors
-$foregroundLight: #fff;
-$foregroundDark: #000;
+@import "./colors";
 
 // Font
-$fontFamily: "Raleway", sans-serif;
+$fontFamily: Quicksand, sans-serif;
 
 // Viewport minimum sizes
 $vp-1: 576px;
@@ -52,20 +28,37 @@ $icon-edit:            '\E006';
 $icon-search:          '\E007';
 $icon-plus:            '\E008';
 
+// Border radius
+$border-radius-large: 4px;
+$border-radius-small: 2px;
+$border-radius-pill: 999px;
+
 // Drop shadow
 @mixin dropShadow($x: 0, $y: 5px, $blur: 3px, $spread: 0, $color: rgba(0,0,0,0.17)) {
     box-shadow: $x $y $blur $spread $color;
 }
 
 // Padding used across the site
-@mixin sitePadding() {
+@mixin sitePadding($side: "both") {
     transition: padding 100ms ease-in-out;
-    padding-right: 12px;
-    padding-left: 12px;
+    @if $side == "left" {
+        padding-left: 12px;
+            @media (min-width: $vp-3) {
+                padding-left: 24px;
+            }
+    } @else if $side == "right" {
+        padding-right: 12px;
+            @media (min-width: $vp-3) {
+                padding-right: 24px;
+            }
+    } @else {
+        padding-left: 12px;
+        padding-right: 12px;
 
-    @media (min-width: $vp-3) {
-        padding-right: 24px;
-        padding-left: 24px;
+        @media (min-width: $vp-3) {
+            padding-right: 24px;
+            padding-left: 24px;
+        }
     }
 }
 
@@ -73,12 +66,13 @@ $icon-plus:            '\E008';
 @mixin controlCommon() {
     height: 36px;
     padding: 0;
-    border: 3px solid $darkTeal;
-    border-radius: 8px;
+    border: 0;
+    border-radius: $border-radius-large;
     display: flex;
     font-family: Raleway, sans-serif;
     font-weight: 500;
     box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @mixin controlInput() {
@@ -90,7 +84,7 @@ $icon-plus:            '\E008';
 }
 
 @mixin controlButton() {
-    background: $darkTeal;
+    background: $midTeal;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -106,9 +100,8 @@ $icon-plus:            '\E008';
 
 @mixin buttonActive() {
     &:active {
-        background: $yellow;
+        background: $darkTeal;
         box-shadow: none;
-        color: $darkTeal;
 
         &:before {
             color: inherit;
@@ -157,7 +150,7 @@ $icon-plus:            '\E008';
     width: $width;
     transition: all 100ms ease-in-out;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: $border-radius-large;
     height: 0;
     box-shadow: 0 3px 5px 2px rgba(0,0,0,0);
 
@@ -175,7 +168,7 @@ $icon-plus:            '\E008';
             font-size: 18px;
             color: $foregroundLight;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: $border-radius-large;
             font-weight: 500;
             position: relative;
             background: transparent;
@@ -219,4 +212,5 @@ $icon-plus:            '\E008';
 }
 
 // Animations
-$fadeTiming: animFadeIn 100ms ease-in-out;
+$shotgun2Pillow: cubic-bezier(0, 0, 0, 1);
+$fadeTiming: animFadeIn 100ms $shotgun2Pillow;

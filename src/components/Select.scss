@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 .wozz-ctrl-select {
     display: flex;
@@ -21,6 +21,7 @@
         padding-right: 22px;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
+        margin-right: 4px;
 
         &:after {
             @include iconFont();

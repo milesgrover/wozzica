@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/AnnotateLine.scss';
+import './AnnotateLine.scss';
 
 class AnnotateLine extends Component {
     constructor(props) {

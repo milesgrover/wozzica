@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 .wozz-add-control {
     padding: 92px 48px;
@@ -8,18 +8,19 @@
         height: 60px;
         border-radius: 100%;
         margin: 0 auto 16px auto;
-        color: $foregroundLight;
-        background: $darkTeal;
+        color: $midTeal;
+        background: $yellow;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 40px;
         line-height: 1;
         font-weight: 600;
-        font-variant-numeric: lining-nums;
-        -moz-font-feature-settings: "lnum";
-        -webkit-font-feature-settings: "lnum";
-        font-feature-settings: "lnum";
+
+        span {
+            position: relative;
+            top: -2px;
+        }
 
         svg {
             width: 40px;
@@ -39,11 +40,20 @@
         }
     }
 
+    .wozz-add-ctrl-heading {
+        text-align: center;
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 26px;
+        line-height: 1.25;
+        font-weight: 500;
+    }
+
     .wozz-add-ctrl-input {
         > form {
             display: flex;
             max-width: 332px;
-            margin: 0 auto;
+            margin: 0 auto 20px;
     
             input[type=file] {
                 position: absolute;
@@ -93,7 +103,6 @@
             .wozz-ctrl-select + input[type=text] {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
-                margin-left: -3px;
             }
         }
     }

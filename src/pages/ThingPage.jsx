@@ -6,7 +6,7 @@ import PageTemplate from "../components/PageTemplate";
 import TagList from "../components/TagList";
 import Shrinker from "../components/Shrinker";
 import { getData } from "../api";
-import '../styles/ThingPage.scss';
+import './ThingPage.scss';
 
 class ThingPage extends Component {
     constructor(props) {

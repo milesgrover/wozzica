@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 .wozz-add {
     .wozz-page-container {
@@ -21,13 +21,13 @@
             }
 
             &:before {
-                background: $yellow-20;
+                background: $teal-tint-10;
                 left: 0;
                 right: 50%;
             }
 
             &:after {
-                background: $yellow-60;
+                background: $teal-tint-30;
                 left: 50%;
                 right: 0;
             }
@@ -51,15 +51,15 @@
     }
 
     .wozz-add-choose-img {
-        background: $yellow-20;
+        background: $teal-tint-10;
     }
 
     .wozz-add-name-thing {
-        background: $yellow-40;
+        background: $teal-tint-20;
     }
 
     .wozz-add-tag-thing {
-        background: $yellow-60;
+        background: $teal-tint-30;
     }
 
     .wozz-add-next {

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Triangle from './Triangle';
-import '../styles/AnnotateModal.scss';
+import './AnnotateModal.scss';
 
 class AnnotateModal extends Component {
     componentDidMount = () => {

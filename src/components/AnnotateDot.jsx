@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/AnnotateDot.scss';
+import './AnnotateDot.scss';
 
 class AnnotateDot extends Component {
     handleDotClick = (e) => {

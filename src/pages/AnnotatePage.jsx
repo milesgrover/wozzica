@@ -9,7 +9,7 @@ import { getToken, getData, updateThing } from '../api';
 import BigButton from '../components/BigButton';
 import { Base64String } from '../utilities/base64-string';
 
-import '../styles/AnnotatePage.scss';
+import './AnnotatePage.scss';
 import TagList from '../components/TagList';
 import AddButton from '../components/AddButton';
 

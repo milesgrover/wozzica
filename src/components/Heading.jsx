@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import '../styles/Heading.scss';
+import './Heading.scss';
 
 const Heading = (props) => {
     if (!props.type) {

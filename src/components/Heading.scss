@@ -1,4 +1,4 @@
-@import './shared';
+@import "../design-system/common";
 
 [class^=wozz-h-] {
     line-height: 1.25;
@@ -7,8 +7,9 @@
 }
 
 .wozz-h-page {
-    font-size: 30px;
-    font-weight: 400;
+    font-size: 36px;
+    font-weight: 600;
+    color: $darkTeal;
 }
 
 .wozz-h-thing {

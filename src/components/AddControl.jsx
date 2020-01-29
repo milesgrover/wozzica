@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Select from './Select';
 import classNames from '../utilities/classNames';
 import LoadIcon from '../components/LoadIcon';
-import '../styles/AddControl.scss';
+import Heading from '../components/Heading';
+import './AddControl.scss';
 
 
 class AddControl extends Component {
@@ -40,6 +41,7 @@ class AddControl extends Component {
                 <div className={classNames('wozz-add-ctrl-number', this.props.complete)}>
                     {this.props.complete === AddControl.InputOptions.loading ? <LoadIcon /> : <span>{this.props.number}</span>}
                 </div>
+                <h2 className="wozz-add-ctrl-heading">{this.props.title}</h2>
                 <div className="wozz-add-ctrl-input">
                     {this.props.input === 'file' &&
                         <form onSubmit={this.noSubmit}>
@@ -55,16 +57,18 @@ class AddControl extends Component {
                                    accept="image/*"/>
                         </form>
                     }
-                    <form onSubmit={this.noSubmit}>
-                        {this.props.options &&
-                                <Select options={this.props.options} />
-                        }
-                        {this.props.input === 'text' &&
-                                <input type="text"
-                                    placeholder={this.props.placeholder}
-                                    onChange={this.props.onInput}/>
-                        }
-                    </form>
+                    {(this.props.options || this.props.input === "text") &&
+                        <form onSubmit={this.noSubmit}>
+                            {this.props.options &&
+                                    <Select options={this.props.options} />
+                            }
+                            {this.props.input === "text" &&
+                                    <input type="text"
+                                        placeholder={this.props.placeholder}
+                                        onChange={this.props.onInput}/>
+                            }
+                        </form>
+                    }
                 </div>
 
                 {this.props.children}

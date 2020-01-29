@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/TitleBar.scss';
+import './TitleBar.scss';
 
 class TitleBar extends Component {
     generateClassName = () => {

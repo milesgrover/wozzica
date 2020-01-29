@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import TitleBar from '../components/TitleBar';
 import PageTemplate from "../components/PageTemplate";
 
-import '../styles/BrowsePage.scss';
+import './BrowsePage.scss';
 
 
 class BrowsePage extends Component {
@@ -30,7 +30,7 @@ class BrowsePage extends Component {
         return (
                 
             <Fragment>
-                <TitleBar title={this.props.title} />
+                {/* <TitleBar title={this.props.title} /> */}
                 <PageTemplate>
                     <div>
                         {this.state.things &&
