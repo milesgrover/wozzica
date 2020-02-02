@@ -9,9 +9,12 @@ class SiteBar extends Component {
         return (
             <section className="wozz-site-bar">
                 <div>
-                <Logo />
-                <Navigation category={this.props.category} vpSize={this.props.vpSize} />
-                <SiteSearch vpSize={this.props.vpSize} />
+                    <Logo />
+                    <Navigation
+                        page={this.props.page}
+                        vpSize={this.props.vpSize}
+                    />
+                    <SiteSearch vpSize={this.props.vpSize} />
                 </div>
             </section>
         )

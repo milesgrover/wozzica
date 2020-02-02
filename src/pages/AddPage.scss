@@ -1,14 +1,13 @@
 @import "../design-system/common";
 
 .wozz-add {
-    .wozz-page-container {
+    &.wozz-page-container {
         display: flex;
         flex-direction: column;
 
         .wozz-page-content {
             padding: 0;
             flex: 1;
-            margin-top: -65px;
             position: relative;
 
             &:before,
@@ -20,11 +19,6 @@
                 z-index: -1;
             }
 
-            &:before {
-                background: $teal-tint-10;
-                left: 0;
-                right: 50%;
-            }
 
             &:after {
                 background: $teal-tint-30;
@@ -37,7 +31,6 @@
     .wozz-add-choose-img,
     .wozz-add-name-thing,
     .wozz-add-tag-thing {
-        padding-top: 65px;
         align-self: stretch;
         flex: 1;
 

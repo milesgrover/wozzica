@@ -6,17 +6,17 @@ const menuItems = [
     {
         name: "Home",
         link: "/",
-        category: "home",
+        page: "home",
     },
     {
         name: "Add a new thing",
         link: "/add",
-        category: "add",
+        page: "add",
     },
     {
         name: "Browse",
         link: "/browse",
-        category: "browse",
+        page: "browse",
     },
 ]
 
@@ -29,12 +29,12 @@ class Navigation extends Component {
         }
     }
 
-    findActiveCategory = () => {
-        return menuItems.findIndex(item => item.category === this.props.category);
+    findActivePage = () => {
+        return menuItems.findIndex(item => item.page === this.props.page);
     }
 
     setToActive = (cat) => {
-        if (this.props.category && this.props.category === cat) {
+        if (this.props.page && this.props.page === cat) {
             return 'active';
         }
         return null;
@@ -75,17 +75,19 @@ class Navigation extends Component {
         return (
             <nav className="wozz-navigation">
                 {this.props.vpSize < 3 &&
-                    <button className="wozz-menu-btn" onClick={this.toggleMenu}>{menuItems[this.findActiveCategory()].name}</button>
+                    <button className="wozz-menu-btn" onClick={this.toggleMenu}>{menuItems[this.findActivePage()].name}</button>
                 }
                 <ul className={this.setNavClass()} style={this.props.vpSize < 3 && this.state.showMenu  ? {height: (menuItems.length - 1) * 44} : null}>
                     {menuItems.map((item, index) => {
-                        const activeIndex = this.findActiveCategory(item.category);
+                        const activeIndex = this.findActivePage(item.page);
                         if (this.props.vpSize < 3) {
                             return activeIndex !== index ? (
                                 <li
                                     key={index}
                                 >
-                                    <Link to={item.link}>{item.name}</Link>
+                                    <Link to={item.link}>
+                                        {item.name}
+                                    </Link>
                                 </li>
                             ) : null;
                         } else {

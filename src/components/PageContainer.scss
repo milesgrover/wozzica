@@ -2,6 +2,7 @@
 
 .wozz-page-container {
     flex: 1;
+    display: flex;
 
     .wozz-page-content {
         animation: pageFadeIn 300ms ease-in-out;
@@ -17,10 +18,10 @@
 
         display: flex;
         max-width: $vp-4;
-        width: calc(100% - 22px);
+        width: 100%;
         margin-right: auto;
         margin-left: auto;
-        padding: 0 11px;
+        @include sitePadding();
 
         @media (max-width: $vp-3) {
             flex-direction: column;

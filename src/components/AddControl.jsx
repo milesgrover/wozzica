@@ -39,7 +39,7 @@ class AddControl extends Component {
         return (
             <div className="wozz-add-control">
                 <div className={classNames('wozz-add-ctrl-number', this.props.complete)}>
-                    {this.props.complete === AddControl.InputOptions.loading ? <LoadIcon /> : <span>{this.props.number}</span>}
+                    {this.props.complete === AddControl.InputOptions.loading ? <LoadIcon fill="#00a18d" /> : <span>{this.props.number}</span>}
                 </div>
                 <h2 className="wozz-add-ctrl-heading">{this.props.title}</h2>
                 <div className="wozz-add-ctrl-input">

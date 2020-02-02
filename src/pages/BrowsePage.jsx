@@ -3,6 +3,7 @@ import TitleBar from '../components/TitleBar';
 import PageTemplate from "../components/PageTemplate";
 
 import './BrowsePage.scss';
+import PageContainer from '../components/PageContainer';
 
 
 class BrowsePage extends Component {
@@ -31,7 +32,7 @@ class BrowsePage extends Component {
                 
             <Fragment>
                 {/* <TitleBar title={this.props.title} /> */}
-                <PageTemplate>
+                <PageContainer>
                     <div>
                         {this.state.things &&
                             this.state.things.map((thing) => {
@@ -52,7 +53,7 @@ class BrowsePage extends Component {
                             })
                         }
                     </div>
-                </PageTemplate>
+                </PageContainer>
             </Fragment>
         )
     }

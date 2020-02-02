@@ -1,5 +1,36 @@
 @import "../design-system/common";
 
-.wozz-home-illustration {
-    margin-top: 0.9em;
+.wozz-page-container.wozz-home {
+    @media (max-width: $vp-3) {
+        &:after {
+            display: none;
+        }
+    }
+    .wozz-page-content {
+        display: grid;
+        grid-template-columns: 1fr 316px;
+        @media (max-width: $vp-3) {
+            grid-template-columns: 1fr;
+            grid-auto-flow: row;
+        }
+    }
+    main {
+        padding-top: $padding-lg;
+        padding-right: $padding-lg;
+        .wozz-home-illustration {
+            margin-top: 0.9em;
+        }
+    }
+
+    aside {
+        padding: $padding-lg 0 0 $padding-lg;
+        border-left: 2px dashed $teal-tint-20;
+        @media (max-width: $vp-3) {
+            border-left: 0;
+            border-top: 2px dashed $teal-tint-20;
+            margin-left: -($padding-sm);
+            margin-right: -($padding-sm);
+            padding: $padding-lg $padding-sm;
+        }
+    }
 }
