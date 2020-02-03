@@ -2,19 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: 'sqldb.wozzica.com',
-    user: 'wozz_admin',
-    password: 'A4z*KqwmmnBrfZW',
-    database: 'wozzica_svelte'
-});
-
-connection.connect((err) => {
-    if (err) throw err;
-    console.log('connected');
-  });
+const db = require('./db/index.js');
 
 app.use(express.static(path.join(__dirname, 'build')));
 
