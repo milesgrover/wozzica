@@ -33,6 +33,9 @@ $border-radius-large: 4px;
 $border-radius-small: 2px;
 $border-radius-pill: 999px;
 
+$padding-sm: 12px;
+$padding-lg: 24px;
+
 // Drop shadow
 @mixin dropShadow($x: 0, $y: 3px, $blur: 3px, $spread: 0, $color: rgba(0,0,0,0.17)) {
     box-shadow: $x $y $blur $spread $color;
@@ -42,22 +45,22 @@ $border-radius-pill: 999px;
 @mixin sitePadding($side: "both") {
     transition: padding 100ms ease-in-out;
     @if $side == "left" {
-        padding-left: 12px;
+        padding-left: $padding-sm;
             @media (min-width: $vp-3) {
-                padding-left: 24px;
+                padding-left: $padding-lg;
             }
     } @else if $side == "right" {
-        padding-right: 12px;
+        padding-right: $padding-sm;
             @media (min-width: $vp-3) {
-                padding-right: 24px;
+                padding-right: $padding-lg;
             }
     } @else {
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: $padding-sm;
+        padding-right: $padding-sm;
 
         @media (min-width: $vp-3) {
-            padding-right: 24px;
-            padding-left: 24px;
+            padding-right: $padding-lg;
+            padding-left: $padding-lg;
         }
     }
 }
@@ -72,7 +75,6 @@ $border-radius-pill: 999px;
     font-family: Raleway, sans-serif;
     font-weight: 500;
     box-sizing: border-box;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @mixin controlInput() {
@@ -98,12 +100,20 @@ $border-radius-pill: 999px;
     }
 }
 
+@mixin buttonHover() {
+    &:hover {
+        background: $teal-shade-20;
+    }
+}
+
 @mixin buttonActive() {
     &:active {
-        background: $teal-shade-20;
-        box-shadow: none;
+        background: $teal-shade-10;
 
         &:before {
+            position: relative;
+            top: 1px;
+            left: -1px;
             color: inherit;
         }
     }
@@ -146,7 +156,7 @@ $border-radius-pill: 999px;
     flex-direction: column;
     position: absolute;
     top: $top;
-    background: $foregroundLight;
+    background: $teal-tint-10;
     width: $width;
     transition: all 100ms ease-in-out;
     overflow: hidden;
@@ -183,7 +193,7 @@ $border-radius-pill: 999px;
             &:hover,
             &:focus {
                 outline: 0;
-                background: $teal-shade-20;
+                background: $teal-shade-10;
                 color: $foregroundLight;
             }
         }

@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import {
+    Switch,
+    Route,
+    withRouter
+} from 'react-router-dom';
 import ViewRePorter from './components/ViewRePorter';
 import SiteBar from './components/SiteBar';
-import Page from './components/Page';
 
 import './App.scss';
 import './design-system/animations.scss';
+import {
+    HomePage,
+    AddPage,
+    BrowsePage,
+    ThingPage,
+    AnnotatePage,
+} from "./pages";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentPage: this.props.location.pathname.slice(1) || "home",
+        }
+    }
     componentDidMount = () => {
         document.addEventListener('keyup', (e) => {
           let key = e.key || e.keycode || 0;
@@ -20,34 +36,32 @@ class App extends Component {
           }
         });
     }
-    render() {
-        const category = this.props.match.params.cat || 'home';
-        const categoryTitles = {
-            add: 'Add a new thing',
-            search: 'Search results'
+    componentDidUpdate(prevProps) {
+        if (prevProps.location.pathname !== this.props.location.pathname) {
+            this.updateCurrentPage()
         }
+    }
+    updateCurrentPage = () => {
+        this.setState({
+            currentPage: this.props.location.pathname.slice(1) || "home",
+        });
+    }
+    render() {
         return (
-            <div className={`wozz-app wozz-${category}`}>
-                <ViewRePorter>
-                    <SiteBar category={category} />
-                </ViewRePorter>
-
-                {!this.props.match.params.thingName &&
-                    <Page category={category}
-                        title={categoryTitles[category] || category}
-                        item={this.props.match.params.item}
-                        history={this.props.history}
-                        />
-                }
-
-                {this.props.match.params.thingName &&
-                    <Page category={category}
-                        thingName={this.props.match.params.thingName}
-                        thingId={this.props.match.params.thingId}
-                        history={this.props.history}
-                        />
-                }
-            </div>
+            <>
+                <div className={`wozz-app`}>
+                    <ViewRePorter>
+                        <SiteBar page={this.state.currentPage} />
+                    </ViewRePorter>
+                    <Switch>
+                        <Route exact path="/" component={HomePage}/>
+                        <Route exact path="/add" component={AddPage}/>
+                        <Route exact path="/browse" component={BrowsePage}/>
+                        <Route exact path="/annotate/:thingId/:thingName" component={AnnotatePage}/>
+                        <Route exact path="/thing/:thingId/:thingName" component={ThingPage}/>
+                    </Switch>
+                </div>
+            </>
         )
     }
 }

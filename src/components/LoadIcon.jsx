@@ -1,36 +1,10 @@
 import React from "react";
+import Spinner from "../images/spinner.gif";
 
 class LoadIcon extends React.Component {
     render() {
         return (
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="35" height="35" className="wozz-load-icon">
-                <g fill={this.props.fill || "#fff"}>
-                    <path opacity=".2" d="M16.81 0h1.22v4.89h-1.22z"/>
-                    <path opacity=".8" d="M16.81 29.95h1.22v4.89h-1.22z"/>
-                    <path d="M29.95 16.81h4.89v1.22h-4.89z"/>
-                    <path opacity=".5" d="M0 16.81h4.89v1.22H0z"/>
-                    <path opacity=".05" d="M25.856 8.12l3.46-3.457.862.863-3.46 3.456z"/>
-                    <path opacity=".65" d="M4.677 29.309l3.456-3.46.864.862-3.456 3.46z"/>
-                    <path opacity=".95" d="M25.848 26.709l.863-.863 3.458 3.458-.863.863z"/>
-                    <path opacity=".35" d="M4.672 5.536l.863-.863 3.458 3.458-.863.863z"/>
-                    <path opacity=".25" d="M12.321.756L13.5.44l1.265 4.724-1.178.315z"/>
-                    <path opacity=".85" d="M20.075 29.682l1.178-.316 1.266 4.724-1.179.315z"/>
-                    <path d="M29.363 13.59l4.724-1.266.316 1.179-4.724 1.265z"/>
-                    <path opacity=".55" d="M.438 21.343l4.723-1.266.316 1.179L.753 22.52z"/>
-                    <path opacity=".1" d="M23.159 6.272l2.445-4.235 1.057.61-2.446 4.235z"/>
-                    <path opacity=".7" d="M8.184 32.199l2.446-4.235 1.056.61L9.24 32.81z"/>
-                    <path d="M27.96 24.21l.61-1.057 4.236 2.445-.61 1.057z"/>
-                    <path opacity=".4" d="M2.027 9.24l.61-1.057 4.234 2.445-.61 1.056z"/>
-                    <path opacity=".15" d="M20.066 5.157L21.33.433l1.178.316-1.265 4.723z"/>
-                    <path opacity=".75" d="M12.317 34.086l1.265-4.724 1.178.316-1.265 4.723z"/>
-                    <path d="M29.364 21.245l.315-1.179 4.724 1.266-.316 1.178z"/>
-                    <path opacity=".45" d="M.437 13.503l.316-1.179 4.724 1.266-.316 1.178z"/>
-                    <path d="M27.966 10.626L32.2 8.181l.61 1.056-4.234 2.446z"/>
-                    <path opacity=".6" d="M2.034 25.597l4.235-2.446.61 1.057-4.235 2.445z"/>
-                    <path opacity=".9" d="M23.152 28.573l1.057-.61 2.444 4.235-1.056.61z"/>
-                    <path opacity=".3" d="M8.177 2.642l1.057-.61 2.444 4.236-1.057.61z"/>
-                </g>
-            </svg>
+            <img src={Spinner} alt="loading" />
         );
     }
 }
