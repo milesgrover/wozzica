@@ -18,7 +18,7 @@
         padding-top: $padding-lg;
         padding-right: $padding-lg;
         .wozz-home-illustration {
-            margin-top: 0.9em;
+            margin-bottom: map-get($type-ramp, "t3");
         }
     }
 
@@ -32,5 +32,11 @@
             margin-right: -($padding-sm);
             padding: $padding-lg $padding-sm;
         }
+    }
+
+    .wozz-t-heading.wozz-home-sidebar {
+        font-weight: 900;
+        text-transform: uppercase;
+        color: $teal-shade-20;
     }
 }

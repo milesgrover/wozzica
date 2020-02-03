@@ -1,0 +1,17 @@
+@import "../design-system/common";
+
+@each $name, $size in $type-size {
+    .wozz-t-#{$name} {
+        @include typography($name);
+    }
+}
+
+.wozz-t-paragraph {
+    margin-bottom: map-get($type-ramp, "t3");
+}
+
+.wozz-t-page_title {
+    color: $teal-shade-20;
+    font-weight: 600;
+    margin-bottom: 10px;
+}

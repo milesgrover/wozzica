@@ -1,16 +1,27 @@
 @import "../design-system/common";
 
-.wozz-browse-item {
-    display: flex;
-    align-items: flex-start;
-
-    img {
-        max-width: 100px;
-        margin-right: 8px;
-    }
-
-    h2 {
-        font-weight: 600;
-        font-size: 18px;
+.wozz-browse {
+    main {
+        padding-top: $padding-lg;
+        align-self: flex-start;
+        .wozz-t-page_title {
+            margin-bottom: 24px;
+        }
+        .wozz-browse-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 6px 0;
+        
+            img {
+                max-width: 100px;
+                margin-right: 8px;
+            }
+        
+            h2 {
+                font-weight: 600;
+                font-size: 18px;
+            }
+        }
     }
 }
+

@@ -1,5 +1,11 @@
 @import "../design-system/common";
 
 .wozz-annotate {
-
+    main {
+        padding-top: $padding-lg;
+        padding-right: $padding-lg;
+    }
+    aside {
+        padding-top: $padding-lg;
+    }
 }

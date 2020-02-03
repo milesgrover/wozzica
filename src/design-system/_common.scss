@@ -1,7 +1,5 @@
 @import "./colors";
-
-// Font
-$fontFamily: Quicksand, sans-serif;
+@import "./type-ramp";
 
 // Viewport minimum sizes
 $vp-1: 576px;

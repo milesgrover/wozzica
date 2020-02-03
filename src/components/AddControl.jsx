@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Select from './Select';
 import classNames from '../utilities/classNames';
 import LoadIcon from '../components/LoadIcon';
-import Heading from '../components/Heading';
 import './AddControl.scss';
 
 

@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import TitleBar from '../components/TitleBar';
-import PageTemplate from "../components/PageTemplate";
+import React, { Component } from 'react';
+import PageContainer from '../components/PageContainer';
+import Text from '../components/Text';
 
 import './BrowsePage.scss';
-import PageContainer from '../components/PageContainer';
 
 
 class BrowsePage extends Component {
@@ -29,33 +28,29 @@ class BrowsePage extends Component {
     }
     render() {
         return (
-                
-            <Fragment>
-                {/* <TitleBar title={this.props.title} /> */}
-                <PageContainer>
-                    <div>
-                        {this.state.things &&
-                            this.state.things.map((thing) => {
-                                console.log(thing)
-                                return (
-                                    <div className="wozz-browse-item" key={thing.id}>
-                                        <img src={thing.image} alt={thing.name} />
-                                        <div>
-                                            <h2>
-                                                <a href={`/thing/${thing.id}/${thing.name.replace(/\s/g, '%20')}`}>
-                                                    {thing.name}
-                                                </a>
-                                            </h2>
-                                            <p>tags: {thing.tags.join(", ")}</p>
-                                        </div>
+            <PageContainer className="wozz-browse">
+                <main>
+                    <Text type="page_title">This is all the things</Text>
+                    {this.state.things &&
+                        this.state.things.map((thing) => {
+                            return (
+                                <div className="wozz-browse-item" key={thing.id}>
+                                    <img src={thing.image} alt={thing.name} />
+                                    <div>
+                                        <h2>
+                                            <a href={`/thing/${thing.id}/${thing.name.replace(/\s/g, '%20')}`}>
+                                                {thing.name}
+                                            </a>
+                                        </h2>
+                                        <p>tags: {thing.tags.join(", ")}</p>
                                     </div>
-                                );
-                            })
-                        }
-                    </div>
-                </PageContainer>
-            </Fragment>
-        )
+                                </div>
+                            );
+                        })
+                    }
+                </main>
+            </PageContainer>
+        );
     }
 }
 

@@ -1,0 +1,18 @@
+@import "../design-system/common";
+
+.wozz-load-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    > div {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        background: $yellow;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

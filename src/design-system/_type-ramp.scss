@@ -1,0 +1,36 @@
+$fontFamily: Quicksand, sans-serif;
+
+$type-ramp: (
+    "t1": 14px,
+    "t2": 16px,
+    "t3": 18px,
+    "t4": 22px,
+    "t5": 24px,
+    "t6": 30px,
+    "t7": 36px,
+);
+
+$type-size: (
+    "caption": map-get($type-ramp, "t1"),
+    "paragraph": map-get($type-ramp, "t3"),
+    "body": map-get($type-ramp, "t3"),
+    "body_sm": map-get($type-ramp, "t2"),
+    "body_lg": map-get($type-ramp, "t4"),
+    "heading_sm": map-get($type-ramp, "t4"),
+    "heading": map-get($type-ramp, "t5"),
+    "page_title": map-get($type-ramp, "t6"),
+    "thing_name": map-get($type-ramp, "t7"),
+);
+
+@mixin typography($size, $leading: true) {
+    font-size: map-get($type-size, $size);
+    @if $leading {
+        @if $size == "paragraph" {
+            line-height: 1.5;
+        } @else {
+            line-height: 1.25;
+        }
+    } @else {
+        line-height: 1;
+    }
+}

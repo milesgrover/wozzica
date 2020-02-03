@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Annotator from '../components/Annotator';
-import LoadIcon from "../components/LoadIcon";
+import LoadPage from "../components/LoadPage";
 import Heading from "../components/Heading";
-import PageTemplate from "../components/PageTemplate";
+import Text from "../components/Text";
+import PageContainer from "../components/PageContainer";
 import TagList from "../components/TagList";
 import Shrinker from "../components/Shrinker";
 import { getData } from "../api";
@@ -18,7 +19,7 @@ class ThingPage extends Component {
         }
     }
     componentDidMount() {
-        getData(this, this.props.thingId)
+        getData(this, this.props.match.params.thingId)
         .then(() => {
             this.setState({
                 loading: false,
@@ -27,25 +28,28 @@ class ThingPage extends Component {
     }
 
     handleEditClick = () => {
-        this.props.history.push(`/annotate/${this.props.thingId}/${this.props.thingName}`)
+        this.props.history.push(`/annotate/${this.props.match.params.thingId}/${this.state.thingData.name}`)
     }
 
     render() {
+        console.log(this.state.thingData)
         if (this.state.loading) {
             return (
-                <div className="wozz-page-content">
-                    <LoadIcon fill="#00d6bc" />
-                </div>
+                <PageContainer className="wozz-thing">
+                    <LoadPage />
+                </PageContainer>
             )
         }
         if (this.state.thingData.annotations) {
             return (
-                <PageTemplate>
+                <PageContainer className="wozz-thing">
                     <div>
                         <header>
                             <section>
                                 <div>This is called a</div>
-                                <Heading type="thingPage">{this.props.thingName}</Heading>
+                                <Text type="thing_name">
+                                    {this.state.thingData.name}
+                                </Text>
                             </section>
                             <section>
                                 <button onClick={this.handleEditClick}>edit</button>
@@ -54,7 +58,7 @@ class ThingPage extends Component {
                         <div className="wozz-thing-illustration">
                             <Shrinker>
                                 <Annotator readonly
-                                        uid={this.props.thingId}
+                                        uid={this.state.thingData.id}
                                         image={this.state.thingData.image}
                                         data={this.state.thingData.annotations}
                                         readonlyImage={this.state.thingData.readonlyImage}
@@ -63,7 +67,7 @@ class ThingPage extends Component {
                         </div>
                         <TagList tags={this.state.thingData.tags} />
                     </div>
-                </PageTemplate>
+                </PageContainer>
             );
         } else {
             return null;

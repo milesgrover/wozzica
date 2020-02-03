@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import EditMode from '../components/EditMode';
-import PageTemplate from '../components/PageTemplate';
-import TitleBar from '../components/TitleBar';
+import PageContainer from '../components/PageContainer';
+import LoadPage from '../components/LoadPage';
 import LoadIcon from '../components/LoadIcon';
 import Heading from '../components/Heading';
 import * as caps from '../utilities/capitalize';
@@ -26,7 +26,7 @@ class AnnotatePage extends Component {
     }
 
     componentDidMount() {
-        getData(this, this.props.thingId)
+        getData(this, this.props.match.params.thingId)
         .then(res => {
             this.setState({
                 loading: false,
@@ -47,7 +47,7 @@ class AnnotatePage extends Component {
     }
 
     handleEditorCancel = () => {
-        getData(this, this.props.thingId);
+        getData(this, this.props.match.params.thingId);
     }
 
     handleFinishClick = () => {
@@ -63,7 +63,7 @@ class AnnotatePage extends Component {
             this.setState({
                 updating: false,
             });
-            this.props.history.push(`/thing/${this.props.thingId}/${this.props.thingName}`);
+            this.props.history.push(`/thing/${this.props.match.params.thingId}/${this.props.match.params.thingName}`);
         }))
     }
 
@@ -76,38 +76,37 @@ class AnnotatePage extends Component {
     }
 
     render() {
+        console.log(this.props)
         if (this.state.loading) {
             return (
-                <LoadIcon fill="#00d6bc" />
+                <PageContainer className="wozz-annotate">
+                    <LoadPage />
+                </PageContainer>
             );
         } else {
-            // console.log(this.state.thingData)
             return (
-                <Fragment>
-                    <TitleBar title="Annotate!" />
-                    <PageTemplate>
-                        <div className="wozz-content-area">
-                            <EditMode thingData={this.state.thingData} updateData={this.handleEditorUpdate} onCancel={this.handleEditorCancel} />
-                            <BigButton onClick={this.handleFinishClick} disabled={this.state.updating}>
-                                Finish
-                                {this.state.updating &&
-                                    <Fragment>
-                                        ing
-                                        <LoadIcon />
-                                    </Fragment>
-                                }
-                            </BigButton>
-                        </div>
-                        <aside className="wozz-aside-area">
-                            <Heading type="section">This is called a</Heading>
-                            <Heading type="thing">{caps.sentencify(this.props.thingName)}</Heading>
-                            <AddButton onClick={this.handleAddNames}>add other names</AddButton>
-                            <Heading type="section">Tagged</Heading>
-                            <TagList tags={this.state.thingData.tags} />
-                            <AddButton onClick={this.handleAddTags}>add more tags</AddButton>
-                        </aside>
-                    </PageTemplate>
-                </Fragment>
+                <PageContainer className="wozz-annotate">
+                    <main>
+                        <EditMode thingData={this.state.thingData} updateData={this.handleEditorUpdate} onCancel={this.handleEditorCancel} />
+                        <BigButton onClick={this.handleFinishClick} disabled={this.state.updating}>
+                            Finish
+                            {this.state.updating &&
+                                <Fragment>
+                                    ing
+                                    <LoadIcon />
+                                </Fragment>
+                            }
+                        </BigButton>
+                    </main>
+                    <aside>
+                        <Heading type="section">This is called a</Heading>
+                        <Heading type="thing">{caps.sentencify(this.props.match.params.thingName)}</Heading>
+                        <AddButton onClick={this.handleAddNames}>add other names</AddButton>
+                        <Heading type="section">Tagged</Heading>
+                        <TagList tags={this.state.thingData.tags} />
+                        <AddButton onClick={this.handleAddTags}>add more tags</AddButton>
+                    </aside>
+                </PageContainer>
             );
         }
     }

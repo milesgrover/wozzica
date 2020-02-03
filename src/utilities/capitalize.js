@@ -3,8 +3,6 @@ const unimportant =
     ['a', 'an', 'the', 'and', 'but', 'or', 'nor', 'yet', 'so', 'of', 'by',
         'for', 'from', 'as', 'to', 'in', 'at', 'on', 'in', 'with'];
 
-
-// Extend the String object to have more methods for different capitalization schemes
 // sentence case
 export const sentencify = function(str, ...exceptions) {
     let string = str.toLowerCase();
